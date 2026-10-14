@@ -1,0 +1,41 @@
+topic: Dataflows Gen2
+cap_title: Dataflows Gen2
+title: *Dataflows*|Gen2
+sub: Cleaning data without code.|Where it shines, and where it stops.
+pills: Power Query || Low-code || Destinations
+p_h: Not everyone who cleans data ^writes code^.
+p_rows: The analyst :: Knows the data best || The tool they use :: Excel, by hand, every month || The risk :: Steps live in one person's head
+p_end: The logic is real and valuable. **It is just not written down anywhere a machine can run it.**
+s_h: A *recorded recipe*.
+s_leads: You clean the data once by clicking: remove this column, split that one, filter those rows. Every step is recorded. || From then on the recipe **runs by itself**, the same way every time.
+s_rows: Built with :: Power Query, in the browser || Steps :: Recorded and editable || Output :: Lands in a table you choose
+m_h: How a *dataflow* runs
+m_rows: **Connect** to a source from a long list of connectors || **Shape** the data with point-and-click steps || **Choose a destination**: Lakehouse, Warehouse and more || **Refresh** on a schedule or from a pipeline
+m_bar: Same engine as Excel and Power BI :: Anyone who has used Power Query already knows how to build one.
+e_h: What engineers ^should know^
+e_rows: Query folding decides the speed :: When steps can be pushed down to the source, it is fast. When they cannot, rows are pulled and processed in the engine. || Staging has a cost :: Staging helps large transformations but adds compute. Turn it off for simple loads. || Fast copy for big moves :: Large, simple ingestion can skip row-by-row processing. || Git and CI/CD are built in :: Since April 2026 every new dataflow is created with Git and deployment support, like other code.
+h_h: Dataflow or *notebook*?
+h_yes_t: Dataflow
+h_no_t: Notebook
+h_yes: Small to medium data || Analysts own the logic || Many sources with simple shaping
+h_no: Very large tables || Complex logic that needs tests || Tight control over performance
+h_catch: The catch :: a dataflow that was fine at one million rows can struggle at one hundred million. Watch the refresh time, and move heavy steps to Spark before they hurt.
+r_kind: watch
+r_h: Four things to ^watch^
+r_rows: **Steps that break folding** early in the query || **Staging left on** for loads that do not need it || **One giant dataflow** instead of small, reusable ones || **No owner** once the analyst who built it moves on
+r_end: Low-code is still code. **It needs the same care.**
+z_h: Dataflows in *five lines*
+z_rows: **Power Query** in the browser || **Every step** is recorded and repeatable || **Writes** to a Lakehouse or Warehouse || **Great** for analysts and modest volumes || **Spark** takes over when data gets big
+z_next: Tomorrow :: Notebooks and Spark :: Where the heavy processing happens.
+q: Where is your team's line between a dataflow and a notebook?
+tags: #PowerQuery #DataflowGen2 #LowCode
+caption:
+A lot of valuable data logic lives in spreadsheets, repeated by hand every month by the person who understands the data best.
+
+Dataflows Gen2 are how that logic becomes something a platform can run. They use Power Query in the browser. You shape the data by clicking, each step is recorded, and the result lands in a destination such as a Lakehouse or Warehouse. After that it refreshes on a schedule or as a step in a pipeline.
+
+For engineers, the important concept is query folding. When the steps can be translated and pushed to the source system, a dataflow is fast. When they cannot, the rows are pulled out and processed in the engine, and that is where refreshes slow down. Staging is the other setting to understand, since it helps heavy transformations and adds cost to simple ones. New dataflows also come with Git and CI/CD support by default now, so they can be versioned and deployed like the rest of the platform.
+
+My view: dataflows are a strength of Fabric, not a toy. They let the people who know the data own the logic. They are also not a replacement for Spark at large volumes.
+
+No project story today. Low-code is still code, and it needs an owner like any other.

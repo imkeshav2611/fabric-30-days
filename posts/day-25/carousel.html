@@ -1,0 +1,94 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Day 25</title><link rel="stylesheet" href="../../assets/carousel.css"></head>
+<body data-series="Microsoft Fabric · 30 Days" data-day="25" data-total="30" data-author="Keshav Maheshwari" data-role="Data Engineer | Databricks · AWS &amp; Azure · Streaming · Applied AI">
+
+<section class="slide">
+<span class="tag">Day 25 of 30</span>
+<h1>Ship it<br><em>safely</em></h1>
+<p class="cover-sub">Git integration and deployment pipelines.<br>Changes that do not break production.</p>
+<div><span class="pill">Dev</span><span class="pill">Test</span><span class="pill">Prod</span></div>
+</section>
+
+<section class="slide">
+<span class="tag amber">The problem</span>
+<h2>"I just changed one thing" <span class="amberc">in production</span>.</h2>
+<div class="body">
+<div class="row"><span class="ic">1</span><span class="k">The change</span><span class="v">Made directly in the live workspace</span></div>
+<div class="row"><span class="ic">2</span><span class="k">The test</span><span class="v">The CEO opening the report</span></div>
+<div class="row"><span class="ic">3</span><span class="k">The undo button</span><span class="v">Does not exist</span></div>
+</div>
+<p class="lead">Without versions and stages, <b class="w">every edit is a live experiment on real users</b>.</p>
+</section>
+
+<section class="slide">
+<span class="tag">The simple version</span>
+<h2><em>Rehearsal</em> before the live show.</h2>
+<p class="lead">No theatre opens a play without rehearsing it. Mistakes happen on an empty stage, not in front of the audience.</p>
+<p class="lead">Deployment stages are your <b class="w">rehearsal rooms</b>, and Git is the <b class="w">script with every revision kept</b>.</p>
+<div class="body">
+<div class="row"><span class="ic">✓</span><span class="k">Git</span><span class="v">Every change saved, with history</span></div>
+<div class="row"><span class="ic">✓</span><span class="k">Dev and Test</span><span class="v">Where mistakes are cheap</span></div>
+<div class="row"><span class="ic">✓</span><span class="k">Production</span><span class="v">Only what passed</span></div>
+</div>
+</section>
+
+<section class="slide">
+<span class="tag">How it works</span>
+<h2>The path of a <em>change</em></h2>
+<div class="steps tight">
+<div class="row"><span class="ic">1</span><span class="v">Connect the workspace to a <b class="w">Git branch</b></span></div>
+<div class="row"><span class="ic">2</span><span class="v">Work in <b class="w">Dev</b>, commit, and open a pull request</span></div>
+<div class="row"><span class="ic">3</span><span class="v"><b class="w">Deploy</b> to Test and check the result</span></div>
+<div class="row"><span class="ic">4</span><span class="v"><b class="w">Deploy</b> to Production when it passes</span></div>
+<div class="row"><span class="ic">5</span><span class="v"><b class="w">Undo</b> a bad change by reverting the commit in Git</span></div>
+</div>
+<div class="bar lake"><b>Two tools, two jobs</b>Git keeps the history of your items. Deployment pipelines move them between stages.</div>
+
+</section>
+
+<section class="slide">
+<span class="tag amber">For engineers</span>
+<h2>What to <span class="amberc">set up</span></h2>
+<div class="body">
+<div class="row col"><span class="k">Git providers</span><span class="v">Azure DevOps, GitHub and GitHub Enterprise are supported, in their cloud versions.</span></div>
+<div class="row col"><span class="k">Stages are flexible</span><span class="v">A deployment pipeline can have from 2 to 10 stages. Three is the default.</span></div>
+<div class="row col"><span class="k">Variable libraries</span><span class="v">Keep values that differ per stage, such as connection names, out of the items themselves.</span></div>
+<div class="row col"><span class="k">Automate when ready</span><span class="v">The fabric-cicd library and the Fabric CLI let a build server deploy for you.</span></div>
+</div>
+</section>
+
+<section class="slide">
+<span class="tag">The honest part</span>
+<h2>How much <em>process</em> do you need?</h2>
+<div class="split">
+<div class="box yes"><h3>Minimum for everyone</h3><ul><li>Separate Dev and Prod workspaces</li><li>Everything committed to Git</li><li>No direct edits in production</li></ul></div>
+<div class="box no"><h3>Add when you grow</h3><ul><li>Automated deployments from a build server</li><li>Pull request reviews for each change</li><li>Automated tests on deployment</li></ul></div>
+</div>
+<p class="quote"><b class="w">The catch:</b> deployment moves definitions, not data. A lakehouse arrives in Test with its structure and no rows. Plan how each stage gets its data.</p>
+</section>
+
+<section class="slide">
+<span class="tag amber">Watch out</span>
+<h2>Four things to <span class="amberc">plan for</span></h2>
+<div class="steps">
+<div class="row"><span class="ic">1</span><span class="v"><b class="w">Item support varies</b>: check each item type you use</span></div>
+<div class="row"><span class="ic">2</span><span class="v"><b class="w">Stage-specific values</b> such as connections and IDs</span></div>
+<div class="row"><span class="ic">3</span><span class="v"><b class="w">Data in lower stages</b>: sample, shortcut or reload</span></div>
+<div class="row"><span class="ic">4</span><span class="v"><b class="w">Who may deploy</b> to production, and who approves</span></div>
+</div>
+<p class="lead">The goal is boring releases. <b class="w">Boring is good.</b></p>
+</section>
+
+<section class="slide">
+<span class="tag">Save this</span>
+<h2>Shipping in <em>five lines</em></h2>
+<div class="body">
+<div class="row"><span class="ic">1</span><span class="v"><b class="w">Git</b> keeps every version of every item</span></div>
+<div class="row"><span class="ic">2</span><span class="v"><b class="w">Stages</b> keep mistakes away from users</span></div>
+<div class="row"><span class="ic">3</span><span class="v"><b class="w">Variables</b> handle per-stage differences</span></div>
+<div class="row"><span class="ic">4</span><span class="v"><b class="w">Definitions move</b>, data does not</span></div>
+<div class="row"><span class="ic">5</span><span class="v"><b class="w">Nobody edits</b> production by hand</span></div>
+</div>
+<p class="big">Tomorrow: <em>Monitoring</em>.<br>Knowing something is wrong before the users do.</p>
+</section>
+
+<script src="../../assets/carousel.js"></script></body></html>

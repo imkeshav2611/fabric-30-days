@@ -1,0 +1,19 @@
+Microsoft Fabric, Day 25 of 30: Git and deployment pipelines.
+
+The fastest way to lose trust in a data platform is to change production directly and find out who notices.
+
+Fabric gives you two tools to avoid that, and they do different jobs. Git integration connects a workspace to a branch in Azure DevOps or GitHub, so every item has history and changes go through commits and pull requests. Deployment pipelines move items between stages, typically Dev, Test and Production, with anywhere from two to ten stages supported.
+
+A few things make this work in practice. Variable libraries hold the values that differ between stages, so items do not need editing on the way through. The fabric-cicd library and the Fabric CLI let a build server run deployments once the team is ready for automation.
+
+The detail that surprises people: deployment moves definitions, not data. A lakehouse reaches Test with its structure and no rows, so each stage needs a plan for how it gets data.
+
+My minimum for any team is small. Separate Dev and Production workspaces, everything in Git, and no hand edits in production. The goal is boring releases.
+
+Slides 1 to 4 cover the big picture. Slides 5 to 7 are where it gets practical. Slide 8 is the summary.
+
+Tomorrow: Monitoring.
+
+Do you deploy through deployment pipelines, a build server, or both?
+
+#MicrosoftFabric #DataEngineering #CICD #DevOps #DataOps

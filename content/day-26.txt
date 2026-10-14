@@ -1,0 +1,43 @@
+topic: Monitoring
+cap_title: monitoring
+title: Know|*before*|they do
+sub: Monitoring in Fabric.|Find the problem before the users.
+pills: Monitoring hub || Metrics app || Alerts
+p_h: "The dashboard is wrong" is a ^bad way^ to find out.
+p_rows: 2 a.m. :: A pipeline fails quietly || 8 a.m. :: Reports show yesterday's data || 9 a.m. :: A director emails you
+p_end: The platform knew at 2 a.m. **Nobody had asked it to say so.**
+s_h: A *car dashboard*.
+s_leads: You do not open the bonnet every morning. A few dials and warning lights tell you when something needs attention. || Monitoring gives your platform **the same dials and warning lights**.
+s_rows: Did it run? :: Job status and history || Is it healthy? :: Duration and failures || Can we afford it? :: Capacity usage
+m_h: Where to *look*
+m_rows: **Monitoring hub**: every run of every pipeline, notebook and refresh || **Capacity Metrics app**: who used how much compute || **Workspace monitoring**: detailed logs you can query with KQL || **Activator**: turn any of this into an alert
+m_bar: Three questions :: Did it run, is it getting slower, and is it eating the capacity? Answer those and you cover most incidents.
+e_h: What each tool is ^good for^
+e_rows: Monitoring hub is your first stop :: It lists runs across the workspace with status and duration. Start every investigation here. || The Metrics app looks back 14 days :: Compute history covers 14 days and storage 30. Longer trends need your own copy. || The Metrics app has no alerts :: To be warned about capacity, use capacity events in Real-Time hub with Activator. || Surge protection is a safety net :: It limits background work when the capacity is under pressure, protecting interactive users.
+h_h: What deserves an *alert*?
+h_yes_t: Alert on
+h_no_t: Just log
+h_yes: A production pipeline failing || A refresh taking twice as long as usual || Capacity nearing its limit
+h_no: Every successful run || Failures in development workspaces || Warnings nobody acts on
+h_catch: The catch :: a job that succeeds can still be wrong. It ran, it wrote zero rows, and everything is green. Monitor the data, not only the job.
+r_kind: watch
+r_h: Four checks that ^catch most problems^
+r_rows: **Freshness**: when did this table last get new rows? || **Volume**: is today's row count in the normal range? || **Duration**: is the job slower than last week? || **Capacity**: what was running when throttling began?
+r_end: Good monitoring is **four questions, asked automatically**.
+z_h: Monitoring in *five lines*
+z_rows: **Monitoring hub** for what ran || **Metrics app** for what it cost || **Workspace monitoring** for the details || **Activator** to be told, not to check || **Watch the data**, not only the jobs
+z_next: Tomorrow :: Faster Spark jobs :: Where the time really goes.
+q: What is your earliest warning signal that a load went wrong?
+tags: #Observability #DataOps #Monitoring
+caption:
+The worst monitoring system is a director emailing to say the numbers look wrong.
+
+Fabric has the pieces to do better. The Monitoring hub lists every run of every pipeline, notebook and refresh, with status and duration. The Capacity Metrics app shows which items consumed how much compute. Workspace monitoring collects detailed logs that you can query with KQL. Activator turns any of these signals into an alert.
+
+Two limits are worth knowing. The Metrics app covers 14 days of compute history, so longer trends need your own copy of the data. And the app itself does not send alerts. To be warned about capacity pressure, use capacity events in Real-Time hub together with Activator.
+
+The gap I see most often is not tooling. It is that teams monitor jobs and not data. A pipeline can succeed, write zero rows, and show green everywhere.
+
+So I would automate four checks on every important table: freshness, volume, duration and capacity. They catch most problems before anyone opens a report.
+
+No project story today, only the habit that prevents the awkward email.

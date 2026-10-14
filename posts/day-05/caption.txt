@@ -1,0 +1,19 @@
+Microsoft Fabric, Day 5 of 30: Lakehouse or Warehouse.
+
+"Lakehouse or Warehouse?" comes up in the first week of almost every Fabric project.
+
+They look similar because they share the foundation. Both store tables in OneLake, both use Delta, and both can be queried with SQL. The difference is how data gets written. A Lakehouse is written with Spark and happily takes raw files. A Warehouse is written with T-SQL and supports multi-table transactions and stored procedures.
+
+So I would not start from a feature comparison. I would start from the people. A team that thinks in SQL will be productive in a Warehouse immediately. A team that works in notebooks will want a Lakehouse. Then look at the raw data and the write pattern.
+
+It is also not either-or. A warehouse can query lakehouse tables in the same workspace, and a Lakehouse for the early layers with a Warehouse for the serving layer is a common split.
+
+On a project for a manufacturing group, years of logic lived in legacy SQL. That moved to Synapse and Fabric to centralise reporting, while PySpark handled the heavier pipeline. Each tool did the job it was good at.
+
+Slides 1 to 4 cover the big picture. Slides 5 to 7 are where it gets practical. Slide 8 is the summary.
+
+Tomorrow: Delta tables.
+
+Lakehouse for everything, Warehouse for everything, or a mix? What does your team run?
+
+#MicrosoftFabric #DataEngineering #Lakehouse #DataWarehouse #TSQL

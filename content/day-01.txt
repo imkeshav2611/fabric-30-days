@@ -1,0 +1,42 @@
+topic: What is Microsoft Fabric
+cap_title: what it actually is
+title: What is|Microsoft|*Fabric*,|really?
+sub: The big picture first.|Then what matters in production.
+pills: OneLake || Delta tables || Capacity
+p_h: One data platform used to mean ^six separate services^.
+p_rows: Move the data :: Azure Data Factory || Store it :: Data Lake Storage || Clean it :: Spark on Databricks or Synapse || Query it :: A SQL warehouse || Live data :: Event Hubs plus a streaming engine || Show it :: Power BI
+p_end: Six setups. Six bills. Six security models. **And you do the wiring between them.**
+s_h: Fabric is a *fitted kitchen*.
+s_leads: Before, you bought the oven, fridge and sink from different shops and did the plumbing yourself. || Fabric arrives as **one kitchen**. Every appliance is already connected, and they all use **one pantry**.
+s_rows: One sign-in :: It runs in the browser, like Power BI || One storage :: Called OneLake. Data is kept once || One bill :: A single pool of computing power
+m_tag: The map
+m_h: What is *inside* Fabric
+m_tiles: Data Factory :: Bring data in, on a schedule || Data Engineering :: Clean it with Spark notebooks || Data Warehouse :: Query it with plain SQL || Real-Time Intelligence :: Data that arrives every second || Data Science :: Train and track ML models || Power BI :: Reports people actually open
+m_bar: OneLake :: One copy of the data, saved as Delta tables. Every tool above reads the same files.
+m_caps: Capacity :: one shared pool of compute that all of it runs on || Security and governance :: set once, applies everywhere
+e_h: What ^changes^ for you
+e_rows: It is SaaS, not PaaS :: No clusters to build or patch. Spark starter pools give you a session in seconds. || One open format: Delta Parquet :: Spark writes a table. The SQL endpoint and Power BI read that same table. No export step. || One compute currency :: Every workload spends Capacity Units from the same F SKU. Sizing is one decision, not six. || Shortcuts instead of copies :: Point OneLake at ADLS, S3 or Google Cloud Storage and query the data where it sits.
+h_h: Is Fabric *right* for you?
+h_yes: Your company already lives in Power BI and Azure || A small team that wants less infrastructure work || You need batch, real-time and reports in one place
+h_no: You need fine control over cluster configuration || You are deep in another platform that works well || Nobody will watch capacity usage
+h_catch: The catch people miss :: capacity is shared. One heavy Spark job can slow down everybody's reports. Plan your capacity before you plan your pipelines.
+r_kind: real
+r_h: What this looked like on a ^real project^
+r_lead: A people-analytics platform. Employee data lived in scattered CSV files that were updated by hand.
+r_rows: **One Lakehouse on OneLake** replaced the scattered files || **Triggered pipelines** refresh the data daily, no manual step || **Bronze, Silver, Gold** layers built in PySpark || **A semantic model** on top for the organisation's KPIs || **Row-level security** so people see only what they should
+r_end: All five steps, **inside one product**.
+z_h: Fabric in *five lines*
+z_rows: **One platform** for the whole data journey || **OneLake** stores the data once, as Delta tables || **Every engine** reads those same tables || **One capacity** pays for everything, so watch it || **Less plumbing**, more time on the real problem
+z_next: Tomorrow :: OneLake :: Why "store it once" is a bigger idea than it sounds.
+q: If you work on Fabric, what would you add to slide 6?
+tags: #OneLake #Azure #PowerBI
+caption:
+I build data platforms on Azure, and a lot of that work has been on Fabric. For the next 30 days I am writing down how I think about it, one topic a day: OneLake, Lakehouse versus Warehouse, Real-Time Intelligence, Direct Lake, security, capacity. Clear enough to follow if you are new to it, with the details that matter once it runs in production.
+
+Starting with the foundation.
+
+A data platform on Azure used to be six services stitched together: one to move data, one to store it, one to transform it, one to query it, one for streaming and one for reporting. Fabric brings those into a single product on a single storage layer, OneLake.
+
+For me the real shift is not convenience. It is that every engine works on the same Delta tables. Spark writes a table, and the SQL endpoint and Power BI read that same table. A whole category of copy jobs goes away.
+
+The thing I would plan for early is capacity. Every workload draws from the same pool, so one heavy Spark job can slow down everyone's reports. Sizing and monitoring deserve attention before the first pipeline is built.

@@ -1,0 +1,19 @@
+Microsoft Fabric, Day 8 of 30: the medallion architecture.
+
+Bronze, Silver, Gold is the most repeated diagram in data engineering. It is repeated because it solves a real problem.
+
+When ingestion, cleaning and reporting logic live in one job, every change is a rebuild and every failure is total. The medallion pattern separates them. Bronze keeps the data exactly as it arrived. Silver makes it clean and consistent. Gold shapes it for a specific business question.
+
+The benefit shows up the day something changes. A new rule or a bug fix means rebuilding from Bronze, not going back to the source system and hoping the history is still there.
+
+A few things I would decide up front in Fabric. Where each layer lives, since Microsoft now recommends a separate lakehouse and workspace per layer. Whether materialized lake views can replace hand-written notebooks for Silver and Gold. Whether Gold should be a Warehouse for SQL users. And what Silver actually promises, because a Silver layer with no quality rules is only a second Bronze.
+
+I built these layers in PySpark for a people-analytics platform, with semantic models reading from Gold. Keeping each concern in its own layer is what kept changes small.
+
+Slides 1 to 4 cover the big picture. Slides 5 to 7 are where it gets practical. Slide 8 is the summary.
+
+Tomorrow: Data Factory pipelines.
+
+Do you keep each layer in its own lakehouse, its own workspace, or all in one?
+
+#MicrosoftFabric #DataEngineering #MedallionArchitecture #Lakehouse #DataModeling

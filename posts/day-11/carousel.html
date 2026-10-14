@@ -1,0 +1,95 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Day 11</title><link rel="stylesheet" href="../../assets/carousel.css"></head>
+<body data-series="Microsoft Fabric · 30 Days" data-day="11" data-total="30" data-author="Keshav Maheshwari" data-role="Data Engineer | Databricks · AWS &amp; Azure · Streaming · Applied AI">
+
+<section class="slide">
+<span class="tag">Day 11 of 30</span>
+<h1>Notebooks<br>and<br><em>Spark</em></h1>
+<p class="cover-sub">Where the heavy processing happens.<br>And how Fabric changes the experience.</p>
+<div><span class="pill">PySpark</span><span class="pill">Starter pools</span><span class="pill">Environments</span></div>
+</section>
+
+<section class="slide">
+<span class="tag amber">The problem</span>
+<h2>One machine <span class="amberc">runs out</span> sooner than you think.</h2>
+<div class="body">
+<div class="row"><span class="ic">1</span><span class="k">A few million rows</span><span class="v">A laptop is fine</span></div>
+<div class="row"><span class="ic">2</span><span class="k">A few billion</span><span class="v">It runs for hours, or crashes</span></div>
+<div class="row"><span class="ic">3</span><span class="k">The usual fix</span><span class="v">Buy a bigger machine</span></div>
+</div>
+<p class="lead">There is always a bigger dataset. <b class="w">A bigger machine is not a strategy.</b></p>
+</section>
+
+<section class="slide">
+<span class="tag">The simple version</span>
+<h2><em>Many cooks</em>, one big order.</h2>
+<p class="lead">One cook cannot serve a banquet alone. A head chef splits the order, hands parts to many cooks, and plates the result.</p>
+<p class="lead">Spark is the <b class="w">head chef</b>. It splits your job across many machines and combines the answers.</p>
+<div class="body">
+<div class="row"><span class="ic">✓</span><span class="k">Your code</span><span class="v">Written once, in a notebook</span></div>
+<div class="row"><span class="ic">✓</span><span class="k">Spark</span><span class="v">Splits the work and runs it</span></div>
+<div class="row"><span class="ic">✓</span><span class="k">You</span><span class="v">Never manage the machines</span></div>
+</div>
+</section>
+
+<section class="slide">
+<span class="tag">How it works</span>
+<h2>Running Spark in <em>Fabric</em></h2>
+<div class="steps tight">
+<div class="row"><span class="ic">1</span><span class="v">Open a <b class="w">notebook</b> and attach a Lakehouse</span></div>
+<div class="row"><span class="ic">2</span><span class="v">A <b class="w">starter pool</b> gives you a session in seconds</span></div>
+<div class="row"><span class="ic">3</span><span class="v">Write <b class="w">PySpark, Spark SQL, Scala or R</b></span></div>
+<div class="row"><span class="ic">4</span><span class="v">Results save as <b class="w">Delta tables</b> in OneLake</span></div>
+<div class="row"><span class="ic">5</span><span class="v"><b class="w">Schedule</b> it, or call it from a pipeline</span></div>
+</div>
+<div class="bar lake"><b>No cluster to build</b>Fabric keeps pools ready. You pick a size only when the default is not enough.</div>
+
+</section>
+
+<section class="slide">
+<span class="tag amber">For engineers</span>
+<h2>Settings that <span class="amberc">matter</span></h2>
+<div class="body">
+<div class="row col"><span class="k">Starter pool or custom pool</span><span class="v">Starter pools start fast with default sizing. Custom pools let you choose node size and autoscale limits.</span></div>
+<div class="row col"><span class="k">Environments hold your setup</span><span class="v">Libraries and Spark settings live in an environment, so every notebook and job runs the same way.</span></div>
+<div class="row col"><span class="k">High concurrency mode</span><span class="v">Several notebooks can share one session, which saves start-up time and capacity.</span></div>
+<div class="row col"><span class="k">Native execution engine</span><span class="v">A vectorised engine you switch on in the environment. It can speed up queries with no code change.</span></div>
+</div>
+</section>
+
+<section class="slide">
+<span class="tag">The honest part</span>
+<h2>Do you <em>need</em> Spark?</h2>
+<div class="split">
+<div class="box yes"><h3>Yes when</h3><ul><li>Data is large or growing fast</li><li>Logic is complex and needs testing</li><li>Files are raw or semi-structured</li></ul></div>
+<div class="box no"><h3>Maybe not when</h3><ul><li>The data fits comfortably in SQL</li><li>The team does not know Python</li><li>A plain Python notebook can handle it</li></ul></div>
+</div>
+<p class="quote"><b class="w">The catch:</b> Spark is easy to start and easy to waste. A notebook left running, or a job on a pool far larger than it needs, quietly eats the shared capacity.</p>
+</section>
+
+<section class="slide">
+<span class="tag amber">From real work</span>
+<h2>Spark on <span class="amberc">real projects</span></h2>
+<p class="lead">PySpark has been the core of most platforms I have worked on.</p>
+<div class="steps">
+<div class="row"><span class="ic">1</span><span class="v"><b class="w">Bronze, Silver and Gold</b> layers for a people-analytics platform</span></div>
+<div class="row"><span class="ic">2</span><span class="v"><b class="w">A sustainability reporting pipeline</b> that cut manual effort by 80%</span></div>
+<div class="row"><span class="ic">3</span><span class="v"><b class="w">Daily volumes</b> from hundreds of GB to several TB on a Databricks platform</span></div>
+<div class="row"><span class="ic">4</span><span class="v"><b class="w">SQL stored procedures</b> rewritten as PySpark during a migration</span></div>
+</div>
+<p class="lead">Same skills, whether the engine runs in <b class="w">Fabric or Databricks</b>.</p>
+</section>
+
+<section class="slide">
+<span class="tag">Save this</span>
+<h2>Spark in Fabric in <em>five lines</em></h2>
+<div class="body">
+<div class="row"><span class="ic">1</span><span class="v"><b class="w">Spark</b> splits big jobs across machines</span></div>
+<div class="row"><span class="ic">2</span><span class="v"><b class="w">Notebooks</b> are where you write the code</span></div>
+<div class="row"><span class="ic">3</span><span class="v"><b class="w">Starter pools</b> remove the waiting</span></div>
+<div class="row"><span class="ic">4</span><span class="v"><b class="w">Environments</b> keep runs consistent</span></div>
+<div class="row"><span class="ic">5</span><span class="v"><b class="w">Idle sessions</b> cost capacity, so stop them</span></div>
+</div>
+<p class="big">Tomorrow: <em>Incremental loads</em>.<br>Moving only what changed.</p>
+</section>
+
+<script src="../../assets/carousel.js"></script></body></html>

@@ -1,0 +1,19 @@
+Microsoft Fabric, Day 13 of 30: table maintenance.
+
+Delta tables get slower over time even when nobody touches the code. The reason is almost always small files.
+
+Every load adds files and every update leaves old ones behind. After a few months a table can hold thousands of small files, and each query has to open them all. Three operations fix it. OPTIMIZE merges small files into larger ones. V-Order arranges the Parquet layout for faster reads. VACUUM removes files that are no longer referenced, keeping seven days of history by default.
+
+One thing has changed that is easy to miss. In newly created Fabric workspaces, V-Order is off by default, because the default Spark profile favours fast writes. If your Gold tables feed Power BI, it is worth checking and enabling it there, either on the table or through a read-heavy resource profile.
+
+Auto compaction is opt-in as well, and Microsoft recommends it for ingestion tables.
+
+I did this kind of tuning on a Databricks platform, using partitioning, compaction and Z-Ordering to cut scan times. The engine was different. The housekeeping is the same on every Delta table.
+
+Slides 1 to 4 cover the big picture. Slides 5 to 7 are where it gets practical. Slide 8 is the summary.
+
+Tomorrow: The on-premises data gateway.
+
+Do you run maintenance on a schedule, or only when something gets slow?
+
+#MicrosoftFabric #DataEngineering #DeltaLake #VOrder #Performance

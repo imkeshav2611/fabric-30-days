@@ -1,0 +1,19 @@
+Microsoft Fabric, Day 20 of 30: semantic models.
+
+Most arguments about data are not about data. They are about definitions.
+
+Sales counts an order when it is placed, finance when it is paid, operations when it ships. Three correct numbers, one confused meeting. A semantic model is where an organisation settles that. It holds tidy tables, the relationships between them, and measures that define each KPI once. Every report then reads the model instead of calculating its own version.
+
+Two things have changed that are worth knowing. Fabric no longer creates a default semantic model automatically for a lakehouse or warehouse, so the model is now something you design on purpose. And new models built on Fabric data use Direct Lake, which reads the Delta tables without an import step.
+
+This layer matters more now that AI agents answer questions on top of it. An agent with clear measures and well-named tables gives useful answers. An agent pointed at raw tables guesses.
+
+On a people-analytics platform I worked on, semantic models defined the organisation's KPIs, and a GenAI assistant sat on top for HR leaders. Its answers were only as good as the definitions underneath.
+
+Slides 1 to 4 cover the big picture. Slides 5 to 7 are where it gets practical. Slide 8 is the summary.
+
+Tomorrow: Direct Lake.
+
+How many definitions of "active customer" exist in your organisation today?
+
+#MicrosoftFabric #DataEngineering #PowerBI #SemanticModel #DataModeling

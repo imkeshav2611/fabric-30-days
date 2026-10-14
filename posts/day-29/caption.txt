@@ -1,0 +1,19 @@
+Microsoft Fabric, Day 29 of 30: migrating an old warehouse.
+
+The hardest systems to migrate are the ones that still work. Nobody wants to touch them, and every year they get harder to leave.
+
+A migration that goes well looks a lot like moving house. Take an inventory of tables, procedures and jobs, and find out which are actually used. Decide what moves as it is, what gets rewritten and what is retired. Convert, then run old and new side by side until the numbers match. Cut over one subject area at a time.
+
+The tooling has improved. Fabric has a Migration Assistant for Data Warehouse that converts schema and code from Synapse dedicated SQL pools and SQL Server and moves the data with a Copy job. There is a Spark Migration Assistant, and Azure Data Factory has an assessment-first upgrade path into Fabric.
+
+Tools convert code. They do not decide what is worth keeping. A large share of any old warehouse is unused, and migrating it wastes weeks.
+
+I led a migration of an on-premises SQL warehouse to Data Lake and Databricks, rewriting stored procedures in PySpark. Processing time fell from 2 hours 50 minutes to about 5 minutes.
+
+Slides 1 to 4 cover the big picture. Slides 5 to 7 are where it gets practical. Slide 8 is the summary.
+
+Tomorrow: The full picture.
+
+Lift and shift or rewrite: which did your last migration choose, and was it right?
+
+#MicrosoftFabric #DataEngineering #DataMigration #AzureSynapse #DataWarehouse

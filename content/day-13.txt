@@ -1,0 +1,42 @@
+topic: Table maintenance
+cap_title: table maintenance
+title: Keeping|tables|*healthy*
+sub: OPTIMIZE, V-Order and VACUUM.|The housekeeping nobody schedules.
+pills: Compaction || V-Order || VACUUM
+p_h: Tables get slower ^without anyone changing them^.
+p_rows: Every load :: Adds a few more small files || Every update :: Leaves old files behind || After six months :: Thousands of files per table
+p_end: The query has to open every one of them. **The data did not grow. The mess did.**
+s_h: Tidying a *messy cupboard*.
+s_leads: Put things away in a hurry for months and the cupboard fills with half-empty boxes. Finding anything takes longer each week. || Maintenance is **repacking into full boxes and throwing out what is no longer needed**.
+s_rows: OPTIMIZE :: Merge small files into big ones || V-Order :: Arrange files for faster reading || VACUUM :: Remove files no longer in use
+m_h: The *three* commands
+m_rows: **OPTIMIZE** rewrites many small files as fewer large ones || **V-Order** sorts and compresses Parquet for fast reads || **VACUUM** deletes old files past the retention period || The **Maintenance** dialog on a lakehouse table runs all three
+m_bar: Default retention is 7 days :: VACUUM keeps a week of history. Shorter than that and time travel stops working for older versions.
+e_h: What changed, and what to ^check^
+e_rows: V-Order is off by default in new workspaces :: The default profile favours fast writes. Reports read faster with V-Order, so turn it on for serving tables. || Resource profiles set the defaults :: writeHeavy is the default. The read-heavy profiles enable V-Order and optimised writes for you. || Auto compaction is opt-in :: Microsoft recommends it for ingestion tables. It compacts after writes so you do not have to schedule it. || Order matters :: Compact first, then vacuum. Vacuuming first just removes files you were about to rewrite.
+h_h: How *often* is enough?
+h_yes_t: Maintain often
+h_no_t: Leave alone
+h_yes: Tables loaded many times a day || Tables that Power BI reads directly || Tables with frequent updates or deletes
+h_no: Large tables that are rarely written || Bronze tables nobody queries || Tables rebuilt in full each run
+h_catch: The catch :: maintenance uses capacity too. OPTIMIZE on a huge table at 9 a.m. competes with everyone's reports. Schedule it like any other heavy job.
+r_kind: real
+r_h: Maintenance on a ^real platform^
+r_lead: A Databricks platform for a financial services company, with daily loads into Delta Lake.
+r_rows: **Partitioning** on the large Delta tables || **Compaction** to merge small files into larger ones || **Z-Ordering** to keep related rows close together || **Query scan times** improved as a result
+r_end: The same three ideas apply to **every Delta table in Fabric**.
+z_h: Maintenance in *five lines*
+z_rows: **Small files** are the silent slowdown || **OPTIMIZE** compacts them || **V-Order** speeds up reads, check it is on || **VACUUM** cleans up, mind the 7 days || **Schedule it** away from peak hours
+z_next: Tomorrow :: The on-premises data gateway :: Reaching data that sits inside a factory or office.
+q: Do you run maintenance on a schedule, or only when something gets slow?
+tags: #DeltaLake #VOrder #Performance
+caption:
+Delta tables get slower over time even when nobody touches the code. The reason is almost always small files.
+
+Every load adds files and every update leaves old ones behind. After a few months a table can hold thousands of small files, and each query has to open them all. Three operations fix it. OPTIMIZE merges small files into larger ones. V-Order arranges the Parquet layout for faster reads. VACUUM removes files that are no longer referenced, keeping seven days of history by default.
+
+One thing has changed that is easy to miss. In newly created Fabric workspaces, V-Order is off by default, because the default Spark profile favours fast writes. If your Gold tables feed Power BI, it is worth checking and enabling it there, either on the table or through a read-heavy resource profile.
+
+Auto compaction is opt-in as well, and Microsoft recommends it for ingestion tables.
+
+I did this kind of tuning on a Databricks platform, using partitioning, compaction and Z-Ordering to cut scan times. The engine was different. The housekeeping is the same on every Delta table.

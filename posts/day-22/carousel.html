@@ -1,0 +1,94 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Day 22</title><link rel="stylesheet" href="../../assets/carousel.css"></head>
+<body data-series="Microsoft Fabric · 30 Days" data-day="22" data-total="30" data-author="Keshav Maheshwari" data-role="Data Engineer | Databricks · AWS &amp; Azure · Streaming · Applied AI">
+
+<section class="slide">
+<span class="tag">Day 22 of 30</span>
+<h1>Who can<br>see<br><em>what</em>?</h1>
+<p class="cover-sub">Security in Fabric, layer by layer.<br>From the workspace down to the row.</p>
+<div><span class="pill">Roles</span><span class="pill">Permissions</span><span class="pill">OneLake security</span></div>
+</section>
+
+<section class="slide">
+<span class="tag amber">The problem</span>
+<h2>One platform means <span class="amberc">one place to get it wrong</span>.</h2>
+<div class="body">
+<div class="row"><span class="ic">1</span><span class="k">Before</span><span class="v">Each tool had its own access list</span></div>
+<div class="row"><span class="ic">2</span><span class="k">Now</span><span class="v">Many tools, one copy of the data</span></div>
+<div class="row"><span class="ic">3</span><span class="k">The risk</span><span class="v">Access granted in one, open in all</span></div>
+</div>
+<p class="lead">When everything shares the same data, <b class="w">a careless permission travels further</b>.</p>
+</section>
+
+<section class="slide">
+<span class="tag">The simple version</span>
+<h2><em>Keys</em> to a building.</h2>
+<p class="lead">Some people get a key to the whole building. Some get one room. Some may only look through a window into one cabinet.</p>
+<p class="lead">Fabric works in the same layers: <b class="w">workspace, item, then the data inside</b>.</p>
+<div class="body">
+<div class="row"><span class="ic">✓</span><span class="k">Workspace role</span><span class="v">A key to the room</span></div>
+<div class="row"><span class="ic">✓</span><span class="k">Item permission</span><span class="v">A key to one cabinet</span></div>
+<div class="row"><span class="ic">✓</span><span class="k">Data security</span><span class="v">Which drawers you may open</span></div>
+</div>
+</section>
+
+<section class="slide">
+<span class="tag">How it works</span>
+<h2>The <em>layers</em>, from wide to narrow</h2>
+<div class="steps">
+<div class="row"><span class="ic">1</span><span class="v"><b class="w">Microsoft Entra ID</b> proves who you are</span></div>
+<div class="row"><span class="ic">2</span><span class="v"><b class="w">Workspace roles</b>: Admin, Member, Contributor, Viewer</span></div>
+<div class="row"><span class="ic">3</span><span class="v"><b class="w">Item permissions</b>: share one lakehouse or report</span></div>
+<div class="row"><span class="ic">4</span><span class="v"><b class="w">OneLake security</b>: tables, folders, columns and rows</span></div>
+</div>
+<div class="bar lake"><b>Least privilege</b>Start people at the narrowest layer that lets them do the job, and widen only when needed.</div>
+
+</section>
+
+<section class="slide">
+<span class="tag amber">For engineers</span>
+<h2>Details people <span class="amberc">get wrong</span></h2>
+<div class="body">
+<div class="row col"><span class="k">Viewer is not harmless</span><span class="v">A Viewer can query data through SQL and reports, but gets no direct OneLake file access unless a role grants it.</span></div>
+<div class="row col"><span class="k">Contributor sees everything</span><span class="v">Admin, Member and Contributor can read all data in the workspace. Row-level rules do not hold them back.</span></div>
+<div class="row col"><span class="k">OneLake security travels with the data</span><span class="v">Roles defined on the data are enforced across Fabric engines, not only in one tool.</span></div>
+<div class="row col"><span class="k">Use groups, not names</span><span class="v">Assign roles to security groups. Individual assignments are impossible to audit later.</span></div>
+</div>
+</section>
+
+<section class="slide">
+<span class="tag">The honest part</span>
+<h2>Workspace role or <em>finer control</em>?</h2>
+<div class="split">
+<div class="box yes"><h3>Role is enough</h3><ul><li>A small team that all sees the same data</li><li>Development workspaces</li><li>Everyone builds, nobody only consumes</li></ul></div>
+<div class="box no"><h3>Go finer</h3><ul><li>Sensitive columns such as salary</li><li>Different regions see different rows</li><li>Consumers outside the build team</li></ul></div>
+</div>
+<p class="quote"><b class="w">The catch:</b> the quickest fix for "I cannot see it" is making someone a Contributor. That one click bypasses every row and column rule you designed.</p>
+</section>
+
+<section class="slide">
+<span class="tag amber">From real work</span>
+<h2>Security on a <span class="amberc">real project</span></h2>
+<p class="lead">A people-analytics platform holding sensitive employee data.</p>
+<div class="steps">
+<div class="row"><span class="ic">1</span><span class="v"><b class="w">Role-based access control</b> decided who could reach the platform</span></div>
+<div class="row"><span class="ic">2</span><span class="v"><b class="w">Row-level security</b> limited which employees each user saw</span></div>
+<div class="row"><span class="ic">3</span><span class="v"><b class="w">Sensitive personnel data</b> stayed protected inside Fabric</span></div>
+<div class="row"><span class="ic">4</span><span class="v"><b class="w">HR leaders</b> queried it through reports and an assistant</span></div>
+</div>
+<p class="lead">With employee data, <b class="w">security is the first design decision</b>, not the last.</p>
+</section>
+
+<section class="slide">
+<span class="tag">Save this</span>
+<h2>Security in <em>five lines</em></h2>
+<div class="body">
+<div class="row"><span class="ic">1</span><span class="v"><b class="w">Identity</b> first, through Entra ID</span></div>
+<div class="row"><span class="ic">2</span><span class="v"><b class="w">Workspace roles</b> for builders</span></div>
+<div class="row"><span class="ic">3</span><span class="v"><b class="w">Item permissions</b> for sharing one thing</span></div>
+<div class="row"><span class="ic">4</span><span class="v"><b class="w">OneLake security</b> for tables, columns, rows</span></div>
+<div class="row"><span class="ic">5</span><span class="v"><b class="w">Contributor and above</b> bypass fine rules</span></div>
+</div>
+<p class="big">Tomorrow: <em>Row-level security</em>.<br>Same report, different rows for each person.</p>
+</section>
+
+<script src="../../assets/carousel.js"></script></body></html>

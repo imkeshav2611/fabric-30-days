@@ -1,0 +1,17 @@
+Microsoft Fabric, Day 27 of 30: making Spark jobs faster.
+
+When a Spark job is slow, the tempting fix is a bigger cluster. It is also the most expensive one, and it often does not work.
+
+Most slow jobs waste effort. They read data they later throw away, shuffle rows between machines for a join that did not need it, or open thousands of tiny files. The fixes are well known and they pay off roughly in this order: filter and select early, broadcast small tables in joins, deal with skew, cache only what is reused, and keep files compacted.
+
+Fabric adds a few levers of its own. The native execution engine is a vectorised engine you enable in the environment, and it speeds up many queries without code changes. Resource profiles set sensible defaults for write-heavy or read-heavy work. Runtime 2.0 is generally available and recommended for production. One thing to note: autotune only works on Runtime 1.2, so it is not an option on current runtimes.
+
+On Databricks platforms I have worked on, partitioning, caching and broadcast joins cut average run time by 25%, and a migration took one process from 2 hours 50 minutes to about 5 minutes. The pattern was the same each time: remove wasted work first.
+
+Slides 1 to 4 cover the big picture. Slides 5 to 7 are where it gets practical. Slide 8 is the summary.
+
+Tomorrow: AI on Fabric.
+
+What single change gave you the biggest Spark speed-up?
+
+#MicrosoftFabric #DataEngineering #ApacheSpark #PerformanceTuning #PySpark

@@ -1,0 +1,95 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Day 29</title><link rel="stylesheet" href="../../assets/carousel.css"></head>
+<body data-series="Microsoft Fabric · 30 Days" data-day="29" data-total="30" data-author="Keshav Maheshwari" data-role="Data Engineer | Databricks · AWS &amp; Azure · Streaming · Applied AI">
+
+<section class="slide">
+<span class="tag">Day 29 of 30</span>
+<h1><em>Moving</em><br>house</h1>
+<p class="cover-sub">Migrating an old warehouse.<br>Without losing anything on the way.</p>
+<div><span class="pill">Assess</span><span class="pill">Convert</span><span class="pill">Reconcile</span></div>
+</section>
+
+<section class="slide">
+<span class="tag amber">The problem</span>
+<h2>The old warehouse works. That is the <span class="amberc">problem</span>.</h2>
+<div class="body">
+<div class="row"><span class="ic">1</span><span class="k">It runs</span><span class="v">But the nightly load takes hours</span></div>
+<div class="row"><span class="ic">2</span><span class="k">It is trusted</span><span class="v">But only two people understand it</span></div>
+<div class="row"><span class="ic">3</span><span class="k">It is paid for</span><span class="v">But the hardware is ageing</span></div>
+</div>
+<p class="lead">Nobody wants to touch it, and <b class="w">every year it gets harder to leave</b>.</p>
+</section>
+
+<section class="slide">
+<span class="tag">The simple version</span>
+<h2>Moving house <em>without losing anything</em>.</h2>
+<p class="lead">You do not carry everything out in one trip. You list what you own, throw out what you no longer need, move room by room and check nothing is missing.</p>
+<p class="lead">A migration is the same: <b class="w">inventory, convert, move, verify</b>.</p>
+<div class="body">
+<div class="row"><span class="ic">✓</span><span class="k">Inventory</span><span class="v">What exists, and what is used</span></div>
+<div class="row"><span class="ic">✓</span><span class="k">Move in phases</span><span class="v">One subject area at a time</span></div>
+<div class="row"><span class="ic">✓</span><span class="k">Verify</span><span class="v">Old and new must match</span></div>
+</div>
+</section>
+
+<section class="slide">
+<span class="tag">How it works</span>
+<h2>The <em>phases</em> of a migration</h2>
+<div class="steps tight">
+<div class="row"><span class="ic">1</span><span class="v"><b class="w">Assess</b>: tables, procedures, jobs and who uses them</span></div>
+<div class="row"><span class="ic">2</span><span class="v"><b class="w">Decide</b>: move as-is, rewrite, or retire</span></div>
+<div class="row"><span class="ic">3</span><span class="v"><b class="w">Convert</b>: schema and code to the new platform</span></div>
+<div class="row"><span class="ic">4</span><span class="v"><b class="w">Run both in parallel</b> and compare the numbers</span></div>
+<div class="row"><span class="ic">5</span><span class="v"><b class="w">Cut over</b> area by area, then switch the old one off</span></div>
+</div>
+<div class="bar lake"><b>Parallel running is not optional</b>Two systems producing the same numbers for a few weeks is how you earn the right to switch.</div>
+
+</section>
+
+<section class="slide">
+<span class="tag amber">For engineers</span>
+<h2>Tools that <span class="amberc">help now</span></h2>
+<div class="body">
+<div class="row col"><span class="k">Migration Assistant for Data Warehouse</span><span class="v">Converts schema and code from Synapse dedicated SQL pools and SQL Server, then moves data with a Copy job.</span></div>
+<div class="row col"><span class="k">Spark Migration Assistant</span><span class="v">Helps bring Synapse Spark notebooks and pools across.</span></div>
+<div class="row col"><span class="k">Data Factory upgrade</span><span class="v">Azure Data Factory has an assessment-first upgrade path, and a factory can be mounted in Fabric.</span></div>
+<div class="row col"><span class="k">Gateways replace self-hosted runtimes</span><span class="v">On-premises connections move to the on-premises data gateway.</span></div>
+</div>
+</section>
+
+<section class="slide">
+<span class="tag">The honest part</span>
+<h2>Lift and shift or <em>rewrite</em>?</h2>
+<div class="split">
+<div class="box yes"><h3>Move as-is</h3><ul><li>Logic is sound and well understood</li><li>The deadline is tight</li><li>The source is close to T-SQL already</li></ul></div>
+<div class="box no"><h3>Rewrite</h3><ul><li>Jobs are slow by design</li><li>Logic is duplicated across procedures</li><li>Nobody trusts the current output</li></ul></div>
+</div>
+<p class="quote"><b class="w">The catch:</b> a large share of an old warehouse is often unused. Migrating it wastes weeks. Find out what is actually queried before converting a single table.</p>
+</section>
+
+<section class="slide">
+<span class="tag amber">From real work</span>
+<h2>Migrations I have <span class="amberc">worked on</span></h2>
+<p class="lead">Two moves away from legacy SQL systems.</p>
+<div class="steps">
+<div class="row"><span class="ic">1</span><span class="v"><b class="w">An on-premises SQL warehouse</b> moved to Data Lake and Databricks</span></div>
+<div class="row"><span class="ic">2</span><span class="v"><b class="w">Stored procedures</b> were rewritten as PySpark</span></div>
+<div class="row"><span class="ic">3</span><span class="v"><b class="w">Processing time</b> fell from 2 hr 50 min to about 5 min</span></div>
+<div class="row"><span class="ic">4</span><span class="v"><b class="w">A manufacturing group's legacy SQL data</b> moved to Synapse and Fabric</span></div>
+</div>
+<p class="lead">Stored procedures became <b class="w">in-memory PySpark</b>, and the run time followed.</p>
+</section>
+
+<section class="slide">
+<span class="tag">Save this</span>
+<h2>Migration in <em>five lines</em></h2>
+<div class="body">
+<div class="row"><span class="ic">1</span><span class="v"><b class="w">Inventory first</b>, and retire what is unused</span></div>
+<div class="row"><span class="ic">2</span><span class="v"><b class="w">Move in phases</b>, not in one weekend</span></div>
+<div class="row"><span class="ic">3</span><span class="v"><b class="w">Rewrite</b> what was slow by design</span></div>
+<div class="row"><span class="ic">4</span><span class="v"><b class="w">Run in parallel</b> and reconcile</span></div>
+<div class="row"><span class="ic">5</span><span class="v"><b class="w">Switch off</b> the old system on purpose</span></div>
+</div>
+<p class="big">Tomorrow: <em>The full picture</em>.<br>One architecture, end to end.</p>
+</section>
+
+<script src="../../assets/carousel.js"></script></body></html>

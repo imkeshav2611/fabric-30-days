@@ -1,0 +1,19 @@
+Microsoft Fabric, Day 22 of 30: security basics.
+
+Fabric keeps one copy of the data and lets many tools use it. That is the benefit. It also means a careless permission reaches further than it used to.
+
+Security works in layers. Microsoft Entra ID establishes who someone is. Workspace roles, which are Admin, Member, Contributor and Viewer, decide what they can do in a workspace. Item permissions share a single lakehouse or report. OneLake security then controls access inside the data, down to tables, folders, columns and rows, and it is enforced across Fabric engines.
+
+Two details catch teams out. A Viewer can still query data through the SQL endpoint and reports. And Admin, Member and Contributor can read everything in the workspace, so row and column rules do not restrain them.
+
+That second point is why the quick fix is dangerous. Making someone a Contributor so they "can see the table" bypasses every fine-grained rule in one click.
+
+On a people-analytics platform I worked on, role-based access and row-level security protected sensitive employee data. With data like that, security belongs in the first design conversation, not in a final checklist.
+
+Slides 1 to 4 cover the big picture. Slides 5 to 7 are where it gets practical. Slide 8 is the summary.
+
+Tomorrow: Row-level security.
+
+How do you stop "just make them a Contributor" from becoming the default fix?
+
+#MicrosoftFabric #DataEngineering #DataSecurity #OneLake #DataGovernance

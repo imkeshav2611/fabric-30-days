@@ -1,0 +1,1 @@
+Microsoft Fabric, Day 18 of 30: Eventhouse and KQL

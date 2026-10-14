@@ -1,0 +1,19 @@
+Microsoft Fabric, Day 1 of 30: what it actually is.
+
+I build data platforms on Azure, and a lot of that work has been on Fabric. For the next 30 days I am writing down how I think about it, one topic a day: OneLake, Lakehouse versus Warehouse, Real-Time Intelligence, Direct Lake, security, capacity. Clear enough to follow if you are new to it, with the details that matter once it runs in production.
+
+Starting with the foundation.
+
+A data platform on Azure used to be six services stitched together: one to move data, one to store it, one to transform it, one to query it, one for streaming and one for reporting. Fabric brings those into a single product on a single storage layer, OneLake.
+
+For me the real shift is not convenience. It is that every engine works on the same Delta tables. Spark writes a table, and the SQL endpoint and Power BI read that same table. A whole category of copy jobs goes away.
+
+The thing I would plan for early is capacity. Every workload draws from the same pool, so one heavy Spark job can slow down everyone's reports. Sizing and monitoring deserve attention before the first pipeline is built.
+
+Slides 1 to 4 cover the big picture. Slides 5 to 7 are where it gets practical. Slide 8 is the summary.
+
+Tomorrow: OneLake.
+
+If you work on Fabric, what would you add to slide 6?
+
+#MicrosoftFabric #DataEngineering #OneLake #Azure #PowerBI

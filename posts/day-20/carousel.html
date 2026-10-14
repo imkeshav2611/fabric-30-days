@@ -1,0 +1,95 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Day 20</title><link rel="stylesheet" href="../../assets/carousel.css"></head>
+<body data-series="Microsoft Fabric · 30 Days" data-day="20" data-total="30" data-author="Keshav Maheshwari" data-role="Data Engineer | Databricks · AWS &amp; Azure · Streaming · Applied AI">
+
+<section class="slide">
+<span class="tag">Day 20 of 30</span>
+<h1><em>Semantic</em><br>models</h1>
+<p class="cover-sub">One agreed meaning for every number.<br>The layer between data and decisions.</p>
+<div><span class="pill">Measures</span><span class="pill">Relationships</span><span class="pill">Star schema</span></div>
+</section>
+
+<section class="slide">
+<span class="tag amber">The problem</span>
+<h2>Three teams, three reports, <span class="amberc">three revenue numbers</span>.</h2>
+<div class="body">
+<div class="row"><span class="ic">1</span><span class="k">Sales</span><span class="v">Counts orders when placed</span></div>
+<div class="row"><span class="ic">2</span><span class="k">Finance</span><span class="v">Counts them when paid</span></div>
+<div class="row"><span class="ic">3</span><span class="k">Operations</span><span class="v">Counts them when shipped</span></div>
+</div>
+<p class="lead">Everyone is right by their own definition. <b class="w">The meeting is spent arguing about whose number to use.</b></p>
+</section>
+
+<section class="slide">
+<span class="tag">The simple version</span>
+<h2>A <em>shared dictionary</em> for your data.</h2>
+<p class="lead">A dictionary does not create words. It fixes what each one means, so two people can use the same word and understand each other.</p>
+<p class="lead">A semantic model fixes what <b class="w">"revenue", "active customer" and "margin"</b> mean, once.</p>
+<div class="body">
+<div class="row"><span class="ic">✓</span><span class="k">Tables</span><span class="v">The data, tidied for analysis</span></div>
+<div class="row"><span class="ic">✓</span><span class="k">Relationships</span><span class="v">How the tables connect</span></div>
+<div class="row"><span class="ic">✓</span><span class="k">Measures</span><span class="v">The agreed calculations</span></div>
+</div>
+</section>
+
+<section class="slide">
+<span class="tag">How it works</span>
+<h2>What a <em>semantic model</em> contains</h2>
+<div class="steps tight">
+<div class="row"><span class="ic">1</span><span class="v"><b class="w">Fact tables</b> hold events: sales, visits, readings</span></div>
+<div class="row"><span class="ic">2</span><span class="v"><b class="w">Dimension tables</b> describe them: date, product, region</span></div>
+<div class="row"><span class="ic">3</span><span class="v"><b class="w">Relationships</b> link facts to dimensions</span></div>
+<div class="row"><span class="ic">4</span><span class="v"><b class="w">Measures</b> define each KPI once, in DAX</span></div>
+<div class="row"><span class="ic">5</span><span class="v"><b class="w">Reports</b> read the model, not the raw tables</span></div>
+</div>
+<div class="bar lake"><b>Define once, use everywhere</b>A measure written in the model gives the same answer in every report, in Excel and to an AI agent.</div>
+
+</section>
+
+<section class="slide">
+<span class="tag amber">For engineers</span>
+<h2>What has <span class="amberc">changed</span> recently</h2>
+<div class="body">
+<div class="row col"><span class="k">You create it on purpose now</span><span class="v">Fabric stopped auto-creating a default semantic model for lakehouses and warehouses. Build the model deliberately.</span></div>
+<div class="row col"><span class="k">Storage mode is per table</span><span class="v">Import, DirectQuery and Direct Lake can be mixed in one model.</span></div>
+<div class="row col"><span class="k">Direct Lake is the default on Fabric data</span><span class="v">New models on a warehouse or SQL endpoint use Direct Lake, reading Delta tables without an import.</span></div>
+<div class="row col"><span class="k">It is code</span><span class="v">Models can be edited as text, versioned in Git and deployed through pipelines.</span></div>
+</div>
+</section>
+
+<section class="slide">
+<span class="tag">The honest part</span>
+<h2>Model it or query the <em>tables directly</em>?</h2>
+<div class="split">
+<div class="box yes"><h3>Build a model</h3><ul><li>The same KPI appears in many reports</li><li>Business users explore the data themselves</li><li>An AI agent will answer questions on it</li></ul></div>
+<div class="box no"><h3>Query directly</h3><ul><li>A one-off analysis</li><li>Engineers exploring raw data</li><li>A single technical report</li></ul></div>
+</div>
+<p class="quote"><b class="w">The catch:</b> a model built on Silver-quality tables spreads bad numbers faster. The model makes a definition consistent. It cannot make it correct.</p>
+</section>
+
+<section class="slide">
+<span class="tag amber">From real work</span>
+<h2>Semantic models on a <span class="amberc">real project</span></h2>
+<p class="lead">A people-analytics platform for HR leadership.</p>
+<div class="steps">
+<div class="row"><span class="ic">1</span><span class="v"><b class="w">Gold tables</b> in the Lakehouse were shaped for analysis</span></div>
+<div class="row"><span class="ic">2</span><span class="v"><b class="w">Semantic models</b> defined the organisation's KPIs</span></div>
+<div class="row"><span class="ic">3</span><span class="v"><b class="w">Row-level security</b> limited who saw which employees</span></div>
+<div class="row"><span class="ic">4</span><span class="v"><b class="w">A GenAI assistant</b> answered workforce questions in plain language</span></div>
+</div>
+<p class="lead">The assistant was only as good as <b class="w">the definitions underneath it</b>.</p>
+</section>
+
+<section class="slide">
+<span class="tag">Save this</span>
+<h2>Semantic models in <em>five lines</em></h2>
+<div class="body">
+<div class="row"><span class="ic">1</span><span class="v"><b class="w">One definition</b> for each business number</span></div>
+<div class="row"><span class="ic">2</span><span class="v"><b class="w">Star schema</b>: facts and dimensions</span></div>
+<div class="row"><span class="ic">3</span><span class="v"><b class="w">Measures</b> hold the logic, not the reports</span></div>
+<div class="row"><span class="ic">4</span><span class="v"><b class="w">Created deliberately</b>, no longer automatic</span></div>
+<div class="row"><span class="ic">5</span><span class="v"><b class="w">AI agents</b> depend on it too</span></div>
+</div>
+<p class="big">Tomorrow: <em>Direct Lake</em>.<br>Fast reports without copying the data.</p>
+</section>
+
+<script src="../../assets/carousel.js"></script></body></html>

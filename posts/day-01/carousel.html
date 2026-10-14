@@ -1,0 +1,102 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Day 1</title><link rel="stylesheet" href="../../assets/carousel.css"></head>
+<body data-series="Microsoft Fabric · 30 Days" data-day="1" data-total="30" data-author="Keshav Maheshwari" data-role="Data Engineer | Databricks · AWS &amp; Azure · Streaming · Applied AI">
+
+<section class="slide">
+<span class="tag">Day 1 of 30</span>
+<h1>What is<br>Microsoft<br><em>Fabric</em>,<br>really?</h1>
+<p class="cover-sub">The big picture first.<br>Then what matters in production.</p>
+<div><span class="pill">OneLake</span><span class="pill">Delta tables</span><span class="pill">Capacity</span></div>
+</section>
+
+<section class="slide">
+<span class="tag amber">The problem</span>
+<h2>One data platform used to mean <span class="amberc">six separate services</span>.</h2>
+<div class="body tight">
+<div class="row"><span class="ic">1</span><span class="k">Move the data</span><span class="v">Azure Data Factory</span></div>
+<div class="row"><span class="ic">2</span><span class="k">Store it</span><span class="v">Data Lake Storage</span></div>
+<div class="row"><span class="ic">3</span><span class="k">Clean it</span><span class="v">Spark on Databricks or Synapse</span></div>
+<div class="row"><span class="ic">4</span><span class="k">Query it</span><span class="v">A SQL warehouse</span></div>
+<div class="row"><span class="ic">5</span><span class="k">Live data</span><span class="v">Event Hubs plus a streaming engine</span></div>
+<div class="row"><span class="ic">6</span><span class="k">Show it</span><span class="v">Power BI</span></div>
+</div>
+<p class="lead">Six setups. Six bills. Six security models. <b class="w">And you do the wiring between them.</b></p>
+</section>
+
+<section class="slide">
+<span class="tag">The simple version</span>
+<h2>Fabric is a <em>fitted kitchen</em>.</h2>
+<p class="lead">Before, you bought the oven, fridge and sink from different shops and did the plumbing yourself.</p>
+<p class="lead">Fabric arrives as <b class="w">one kitchen</b>. Every appliance is already connected, and they all use <b class="w">one pantry</b>.</p>
+<div class="body">
+<div class="row"><span class="ic">✓</span><span class="k">One sign-in</span><span class="v">It runs in the browser, like Power BI</span></div>
+<div class="row"><span class="ic">✓</span><span class="k">One storage</span><span class="v">Called OneLake. Data is kept once</span></div>
+<div class="row"><span class="ic">✓</span><span class="k">One bill</span><span class="v">A single pool of computing power</span></div>
+</div>
+</section>
+
+<section class="slide">
+<span class="tag">The map</span>
+<h2>What is <em>inside</em> Fabric</h2>
+<div class="grid">
+<div class="tile"><b>Data Factory</b><span>Bring data in, on a schedule</span></div>
+<div class="tile"><b>Data Engineering</b><span>Clean it with Spark notebooks</span></div>
+<div class="tile"><b>Data Warehouse</b><span>Query it with plain SQL</span></div>
+<div class="tile"><b>Real-Time Intelligence</b><span>Data that arrives every second</span></div>
+<div class="tile"><b>Data Science</b><span>Train and track ML models</span></div>
+<div class="tile"><b>Power BI</b><span>Reports people actually open</span></div>
+</div>
+<div class="bar lake"><b>OneLake</b>One copy of the data, saved as Delta tables. Every tool above reads the same files.</div>
+<div class="bar cap"><b>Capacity</b> · one shared pool of compute that all of it runs on</div>
+<div class="bar cap"><b>Security and governance</b> · set once, applies everywhere</div>
+
+</section>
+
+<section class="slide">
+<span class="tag amber">For engineers</span>
+<h2>What <span class="amberc">changes</span> for you</h2>
+<div class="body">
+<div class="row col"><span class="k">It is SaaS, not PaaS</span><span class="v">No clusters to build or patch. Spark starter pools give you a session in seconds.</span></div>
+<div class="row col"><span class="k">One open format: Delta Parquet</span><span class="v">Spark writes a table. The SQL endpoint and Power BI read that same table. No export step.</span></div>
+<div class="row col"><span class="k">One compute currency</span><span class="v">Every workload spends Capacity Units from the same F SKU. Sizing is one decision, not six.</span></div>
+<div class="row col"><span class="k">Shortcuts instead of copies</span><span class="v">Point OneLake at ADLS, S3 or Google Cloud Storage and query the data where it sits.</span></div>
+</div>
+</section>
+
+<section class="slide">
+<span class="tag">The honest part</span>
+<h2>Is Fabric <em>right</em> for you?</h2>
+<div class="split">
+<div class="box yes"><h3>Good fit</h3><ul><li>Your company already lives in Power BI and Azure</li><li>A small team that wants less infrastructure work</li><li>You need batch, real-time and reports in one place</li></ul></div>
+<div class="box no"><h3>Think twice</h3><ul><li>You need fine control over cluster configuration</li><li>You are deep in another platform that works well</li><li>Nobody will watch capacity usage</li></ul></div>
+</div>
+<p class="quote"><b class="w">The catch people miss:</b> capacity is shared. One heavy Spark job can slow down everybody's reports. Plan your capacity before you plan your pipelines.</p>
+</section>
+
+<section class="slide">
+<span class="tag amber">From real work</span>
+<h2>What this looked like on a <span class="amberc">real project</span></h2>
+<p class="lead">A people-analytics platform. Employee data lived in scattered CSV files that were updated by hand.</p>
+<div class="steps tight">
+<div class="row"><span class="ic">1</span><span class="v"><b class="w">One Lakehouse on OneLake</b> replaced the scattered files</span></div>
+<div class="row"><span class="ic">2</span><span class="v"><b class="w">Triggered pipelines</b> refresh the data daily, no manual step</span></div>
+<div class="row"><span class="ic">3</span><span class="v"><b class="w">Bronze, Silver, Gold</b> layers built in PySpark</span></div>
+<div class="row"><span class="ic">4</span><span class="v"><b class="w">A semantic model</b> on top for the organisation's KPIs</span></div>
+<div class="row"><span class="ic">5</span><span class="v"><b class="w">Row-level security</b> so people see only what they should</span></div>
+</div>
+<p class="lead">All five steps, <b class="w">inside one product</b>.</p>
+</section>
+
+<section class="slide">
+<span class="tag">Save this</span>
+<h2>Fabric in <em>five lines</em></h2>
+<div class="body">
+<div class="row"><span class="ic">1</span><span class="v"><b class="w">One platform</b> for the whole data journey</span></div>
+<div class="row"><span class="ic">2</span><span class="v"><b class="w">OneLake</b> stores the data once, as Delta tables</span></div>
+<div class="row"><span class="ic">3</span><span class="v"><b class="w">Every engine</b> reads those same tables</span></div>
+<div class="row"><span class="ic">4</span><span class="v"><b class="w">One capacity</b> pays for everything, so watch it</span></div>
+<div class="row"><span class="ic">5</span><span class="v"><b class="w">Less plumbing</b>, more time on the real problem</span></div>
+</div>
+<p class="big">Tomorrow: <em>OneLake</em>.<br>Why "store it once" is a bigger idea than it sounds.</p>
+</section>
+
+<script src="../../assets/carousel.js"></script></body></html>

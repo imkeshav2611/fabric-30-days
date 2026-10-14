@@ -1,0 +1,42 @@
+topic: Semantic models
+cap_title: semantic models
+title: *Semantic*|models
+sub: One agreed meaning for every number.|The layer between data and decisions.
+pills: Measures || Relationships || Star schema
+p_h: Three teams, three reports, ^three revenue numbers^.
+p_rows: Sales :: Counts orders when placed || Finance :: Counts them when paid || Operations :: Counts them when shipped
+p_end: Everyone is right by their own definition. **The meeting is spent arguing about whose number to use.**
+s_h: A *shared dictionary* for your data.
+s_leads: A dictionary does not create words. It fixes what each one means, so two people can use the same word and understand each other. || A semantic model fixes what **"revenue", "active customer" and "margin"** mean, once.
+s_rows: Tables :: The data, tidied for analysis || Relationships :: How the tables connect || Measures :: The agreed calculations
+m_h: What a *semantic model* contains
+m_rows: **Fact tables** hold events: sales, visits, readings || **Dimension tables** describe them: date, product, region || **Relationships** link facts to dimensions || **Measures** define each KPI once, in DAX || **Reports** read the model, not the raw tables
+m_bar: Define once, use everywhere :: A measure written in the model gives the same answer in every report, in Excel and to an AI agent.
+e_h: What has ^changed^ recently
+e_rows: You create it on purpose now :: Fabric stopped auto-creating a default semantic model for lakehouses and warehouses. Build the model deliberately. || Storage mode is per table :: Import, DirectQuery and Direct Lake can be mixed in one model. || Direct Lake is the default on Fabric data :: New models on a warehouse or SQL endpoint use Direct Lake, reading Delta tables without an import. || It is code :: Models can be edited as text, versioned in Git and deployed through pipelines.
+h_h: Model it or query the *tables directly*?
+h_yes_t: Build a model
+h_no_t: Query directly
+h_yes: The same KPI appears in many reports || Business users explore the data themselves || An AI agent will answer questions on it
+h_no: A one-off analysis || Engineers exploring raw data || A single technical report
+h_catch: The catch :: a model built on Silver-quality tables spreads bad numbers faster. The model makes a definition consistent. It cannot make it correct.
+r_kind: real
+r_h: Semantic models on a ^real project^
+r_lead: A people-analytics platform for HR leadership.
+r_rows: **Gold tables** in the Lakehouse were shaped for analysis || **Semantic models** defined the organisation's KPIs || **Row-level security** limited who saw which employees || **A GenAI assistant** answered workforce questions in plain language
+r_end: The assistant was only as good as **the definitions underneath it**.
+z_h: Semantic models in *five lines*
+z_rows: **One definition** for each business number || **Star schema**: facts and dimensions || **Measures** hold the logic, not the reports || **Created deliberately**, no longer automatic || **AI agents** depend on it too
+z_next: Tomorrow :: Direct Lake :: Fast reports without copying the data.
+q: How many definitions of "active customer" exist in your organisation today?
+tags: #PowerBI #SemanticModel #DataModeling
+caption:
+Most arguments about data are not about data. They are about definitions.
+
+Sales counts an order when it is placed, finance when it is paid, operations when it ships. Three correct numbers, one confused meeting. A semantic model is where an organisation settles that. It holds tidy tables, the relationships between them, and measures that define each KPI once. Every report then reads the model instead of calculating its own version.
+
+Two things have changed that are worth knowing. Fabric no longer creates a default semantic model automatically for a lakehouse or warehouse, so the model is now something you design on purpose. And new models built on Fabric data use Direct Lake, which reads the Delta tables without an import step.
+
+This layer matters more now that AI agents answer questions on top of it. An agent with clear measures and well-named tables gives useful answers. An agent pointed at raw tables guesses.
+
+On a people-analytics platform I worked on, semantic models defined the organisation's KPIs, and a GenAI assistant sat on top for HR leaders. Its answers were only as good as the definitions underneath.

@@ -1,0 +1,43 @@
+topic: Mirroring
+cap_title: mirroring
+title: *Mirroring*
+sub: A live copy of your database in Fabric.|Without building a pipeline.
+pills: Near real time || Delta || No ETL
+p_h: Analysts want live data. Databases want to be ^left alone^.
+p_rows: Query production directly :: The application slows down || Nightly export :: Reports are a day old || Build change capture :: Weeks of engineering
+p_end: Every team ends up choosing between **fresh data and a healthy database**.
+s_h: A *mirror*, not a photograph.
+s_leads: A photograph shows how things looked when you took it. A mirror shows how they look now. || Mirroring keeps a **continuously updated copy** of your database in OneLake, ready for analytics.
+s_rows: You do :: Pick the database and tables || Fabric does :: The copying, continuously || You get :: Delta tables, a few moments behind
+m_h: What happens *behind* the mirror
+m_rows: Fabric takes an **initial snapshot** of the tables || It then reads the **changes** as they happen || Changes land as **Delta tables** in OneLake || A **SQL analytics endpoint** lets you query them
+m_bar: Three kinds :: Database mirroring copies data. Metadata mirroring links a catalog. Open mirroring lets any system push changes in.
+e_h: The fine print that ^matters^
+e_rows: Many sources now :: Azure SQL, SQL Server, Cosmos DB, PostgreSQL, Snowflake, Oracle, SAP, BigQuery and Databricks catalogs, among others. || What is free :: Replication compute is free. Storage is free up to 1 TB per capacity unit. Querying uses capacity as normal. || It is a replica, not a transformation :: Tables arrive as they are in the source. Cleaning and modelling still happen downstream. || Read-only :: You query the mirror. You do not write to it.
+h_h: Mirror it or *build a pipeline*?
+h_yes_t: Mirror
+h_no_t: Pipeline
+h_yes: You need the tables as they are, kept fresh || The source is on the supported list || You want less code to maintain
+h_no: You only need a small filtered slice || The source is not supported || You must reshape data before it lands
+h_catch: The catch :: mirroring gives you a raw copy of an operational schema. Without a Silver layer on top, analysts inherit every quirk of the application database.
+r_kind: watch
+r_h: Four checks ^before you mirror^
+r_rows: **Unsupported tables or column types** in your source || **Network path**: can Fabric reach the database? || **Retention** of history on the mirrored tables || **Who models the data** after it lands
+r_end: Mirroring replaces the ingestion pipeline, **not the modelling work**.
+z_h: Mirroring in *five lines*
+z_rows: **A live replica** of your database in OneLake || **No pipeline** to build or schedule || **Delta tables**, queryable with SQL || **Replication** is free, queries are not || **Model it** before people report on it
+z_next: Tomorrow :: Real-Time Intelligence :: What "real time" actually means.
+q: Have you replaced an ingestion pipeline with mirroring yet? How did it go?
+tags: #Mirroring #ChangeDataCapture #OneLake
+caption:
+Getting operational data into an analytics platform is usually the first pipeline a team builds, and one of the most fragile.
+
+Mirroring removes that pipeline for supported sources. You point Fabric at a database and choose the tables. Fabric takes a snapshot, then keeps reading changes and writes them into OneLake as Delta tables. A SQL analytics endpoint sits on top, so the data is queryable without any further work.
+
+The list of sources has grown a lot. It now covers Azure SQL, SQL Server, Cosmos DB, PostgreSQL, Snowflake, Oracle, SAP and Google BigQuery among others, plus open mirroring for systems that can push their own changes.
+
+The pricing detail worth knowing: the replication compute is free, and storage is free up to 1 TB per capacity unit. Queries against the mirrored data use capacity like anything else.
+
+What mirroring does not do is model the data. You get a faithful copy of an operational schema, with all its quirks. A Silver layer on top is still needed before anyone builds reports on it.
+
+No project story today. Mirroring replaces ingestion code, not thinking.

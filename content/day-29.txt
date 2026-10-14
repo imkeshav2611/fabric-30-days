@@ -1,0 +1,42 @@
+topic: Migrating to a modern platform
+cap_title: migrating an old warehouse
+title: *Moving*|house
+sub: Migrating an old warehouse.|Without losing anything on the way.
+pills: Assess || Convert || Reconcile
+p_h: The old warehouse works. That is the ^problem^.
+p_rows: It runs :: But the nightly load takes hours || It is trusted :: But only two people understand it || It is paid for :: But the hardware is ageing
+p_end: Nobody wants to touch it, and **every year it gets harder to leave**.
+s_h: Moving house *without losing anything*.
+s_leads: You do not carry everything out in one trip. You list what you own, throw out what you no longer need, move room by room and check nothing is missing. || A migration is the same: **inventory, convert, move, verify**.
+s_rows: Inventory :: What exists, and what is used || Move in phases :: One subject area at a time || Verify :: Old and new must match
+m_h: The *phases* of a migration
+m_rows: **Assess**: tables, procedures, jobs and who uses them || **Decide**: move as-is, rewrite, or retire || **Convert**: schema and code to the new platform || **Run both in parallel** and compare the numbers || **Cut over** area by area, then switch the old one off
+m_bar: Parallel running is not optional :: Two systems producing the same numbers for a few weeks is how you earn the right to switch.
+e_h: Tools that ^help now^
+e_rows: Migration Assistant for Data Warehouse :: Converts schema and code from Synapse dedicated SQL pools and SQL Server, then moves data with a Copy job. || Spark Migration Assistant :: Helps bring Synapse Spark notebooks and pools across. || Data Factory upgrade :: Azure Data Factory has an assessment-first upgrade path, and a factory can be mounted in Fabric. || Gateways replace self-hosted runtimes :: On-premises connections move to the on-premises data gateway.
+h_h: Lift and shift or *rewrite*?
+h_yes_t: Move as-is
+h_no_t: Rewrite
+h_yes: Logic is sound and well understood || The deadline is tight || The source is close to T-SQL already
+h_no: Jobs are slow by design || Logic is duplicated across procedures || Nobody trusts the current output
+h_catch: The catch :: a large share of an old warehouse is often unused. Migrating it wastes weeks. Find out what is actually queried before converting a single table.
+r_kind: real
+r_h: Migrations I have ^worked on^
+r_lead: Two moves away from legacy SQL systems.
+r_rows: **An on-premises SQL warehouse** moved to Data Lake and Databricks || **Stored procedures** were rewritten as PySpark || **Processing time** fell from 2 hr 50 min to about 5 min || **A manufacturing group's legacy SQL data** moved to Synapse and Fabric
+r_end: Stored procedures became **in-memory PySpark**, and the run time followed.
+z_h: Migration in *five lines*
+z_rows: **Inventory first**, and retire what is unused || **Move in phases**, not in one weekend || **Rewrite** what was slow by design || **Run in parallel** and reconcile || **Switch off** the old system on purpose
+z_next: Tomorrow :: The full picture :: One architecture, end to end.
+q: Lift and shift or rewrite: which did your last migration choose, and was it right?
+tags: #DataMigration #AzureSynapse #DataWarehouse
+caption:
+The hardest systems to migrate are the ones that still work. Nobody wants to touch them, and every year they get harder to leave.
+
+A migration that goes well looks a lot like moving house. Take an inventory of tables, procedures and jobs, and find out which are actually used. Decide what moves as it is, what gets rewritten and what is retired. Convert, then run old and new side by side until the numbers match. Cut over one subject area at a time.
+
+The tooling has improved. Fabric has a Migration Assistant for Data Warehouse that converts schema and code from Synapse dedicated SQL pools and SQL Server and moves the data with a Copy job. There is a Spark Migration Assistant, and Azure Data Factory has an assessment-first upgrade path into Fabric.
+
+Tools convert code. They do not decide what is worth keeping. A large share of any old warehouse is unused, and migrating it wastes weeks.
+
+I led a migration of an on-premises SQL warehouse to Data Lake and Databricks, rewriting stored procedures in PySpark. Processing time fell from 2 hours 50 minutes to about 5 minutes.

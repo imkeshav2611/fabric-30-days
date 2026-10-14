@@ -1,0 +1,42 @@
+topic: Row-level security
+cap_title: row-level security
+title: Same report,|*different*|rows
+sub: Row-level security.|One model, the right slice for each person.
+pills: RLS || Roles || Predicates
+p_h: One report per region ^does not scale^.
+p_rows: 5 regions :: 5 copies of the report || A new KPI :: Change it 5 times || 50 managers :: Nobody maintains 50 copies
+p_end: Copies drift, and sooner or later **someone opens the wrong one**.
+s_h: One *report card* per student.
+s_leads: A school prints one results system, not one per child. Each student opens it and sees only their own marks. || Row-level security does that for data: **one table, filtered by who is asking**.
+s_rows: One table :: Holds everyone's rows || A rule :: "Show rows where region is mine" || Each user :: Sees only their slice
+m_h: Where you can *define* it
+m_rows: **OneLake security**: on the table, enforced across engines || **Warehouse and SQL endpoint**: a T-SQL security policy || **Semantic model**: roles with a DAX filter || Pick **one place** as the source of truth
+m_bar: The closer to the data, the better :: A rule on the table protects every tool. A rule in one report protects only that report.
+e_h: The gaps you ^must know^
+e_rows: SQL rules do not cover Spark :: A security policy on the SQL endpoint does not protect direct access to the Delta files through a notebook. || Model rules apply to Viewers only :: Admin, Member and Contributor roles on the workspace are not restricted by semantic model security. || Direct Lake behaves differently :: With SQL rules, Direct Lake on SQL falls back to DirectQuery. Direct Lake on OneLake does not apply them at all. || Test as the user :: Always check with a real restricted account. "It works for me" means nothing if you are an Admin.
+h_h: Where should the rule *live*?
+h_yes_t: On the data
+h_no_t: In the model
+h_yes: Several tools read the same table || Engineers and analysts both query it || The rule is a compliance requirement
+h_no: Only Power BI consumes the data || Rules depend on business hierarchies || Report authors own the logic
+h_catch: The catch :: security defined in two places will disagree. When it does, people see either too much or too little, and both end in an incident.
+r_kind: real
+r_h: Row-level security on a ^real project^
+r_lead: A people-analytics platform holding sensitive personnel data.
+r_rows: **One set of tables** held employee data for the organisation || **Row-level security** filtered rows for each user || **Role-based access** controlled who entered at all || **Semantic models** carried the KPIs on top
+r_end: One platform for everyone, **without everyone seeing everything**.
+z_h: RLS in *five lines*
+z_rows: **One table**, filtered per user || **Define it** as close to the data as you can || **SQL rules** do not protect Spark access || **Builders** in the workspace bypass model rules || **Test** with a restricted account
+z_next: Tomorrow :: Governance :: Lineage, labels and knowing what you have.
+q: Where does your row-level security live: on the data, in SQL, or in the model?
+tags: #RowLevelSecurity #PowerBI #DataSecurity
+caption:
+The alternative to row-level security is a copy of the report for every audience. That works for five regions and collapses at fifty managers.
+
+Row-level security keeps one table and filters it by who is asking. In Fabric you can define it in three places: OneLake security on the table itself, a T-SQL security policy on a warehouse or SQL analytics endpoint, or roles with a DAX filter in a semantic model.
+
+The closer to the data the rule sits, the more it protects. And the gaps between these options are where incidents come from. A SQL security policy does not cover someone reading the Delta files through Spark. Semantic model security only restricts Viewers, so Admins, Members and Contributors see everything. Direct Lake on SQL falls back to DirectQuery when SQL rules exist, while Direct Lake on OneLake does not apply them.
+
+My rule is to choose one place as the source of truth and test with a real restricted account. Testing as an Admin proves nothing.
+
+I applied row-level security on a people-analytics platform so that one set of tables could serve the whole organisation without everyone seeing everything.

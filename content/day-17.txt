@@ -1,0 +1,42 @@
+topic: Eventstream
+cap_title: Eventstream
+title: *Event-*|*stream*
+sub: Catching data as it happens.|And shaping it before it lands.
+pills: Sources || Transform || Route
+p_h: Events come from ^everywhere^, in every shape.
+p_rows: Apps :: Clicks and orders || Devices :: Sensor readings || Databases :: Row changes || Other clouds :: Kafka and message queues
+p_end: Each one used to need **its own custom code to collect, clean and deliver**.
+s_h: A *conveyor belt* with sorting stations.
+s_leads: Parcels drop onto a belt from many loading doors. Along the way they are scanned, sorted and sent down the right chute. || An eventstream is that belt: **events in, shaped in motion, delivered where they are needed**.
+s_rows: Sources :: Where events come from || Operators :: What happens on the way || Destinations :: Where they end up
+m_h: Building an *eventstream*
+m_rows: **Add sources**: Event Hubs, IoT Hub, Kafka, database changes || **Shape** on a canvas: filter, aggregate, join, group by || **Route** to an Eventhouse, a Lakehouse or Activator || **One stream** can feed several destinations at once
+m_bar: No code required :: The whole flow is drawn on a canvas. A SQL operator is there for logic that needs it.
+e_h: What engineers ^should know^
+e_rows: It speaks Kafka :: An eventstream exposes a Kafka-compatible endpoint, so existing producers can send to it with little change. || Database changes are a source :: Change data capture from SQL Server, PostgreSQL, MySQL, Cosmos DB and others can flow in as events. || Delivery is at-least-once :: An event can arrive twice. Downstream logic should tolerate duplicates. || Windows are how you aggregate :: Group by time windows to turn an endless stream into counts and averages.
+h_h: Eventstream or a *pipeline*?
+h_yes_t: Eventstream
+h_no_t: Pipeline
+h_yes: Data arrives continuously || You need it within seconds || Several consumers need the same events
+h_no: Files arrive on a schedule || Hourly or daily freshness is fine || The source can only be queried in bulk
+h_catch: The catch :: filtering late is expensive. Every event you carry to the destination costs storage and compute. Drop what you do not need as early as possible.
+r_kind: real
+r_h: Eventstream on a ^real project^
+r_lead: A consumer delivery platform with streaming operational data.
+r_rows: **Event Hub** received the raw events at high velocity || **Eventstream** carried them into Fabric || **Eventhouse** stored them for KQL queries || **Leadership** asked for live numbers in natural language
+r_end: Terabytes per minute, with **sub-second answers** at the end.
+z_h: Eventstream in *five lines*
+z_rows: **Many sources**, one way to connect them || **Shape events** while they move || **Send them** to more than one place || **Expect duplicates**, design for them || **Filter early**, pay less later
+z_next: Tomorrow :: Eventhouse and KQL :: Asking questions of fast-moving data.
+q: What is the highest-volume stream you have had to handle, and what broke first?
+tags: #Eventstream #Kafka #StreamProcessing
+caption:
+Before a stream can be analysed, it has to be collected, cleaned and delivered. That used to mean custom code for every source.
+
+Eventstream is Fabric's answer. You add sources, such as Event Hubs, IoT Hub, Kafka or change data from a database. You shape the events on a visual canvas with filters, aggregations, joins and time windows. Then you route them to one or more destinations: an Eventhouse for analysis, a Lakehouse for storage, or Activator to trigger actions.
+
+Two details matter in practice. An eventstream exposes a Kafka-compatible endpoint, so existing producers can often point at it with little change. And delivery is at-least-once, which means an event can arrive twice and downstream logic has to cope.
+
+My main advice is to filter early. Every event carried to the destination costs storage and compute, so dropping what nobody needs at the start of the flow is the cheapest optimisation available.
+
+On a real-time platform for a consumer delivery business, Event Hub and Eventstream carried terabytes per minute into Fabric, with Eventhouse answering queries in under a second.

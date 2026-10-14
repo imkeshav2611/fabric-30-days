@@ -1,0 +1,42 @@
+topic: OneLake
+cap_title: OneLake, one copy of your data
+title: OneLake:|*one copy*|of your|data
+sub: The storage layer under everything.|And why it changes how teams share data.
+pills: Shortcuts || Delta || Workspaces
+p_h: Every team kept its ^own copy^ of the data.
+p_rows: Finance :: Its own storage account || Marketing :: Another lake, another copy || Data science :: Exports on a shared drive || Reporting :: One more copy in the BI tool
+p_end: Four copies, four versions of the truth. **Nobody knows which one is current.**
+s_h: OneLake is *OneDrive for data*.
+s_leads: Your company has one OneDrive, not one per team. Everyone works in it, and permissions decide who sees what. || OneLake is the same idea for analytics data. **One lake per organisation**, already there on day one.
+s_rows: One per tenant :: Nothing to create or size || Familiar layout :: Workspaces, then items || One format :: Tables are stored as Delta
+m_h: How OneLake is *organised*
+m_rows: **Tenant**: the whole organisation, one lake || **Workspace**: a folder for a team or project || **Item**: a lakehouse, warehouse or database || **Inside a lakehouse**: Tables and Files
+m_bar: Shortcuts :: A pointer to data that lives somewhere else. It appears in the lake without being copied.
+e_h: What matters ^under the hood^
+e_rows: It speaks ADLS Gen2 :: OneLake supports the ADLS Gen2 APIs and SDKs, so tools built for Data Lake Storage keep working. || Region follows capacity :: A workspace's data lives in the region of the capacity it is assigned to. || Storage is billed on its own :: Stored gigabytes are charged separately from the compute capacity. || Open table formats :: Fabric engines write Delta Parquet. OneLake can also present tables as Iceberg for other engines.
+h_h: Does one lake mean *no silos*?
+h_yes_t: It helps when
+h_no_t: It will not fix
+h_yes: Teams need the same data without copying it || Data is spread across Azure, AWS and Google || You want one place to govern access
+h_no: Unclear ownership of each dataset || A messy workspace structure || Poor data quality at the source
+h_catch: The catch :: one lake can still become one swamp. Decide workspace boundaries and who owns each table before teams start loading data.
+r_kind: real
+r_h: OneLake on a ^real project^
+r_lead: A people-analytics platform where employee data was split across many files.
+r_rows: **Performance, ratings and learning data** landed in one Lakehouse || **Semantic models** read from that single copy || **Role-based access and row-level security** protected it || **Daily pipelines** kept it fresh
+r_end: The value was not the storage. It was **one agreed copy**.
+z_h: OneLake in *five lines*
+z_rows: **One lake** per organisation, created for you || **Workspaces** are the folders, items live inside || **Tables are Delta**, so every engine reads them || **Shortcuts** bring in outside data with no copy || **Ownership** still has to be decided by people
+z_next: Tomorrow :: Workspaces and capacities :: How Fabric is organised, and how you pay for it.
+q: How do you draw workspace boundaries: by team, by project or by data layer?
+tags: #OneLake #DataLake #Azure
+caption:
+Yesterday I said Fabric keeps data once. OneLake is the part that makes that true.
+
+The simplest way to think about it is OneDrive for data. An organisation gets one lake, created automatically. Workspaces act as folders, and lakehouses and warehouses live inside them. Tables are stored in Delta format, so Spark, SQL and Power BI all read the same files.
+
+For engineers, two details matter early. OneLake supports the same APIs as Azure Data Lake Storage Gen2, so existing tools keep working. And a workspace's data lives in the region of its capacity, which matters the moment data residency comes up.
+
+The honest part: one lake does not remove silos by default. It removes the technical reason for them. Ownership, naming and workspace design are still decisions people have to make, and they are much cheaper to make before the data arrives.
+
+On a people-analytics platform I worked on, the win was not storage. It was that performance, ratings and learning data finally sat in one agreed copy that every report used.

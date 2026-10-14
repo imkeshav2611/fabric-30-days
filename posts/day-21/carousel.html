@@ -1,0 +1,93 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Day 21</title><link rel="stylesheet" href="../../assets/carousel.css"></head>
+<body data-series="Microsoft Fabric · 30 Days" data-day="21" data-total="30" data-author="Keshav Maheshwari" data-role="Data Engineer | Databricks · AWS &amp; Azure · Streaming · Applied AI">
+
+<section class="slide">
+<span class="tag">Day 21 of 30</span>
+<h1><em>Direct</em><br>Lake</h1>
+<p class="cover-sub">Fast reports without copying data.<br>How it works, and where it stops.</p>
+<div><span class="pill">Import</span><span class="pill">DirectQuery</span><span class="pill">Framing</span></div>
+</section>
+
+<section class="slide">
+<span class="tag amber">The problem</span>
+<h2>Power BI always made you <span class="amberc">pick a compromise</span>.</h2>
+<div class="body">
+<div class="row"><span class="ic">1</span><span class="k">Import</span><span class="v">Fast, but data is a copy and goes stale</span></div>
+<div class="row"><span class="ic">2</span><span class="k">DirectQuery</span><span class="v">Always fresh, but every click is slow</span></div>
+<div class="row"><span class="ic">3</span><span class="k">Big tables</span><span class="v">Refresh takes hours</span></div>
+</div>
+<p class="lead">Speed or freshness. <b class="w">For years you could not have both.</b></p>
+</section>
+
+<section class="slide">
+<span class="tag">The simple version</span>
+<h2>Reading the book <em>in the library</em>.</h2>
+<p class="lead">Import is photocopying the whole library and carrying it home. DirectQuery is phoning the librarian with every question.</p>
+<p class="lead">Direct Lake is <b class="w">walking in and reading the book off the shelf</b>: no copy, no middleman.</p>
+<div class="body">
+<div class="row"><span class="ic">✓</span><span class="k">No import</span><span class="v">Data stays in OneLake</span></div>
+<div class="row"><span class="ic">✓</span><span class="k">No query hop</span><span class="v">Columns load straight into memory</span></div>
+<div class="row"><span class="ic">✓</span><span class="k">Result</span><span class="v">Near-import speed on current data</span></div>
+</div>
+</section>
+
+<section class="slide">
+<span class="tag">How it works</span>
+<h2>What happens when you <em>open a report</em></h2>
+<div class="steps">
+<div class="row"><span class="ic">1</span><span class="v">The model points at <b class="w">Delta tables</b> in OneLake</span></div>
+<div class="row"><span class="ic">2</span><span class="v">Only the <b class="w">columns the visual needs</b> are loaded</span></div>
+<div class="row"><span class="ic">3</span><span class="v">They go straight into <b class="w">memory</b> for fast analysis</span></div>
+<div class="row"><span class="ic">4</span><span class="v"><b class="w">Framing</b> moves the model to the latest table version</span></div>
+</div>
+<div class="bar lake"><b>Why it is fast</b>Delta's Parquet files are already columnar. The engine reads them as they are instead of converting them.</div>
+
+</section>
+
+<section class="slide">
+<span class="tag amber">For engineers</span>
+<h2>The two <span class="amberc">flavours</span></h2>
+<div class="body">
+<div class="row col"><span class="k">Direct Lake on OneLake</span><span class="v">Reads Delta tables directly. Can combine several sources and mix with Import tables. No DirectQuery fallback.</span></div>
+<div class="row col"><span class="k">Direct Lake on SQL</span><span class="v">Goes through a SQL analytics endpoint. Falls back to DirectQuery when it has to, which is slower.</span></div>
+<div class="row col"><span class="k">Guardrails depend on capacity size</span><span class="v">Each SKU has limits on rows and files per table. Past them, one flavour falls back and the other fails.</span></div>
+<div class="row col"><span class="k">Table health shows up here</span><span class="v">Many small files and missing V-Order make Direct Lake slower.</span></div>
+</div>
+</section>
+
+<section class="slide">
+<span class="tag">The honest part</span>
+<h2>Direct Lake or <em>Import</em>?</h2>
+<div class="split">
+<div class="box yes"><h3>Direct Lake</h3><ul><li>Data already lives in OneLake as Delta</li><li>Tables are large or refreshed often</li><li>You want one copy of the data</li></ul></div>
+<div class="box no"><h3>Import</h3><ul><li>Small models where import is simple</li><li>Sources outside Fabric</li><li>Heavy use of calculated columns</li></ul></div>
+</div>
+<p class="quote"><b class="w">The catch:</b> Direct Lake is only as fast as the Delta tables under it. A table with thousands of small files turns a fast mode into a slow one.</p>
+</section>
+
+<section class="slide">
+<span class="tag amber">Watch out</span>
+<h2>Four things to <span class="amberc">check</span></h2>
+<div class="steps">
+<div class="row"><span class="ic">1</span><span class="v"><b class="w">Which flavour</b> your model uses, and whether it can fall back</span></div>
+<div class="row"><span class="ic">2</span><span class="v"><b class="w">Guardrails</b> for your capacity size</span></div>
+<div class="row"><span class="ic">3</span><span class="v"><b class="w">V-Order and compaction</b> on the tables reports read</span></div>
+<div class="row"><span class="ic">4</span><span class="v"><b class="w">Security</b>: SQL row-level rules do not apply to the OneLake flavour</span></div>
+</div>
+<p class="lead">Direct Lake rewards <b class="w">good table engineering</b> more than any other mode.</p>
+</section>
+
+<section class="slide">
+<span class="tag">Save this</span>
+<h2>Direct Lake in <em>five lines</em></h2>
+<div class="body">
+<div class="row"><span class="ic">1</span><span class="v"><b class="w">No import</b>, no copy of the data</span></div>
+<div class="row"><span class="ic">2</span><span class="v"><b class="w">Reads Delta</b> files straight into memory</span></div>
+<div class="row"><span class="ic">3</span><span class="v"><b class="w">Two flavours</b>: on OneLake and on SQL</span></div>
+<div class="row"><span class="ic">4</span><span class="v"><b class="w">Guardrails</b> scale with capacity</span></div>
+<div class="row"><span class="ic">5</span><span class="v"><b class="w">Healthy tables</b> make it fast</span></div>
+</div>
+<p class="big">Tomorrow: <em>Security basics</em>.<br>Who can see what, and how Fabric decides.</p>
+</section>
+
+<script src="../../assets/carousel.js"></script></body></html>

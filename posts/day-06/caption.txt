@@ -1,0 +1,19 @@
+Microsoft Fabric, Day 6 of 30: Delta tables.
+
+Every table in a Fabric Lakehouse or Warehouse is a Delta table. It is worth ten minutes to understand what that means.
+
+A Delta table is two things: Parquet files that hold the data, and a transaction log that records every change. A write adds new files and then adds an entry to the log saying which files are now part of the table. Readers follow the log, so they see a complete version or nothing.
+
+That one idea gives you most of what plain files lack. Failed jobs leave no half-written data. Readers and writers do not corrupt each other. You can query the table as it was yesterday, and a write with the wrong schema is rejected.
+
+What Delta does not do is tidy up. Every write adds files, and frequent small loads lead to thousands of small files and slower queries. Compaction and cleanup are still the engineer's job, and I will cover them later in this series.
+
+I leaned on Delta during a warehouse migration to Databricks, where processing time went from 2 hours 50 minutes to about 5 minutes. Different platform, but the same format Fabric is built on.
+
+Slides 1 to 4 cover the big picture. Slides 5 to 7 are where it gets practical. Slide 8 is the summary.
+
+Tomorrow: Shortcuts.
+
+Has time travel ever saved you after a bad load?
+
+#MicrosoftFabric #DataEngineering #DeltaLake #Parquet #Lakehouse

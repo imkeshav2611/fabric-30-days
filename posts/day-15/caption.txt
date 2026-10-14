@@ -1,0 +1,21 @@
+Microsoft Fabric, Day 15 of 30: mirroring.
+
+Getting operational data into an analytics platform is usually the first pipeline a team builds, and one of the most fragile.
+
+Mirroring removes that pipeline for supported sources. You point Fabric at a database and choose the tables. Fabric takes a snapshot, then keeps reading changes and writes them into OneLake as Delta tables. A SQL analytics endpoint sits on top, so the data is queryable without any further work.
+
+The list of sources has grown a lot. It now covers Azure SQL, SQL Server, Cosmos DB, PostgreSQL, Snowflake, Oracle, SAP and Google BigQuery among others, plus open mirroring for systems that can push their own changes.
+
+The pricing detail worth knowing: the replication compute is free, and storage is free up to 1 TB per capacity unit. Queries against the mirrored data use capacity like anything else.
+
+What mirroring does not do is model the data. You get a faithful copy of an operational schema, with all its quirks. A Silver layer on top is still needed before anyone builds reports on it.
+
+No project story today. Mirroring replaces ingestion code, not thinking.
+
+Slides 1 to 4 cover the big picture. Slides 5 to 7 are where it gets practical. Slide 8 is the summary.
+
+Tomorrow: Real-Time Intelligence.
+
+Have you replaced an ingestion pipeline with mirroring yet? How did it go?
+
+#MicrosoftFabric #DataEngineering #Mirroring #ChangeDataCapture #OneLake

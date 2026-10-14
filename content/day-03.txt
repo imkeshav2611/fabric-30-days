@@ -1,0 +1,41 @@
+topic: Workspaces and capacities
+cap_title: workspaces and capacities
+title: Work-|spaces &|*capacity*
+sub: How Fabric is organised.|And how the bill actually works.
+pills: F SKUs || Capacity Units || Throttling
+p_h: "Why is my report slow?" has a ^billing^ answer.
+p_rows: Old world :: Each service had its own meter || Fabric :: One meter for everything || Result :: Workloads compete for it
+p_end: If nobody understands the meter, **the first heavy job teaches everyone at once**.
+s_h: Rooms in a building, *one power meter*.
+s_leads: A **workspace** is a room. A team keeps its lakehouses, pipelines and reports in it. || A **capacity** is the electricity. Every room plugged into it shares the same supply.
+s_rows: Workspace :: Where items live || Capacity :: The compute you pay for || The link :: Each workspace uses one capacity
+m_h: How the *meter* works
+m_rows: Compute is counted in **Capacity Units** || You buy a size: **F2 up to F8192** || **Pay as you go** can be paused. **Reserved** costs less || **Bursting** lets a job run faster than the size allows || **Smoothing** spreads that usage over time
+m_bar: Throttling :: Sustained overuse first delays interactive work, then rejects it, and finally rejects background jobs too.
+e_h: Details worth ^knowing early^
+e_rows: Interactive and background are smoothed differently :: A report click is smoothed over minutes. A scheduled job is spread across 24 hours. || F64 is a licensing line :: From F64 up, people with a free licence and the Viewer role can open Power BI content. Below it, viewers need Pro. || The Capacity Metrics app is the source of truth :: It shows which item used how much, and when throttling started. || Overage is now an option :: Capacity overage bills spikes at a premium rate instead of throttling. It is on by default for new F capacities.
+h_h: One capacity or *several*?
+h_yes_t: One shared capacity
+h_no_t: Split capacities
+h_yes: Simple to run and to explain || Idle compute is shared, not wasted || Fine for a small or new team
+h_no: Production reports need protection || Dev experiments are unpredictable || Departments want separate bills
+h_catch: The catch :: a Spark experiment in a dev workspace and the CEO's dashboard can share one meter. Separate them before it hurts, not after.
+r_kind: watch
+r_h: Four mistakes I would ^avoid^
+r_rows: **Sizing from a guess.** Start small, measure, then resize || **Dev and prod on one capacity** with no guardrails || **Nobody owns the Metrics app**, so throttling is a surprise || **Leaving pay-as-you-go running** on nights and weekends
+r_end: Capacity is a design decision, **not a purchase order**.
+z_h: Capacity in *five lines*
+z_rows: **Workspace** is where things live || **Capacity** is the compute they run on || **Everything shares it**, so plan for contention || **Smoothing helps**, throttling is the limit || **Measure first**, then choose the size
+z_next: Tomorrow :: The Lakehouse :: The item most Fabric projects start with.
+q: What was the first thing that pushed your capacity into throttling?
+tags: #FabricCapacity #PowerBI #FinOps
+caption:
+Most Fabric performance questions I hear are really capacity questions.
+
+A workspace is where a team's items live. A capacity is the compute those items run on, measured in Capacity Units and bought as an F SKU. Every workload in every workspace on that capacity draws from the same pool: Spark, pipelines, the warehouse and Power BI.
+
+Fabric softens this with bursting and smoothing. A job can run faster than the capacity size suggests, and the cost is spread over time. That is useful, and it is also why problems show up late. Sustained overuse ends in throttling, where work is delayed and eventually rejected. Capacity overage, now generally available, lets you pay a premium for spikes instead, so it is worth knowing whether it is switched on.
+
+Two things I would settle early. First, who looks at the Capacity Metrics app every week. Second, whether development and production share a capacity. Sharing is cheaper and simpler. Splitting protects the reports people depend on.
+
+No project story on this one, only the pattern I keep seeing: capacity gets treated as a purchase when it is a design decision.

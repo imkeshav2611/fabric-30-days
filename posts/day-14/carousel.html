@@ -1,0 +1,94 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Day 14</title><link rel="stylesheet" href="../../assets/carousel.css"></head>
+<body data-series="Microsoft Fabric · 30 Days" data-day="14" data-total="30" data-author="Keshav Maheshwari" data-role="Data Engineer | Databricks · AWS &amp; Azure · Streaming · Applied AI">
+
+<section class="slide">
+<span class="tag">Day 14 of 30</span>
+<h1>The data<br><em>gateway</em></h1>
+<p class="cover-sub">Reaching data inside a factory or office.<br>Without opening the firewall.</p>
+<div><span class="pill">Outbound only</span><span class="pill">Clusters</span><span class="pill">Hybrid</span></div>
+</section>
+
+<section class="slide">
+<span class="tag amber">The problem</span>
+<h2>The cloud cannot see <span class="amberc">inside your building</span>.</h2>
+<div class="body">
+<div class="row"><span class="ic">1</span><span class="k">The database</span><span class="v">On a server in the plant</span></div>
+<div class="row"><span class="ic">2</span><span class="k">The firewall</span><span class="v">Blocks everything from outside</span></div>
+<div class="row"><span class="ic">3</span><span class="k">The security team</span><span class="v">Will not open an inbound port</span></div>
+</div>
+<p class="lead">And they are right. <b class="w">So how does a cloud pipeline read that table?</b></p>
+</section>
+
+<section class="slide">
+<span class="tag">The simple version</span>
+<h2>A <em>courier</em> who works from the inside.</h2>
+<p class="lead">The office does not let strangers walk in. Instead, an employee carries parcels out to the delivery van when asked.</p>
+<p class="lead">The gateway is that employee: <b class="w">software inside your network that fetches data on request</b>.</p>
+<div class="body">
+<div class="row"><span class="ic">✓</span><span class="k">Installed</span><span class="v">On a machine in your network</span></div>
+<div class="row"><span class="ic">✓</span><span class="k">Connects</span><span class="v">Outward, to the cloud</span></div>
+<div class="row"><span class="ic">✓</span><span class="k">Firewall</span><span class="v">No inbound ports opened</span></div>
+</div>
+</section>
+
+<section class="slide">
+<span class="tag">How it works</span>
+<h2>How a <em>request</em> travels</h2>
+<div class="steps">
+<div class="row"><span class="ic">1</span><span class="v">A pipeline or report in Fabric asks for on-premises data</span></div>
+<div class="row"><span class="ic">2</span><span class="v">The request waits in a <b class="w">secure cloud relay</b></span></div>
+<div class="row"><span class="ic">3</span><span class="v">The gateway <b class="w">calls out</b>, picks it up and queries the source</span></div>
+<div class="row"><span class="ic">4</span><span class="v">Results travel back through the same outbound connection</span></div>
+</div>
+<div class="bar lake"><b>Why security teams accept it</b>The gateway only makes outbound connections. Nothing on the internet can dial in.</div>
+
+</section>
+
+<section class="slide">
+<span class="tag amber">For engineers</span>
+<h2>Running it <span class="amberc">properly</span></h2>
+<div class="body">
+<div class="row col"><span class="k">Use standard mode</span><span class="v">Standard mode serves many users and sources. Personal mode works only with Power BI and cannot be shared.</span></div>
+<div class="row col"><span class="k">Build a cluster</span><span class="v">Two or more gateway machines in a cluster avoid a single point of failure.</span></div>
+<div class="row col"><span class="k">Keep it updated</span><span class="v">A new version ships every month, and only the last six releases are supported.</span></div>
+<div class="row col"><span class="k">Put it near the data</span><span class="v">The gateway machine does real work. Place it close to the source and size it for the load.</span></div>
+</div>
+</section>
+
+<section class="slide">
+<span class="tag">The honest part</span>
+<h2>Gateway or <em>something else</em>?</h2>
+<div class="split">
+<div class="box yes"><h3>On-premises gateway</h3><ul><li>Sources on servers in your own network</li><li>Strict rules against inbound access</li><li>A mix of cloud and on-premises data</li></ul></div>
+<div class="box no"><h3>Consider instead</h3><ul><li>Sources in an Azure virtual network</li><li>Data already replicated to the cloud</li><li>A source that can push files out</li></ul></div>
+</div>
+<p class="quote"><b class="w">The catch:</b> the gateway is a server someone must own. Most "the pipeline failed" tickets on hybrid projects trace back to a gateway that was offline, full or out of date.</p>
+</section>
+
+<section class="slide">
+<span class="tag amber">From real work</span>
+<h2>A gateway on a <span class="amberc">real project</span></h2>
+<p class="lead">A manufacturing group with a plant in Sweden and its analytics platform in Azure in India.</p>
+<div class="steps">
+<div class="row"><span class="ic">1</span><span class="v"><b class="w">On-premises gateways</b> connected the plant's systems</span></div>
+<div class="row"><span class="ic">2</span><span class="v"><b class="w">Data Factory</b> moved the data across to Azure</span></div>
+<div class="row"><span class="ic">3</span><span class="v"><b class="w">Legacy SQL data</b> landed in Synapse and Fabric</span></div>
+<div class="row"><span class="ic">4</span><span class="v"><b class="w">Reporting was centralised</b> across cloud and on-premises systems</span></div>
+</div>
+<p class="lead">Two countries and two networks, <b class="w">one reporting platform</b>.</p>
+</section>
+
+<section class="slide">
+<span class="tag">Save this</span>
+<h2>The gateway in <em>five lines</em></h2>
+<div class="body">
+<div class="row"><span class="ic">1</span><span class="v"><b class="w">Software</b> inside your network</span></div>
+<div class="row"><span class="ic">2</span><span class="v"><b class="w">Outbound only</b>, no open inbound ports</span></div>
+<div class="row"><span class="ic">3</span><span class="v"><b class="w">Standard mode</b> and a cluster for production</span></div>
+<div class="row"><span class="ic">4</span><span class="v"><b class="w">Monthly updates</b>, so plan them</span></div>
+<div class="row"><span class="ic">5</span><span class="v"><b class="w">It needs an owner</b> like any server</span></div>
+</div>
+<p class="big">Tomorrow: <em>Mirroring</em>.<br>A live copy of your database inside Fabric.</p>
+</section>
+
+<script src="../../assets/carousel.js"></script></body></html>

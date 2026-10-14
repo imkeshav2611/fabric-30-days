@@ -1,0 +1,42 @@
+topic: Governance
+cap_title: governance
+title: Knowing|what you|*have*
+sub: Governance in Fabric.|Lineage, labels and trust.
+pills: Catalog || Lineage || Endorsement
+p_h: After a year, nobody knows ^which table to trust^.
+p_rows: sales_final :: Is this the real one? || sales_final_v2 :: Or this? || Who owns it :: Left the company in March || Contains personal data :: Nobody is sure
+p_end: The platform works. **Finding and trusting the right data is the hard part.**
+s_h: *Labels and receipts* on every box.
+s_leads: A warehouse without labels is just a room full of boxes. With labels, receipts and a floor plan, anyone can find what they need and know where it came from. || Governance gives your data **those labels, receipts and a floor plan**.
+s_rows: Catalog :: The floor plan || Lineage :: The receipt trail || Labels :: What is inside, and how sensitive
+m_h: The tools Fabric *gives you*
+m_rows: **OneLake catalog**: explore, govern and secure in one place || **Domains** group workspaces by business area || **Endorsement**: Promoted, Certified, Master data || **Sensitivity labels** follow the data downstream || **Lineage view** shows what feeds what
+m_bar: Purview underneath :: Labels and protection policies come from Microsoft Purview, the same ones used across Microsoft 365.
+e_h: Making it ^work in practice^
+e_rows: Certify sparingly :: If everything is Certified, the badge means nothing. Reserve it for data a named owner stands behind. || Lineage is per workspace :: The lineage view covers one workspace. Cross-workspace flows need more deliberate tracking. || Labels inherit :: A label on a lakehouse carries through to items built on it, which protects exports too. || Ownership before tooling :: A catalog full of items with no owner is a tidy list of unanswered questions.
+h_h: How much governance is *enough*?
+h_yes_t: Start with
+h_no_t: Add later
+h_yes: A named owner for every Gold table || Sensitivity labels on personal data || Certification for core datasets
+h_no: A committee for every change || Detailed documentation of Bronze || Approval steps nobody will follow
+h_catch: The catch :: governance that slows people down gets bypassed. The version that works is the lightest one people will actually follow.
+r_kind: real
+r_h: Governance on a ^real project^
+r_lead: A manufacturing group with plants and business units in several countries.
+r_rows: **Data governance** was standardised across international units || **Access control** followed one model everywhere || **System architecture diagrams** documented the flows || **Audit-ready KPIs** went to top leadership
+r_end: Across borders, **shared rules** mattered more than shared tools.
+z_h: Governance in *five lines*
+z_rows: **A catalog** so data can be found || **Owners** so questions have answers || **Endorsement** so people know what to trust || **Labels** so sensitive data stays protected || **Lineage** so changes do not surprise anyone
+z_next: Tomorrow :: Git and deployment pipelines :: Shipping changes without breaking production.
+q: Does every Gold table in your platform have a named owner?
+tags: #DataGovernance #MicrosoftPurview #DataCatalog
+caption:
+A year into any data platform, the technology is rarely the problem. The problem is that nobody knows which table to trust.
+
+Governance is how you fix that, and Fabric has more built in than most teams use. The OneLake catalog is the single place to explore, govern and secure data. Domains group workspaces by business area. Endorsement marks items as Promoted, Certified or Master data. Sensitivity labels from Microsoft Purview follow the data downstream. Lineage view shows what feeds what inside a workspace.
+
+The tools are the easy part. What makes them work is restraint and ownership. If everything is Certified, the badge means nothing. If a table has no named owner, the catalog entry is a question with nobody to answer it.
+
+I would start small: an owner for every Gold table, labels on personal data, certification for the few datasets the business runs on. Heavy process gets bypassed.
+
+On a project for a manufacturing group, standardising governance and access control across international units was a core part of the work, alongside the pipelines themselves.

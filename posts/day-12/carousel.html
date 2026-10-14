@@ -1,0 +1,94 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Day 12</title><link rel="stylesheet" href="../../assets/carousel.css"></head>
+<body data-series="Microsoft Fabric · 30 Days" data-day="12" data-total="30" data-author="Keshav Maheshwari" data-role="Data Engineer | Databricks · AWS &amp; Azure · Streaming · Applied AI">
+
+<section class="slide">
+<span class="tag">Day 12 of 30</span>
+<h1>Load only<br>what<br><em>changed</em></h1>
+<p class="cover-sub">Incremental loading.<br>Faster, cheaper, and easy to get wrong.</p>
+<div><span class="pill">Watermark</span><span class="pill">MERGE</span><span class="pill">Change data</span></div>
+</section>
+
+<section class="slide">
+<span class="tag amber">The problem</span>
+<h2>Reloading everything, every night, <span class="amberc">stops scaling</span>.</h2>
+<div class="body">
+<div class="row"><span class="ic">1</span><span class="k">Year one</span><span class="v">The full load takes 10 minutes</span></div>
+<div class="row"><span class="ic">2</span><span class="k">Year three</span><span class="v">It takes four hours</span></div>
+<div class="row"><span class="ic">3</span><span class="k">The data that changed</span><span class="v">Less than one percent</span></div>
+</div>
+<p class="lead">You are paying to move and rewrite <b class="w">data that is exactly the same as yesterday</b>.</p>
+</section>
+
+<section class="slide">
+<span class="tag">The simple version</span>
+<h2>Read <em>today's newspaper</em>, not the archive.</h2>
+<p class="lead">To catch up on the news, you do not reread every paper ever printed. You read what came out since you last looked.</p>
+<p class="lead">An incremental load does that: <b class="w">remember where you stopped, fetch only what is new</b>.</p>
+<div class="body">
+<div class="row"><span class="ic">✓</span><span class="k">Bookmark</span><span class="v">The last point you loaded</span></div>
+<div class="row"><span class="ic">✓</span><span class="k">Fetch</span><span class="v">Only rows after it</span></div>
+<div class="row"><span class="ic">✓</span><span class="k">Apply</span><span class="v">Add or update, never duplicate</span></div>
+</div>
+</section>
+
+<section class="slide">
+<span class="tag">How it works</span>
+<h2>The <em>three steps</em></h2>
+<div class="steps">
+<div class="row"><span class="ic">1</span><span class="v"><b class="w">Find the changes</b>: a modified date, an ID, or a change feed</span></div>
+<div class="row"><span class="ic">2</span><span class="v"><b class="w">Bring only those rows</b> into the lake</span></div>
+<div class="row"><span class="ic">3</span><span class="v"><b class="w">Merge</b> them: update what exists, insert what is new</span></div>
+<div class="row"><span class="ic">4</span><span class="v"><b class="w">Move the bookmark</b> only after the load succeeds</span></div>
+</div>
+<div class="bar lake"><b>MERGE is the key</b>One statement updates matching rows and inserts new ones, as a single transaction.</div>
+
+</section>
+
+<section class="slide">
+<span class="tag amber">For engineers</span>
+<h2>Where it <span class="amberc">goes wrong</span></h2>
+<div class="body">
+<div class="row col"><span class="k">Deletes are invisible</span><span class="v">A watermark on "modified date" never sees a deleted row. You need a change feed or a periodic compare.</span></div>
+<div class="row col"><span class="k">Late data</span><span class="v">Rows that arrive after the bookmark has moved are skipped unless you reload a safety window.</span></div>
+<div class="row col"><span class="k">Reruns must be safe</span><span class="v">If a retry inserts the same rows twice, the load is not incremental, it is wrong.</span></div>
+<div class="row col"><span class="k">Trust but verify</span><span class="v">A scheduled full reconcile catches drift before the business does.</span></div>
+</div>
+</section>
+
+<section class="slide">
+<span class="tag">The honest part</span>
+<h2>Incremental or <em>full</em> load?</h2>
+<div class="split">
+<div class="box yes"><h3>Incremental</h3><ul><li>Large tables with few daily changes</li><li>A reliable change marker exists</li><li>Loads must finish in a tight window</li></ul></div>
+<div class="box no"><h3>Full reload</h3><ul><li>Small tables that load in seconds</li><li>No trustworthy change marker</li><li>History gets rewritten often</li></ul></div>
+</div>
+<p class="quote"><b class="w">The catch:</b> an incremental load fails quietly. It still finishes, the row counts look fine, and the table drifts a little further from the source every day.</p>
+</section>
+
+<section class="slide">
+<span class="tag amber">From real work</span>
+<h2>Incremental on a <span class="amberc">real platform</span></h2>
+<p class="lead">A data consolidation platform on Databricks for a financial services company.</p>
+<div class="steps">
+<div class="row"><span class="ic">1</span><span class="v"><b class="w">Over 10 million records</b> processed each day</span></div>
+<div class="row"><span class="ic">2</span><span class="v"><b class="w">Incremental pipelines</b> and automated loading workflows</span></div>
+<div class="row"><span class="ic">3</span><span class="v"><b class="w">Sources</b> included FTP, AWS S3 and Kafka</span></div>
+<div class="row"><span class="ic">4</span><span class="v"><b class="w">dbt tests</b> enforced data quality on the results</span></div>
+</div>
+<p class="lead">At that volume, full reloads were <b class="w">never an option</b>.</p>
+</section>
+
+<section class="slide">
+<span class="tag">Save this</span>
+<h2>Incremental in <em>five lines</em></h2>
+<div class="body">
+<div class="row"><span class="ic">1</span><span class="v"><b class="w">Bookmark</b> where the last load ended</span></div>
+<div class="row"><span class="ic">2</span><span class="v"><b class="w">Fetch</b> only what changed since</span></div>
+<div class="row"><span class="ic">3</span><span class="v"><b class="w">MERGE</b> to update and insert safely</span></div>
+<div class="row"><span class="ic">4</span><span class="v"><b class="w">Plan for</b> deletes and late data</span></div>
+<div class="row"><span class="ic">5</span><span class="v"><b class="w">Reconcile</b> against the source regularly</span></div>
+</div>
+<p class="big">Tomorrow: <em>Table maintenance</em>.<br>OPTIMIZE, V-Order and VACUUM.</p>
+</section>
+
+<script src="../../assets/carousel.js"></script></body></html>

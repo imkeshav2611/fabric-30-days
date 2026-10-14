@@ -1,0 +1,95 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Day 5</title><link rel="stylesheet" href="../../assets/carousel.css"></head>
+<body data-series="Microsoft Fabric · 30 Days" data-day="5" data-total="30" data-author="Keshav Maheshwari" data-role="Data Engineer | Databricks · AWS &amp; Azure · Streaming · Applied AI">
+
+<section class="slide">
+<span class="tag">Day 5 of 30</span>
+<h1>Lakehouse<br>or<br><em>Warehouse</em>?</h1>
+<p class="cover-sub">The week-one question.<br>A practical way to decide.</p>
+<div><span class="pill">Spark</span><span class="pill">T-SQL</span><span class="pill">Skills</span></div>
+</section>
+
+<section class="slide">
+<span class="tag amber">The problem</span>
+<h2>Two items that look like they do the <span class="amberc">same job</span>.</h2>
+<div class="body">
+<div class="row"><span class="ic">1</span><span class="k">Both</span><span class="v">Store tables in OneLake</span></div>
+<div class="row"><span class="ic">2</span><span class="k">Both</span><span class="v">Use the Delta format</span></div>
+<div class="row"><span class="ic">3</span><span class="k">Both</span><span class="v">Can be queried with SQL</span></div>
+</div>
+<p class="lead">So teams argue about features, when <b class="w">the real difference is who writes the data, and how</b>.</p>
+</section>
+
+<section class="slide">
+<span class="tag">The simple version</span>
+<h2>A <em>workshop</em> and a <em>showroom</em>.</h2>
+<p class="lead">The <b class="w">workshop</b> takes raw material in any shape. You need tools and some skill, and you can build anything.</p>
+<p class="lead">The <b class="w">showroom</b> is orderly. Everything is finished, labelled and easy to browse.</p>
+<div class="body">
+<div class="row"><span class="ic">✓</span><span class="k">Lakehouse</span><span class="v">The workshop. Spark and files</span></div>
+<div class="row"><span class="ic">✓</span><span class="k">Warehouse</span><span class="v">The showroom. SQL all the way</span></div>
+<div class="row"><span class="ic">✓</span><span class="k">OneLake</span><span class="v">The same floor under both</span></div>
+</div>
+</section>
+
+<section class="slide">
+<span class="tag">Side by side</span>
+<h2>The <em>real</em> differences</h2>
+<div class="steps tight">
+<div class="row"><span class="ic">1</span><span class="v"><b class="w">Write with</b>: Lakehouse uses Spark. Warehouse uses T-SQL</span></div>
+<div class="row"><span class="ic">2</span><span class="v"><b class="w">Data types</b>: Lakehouse takes files. Warehouse takes tables</span></div>
+<div class="row"><span class="ic">3</span><span class="v"><b class="w">Transactions</b>: Warehouse supports multi-table</span></div>
+<div class="row"><span class="ic">4</span><span class="v"><b class="w">Skills</b>: Python and Spark, or SQL</span></div>
+<div class="row"><span class="ic">5</span><span class="v"><b class="w">Storage</b>: both are Delta in OneLake</span></div>
+</div>
+<div class="bar lake"><b>Not either-or</b>A warehouse can query lakehouse tables in the same workspace. Many teams use both.</div>
+
+</section>
+
+<section class="slide">
+<span class="tag amber">For engineers</span>
+<h2>How I would <span class="amberc">decide</span></h2>
+<div class="body">
+<div class="row col"><span class="k">Start from the team, not the tool</span><span class="v">A SQL team will be productive in a Warehouse on day one. A Spark team will not want to leave notebooks.</span></div>
+<div class="row col"><span class="k">Look at the raw data</span><span class="v">Files, JSON, images and large volumes point to a Lakehouse for the early layers.</span></div>
+<div class="row col"><span class="k">Check the write pattern</span><span class="v">Stored procedures and multi-table updates in T-SQL point to a Warehouse.</span></div>
+<div class="row col"><span class="k">Combine them</span><span class="v">Lakehouse for Bronze and Silver, Warehouse for Gold is a common, sensible split.</span></div>
+</div>
+</section>
+
+<section class="slide">
+<span class="tag">The honest part</span>
+<h2>Which one <em>first</em>?</h2>
+<div class="split">
+<div class="box yes"><h3>Lakehouse first</h3><ul><li>Engineers who work in Spark</li><li>Raw, messy or very large data</li><li>Data science on the same data</li></ul></div>
+<div class="box no"><h3>Warehouse first</h3><ul><li>Analysts and developers who live in SQL</li><li>A migration from a SQL warehouse</li><li>Heavy use of stored procedures</li></ul></div>
+</div>
+<p class="quote"><b class="w">The catch:</b> picking by feature list leads to rework. Pick by who will maintain it at 2 a.m., because that is who needs to read the code.</p>
+</section>
+
+<section class="slide">
+<span class="tag amber">From real work</span>
+<h2>The choice on a <span class="amberc">real project</span></h2>
+<p class="lead">A manufacturing group with years of reporting logic in legacy SQL systems.</p>
+<div class="steps">
+<div class="row"><span class="ic">1</span><span class="v"><b class="w">Legacy SQL data</b> moved to Azure Synapse and Fabric</span></div>
+<div class="row"><span class="ic">2</span><span class="v"><b class="w">Enterprise reporting</b> was centralised in one place</span></div>
+<div class="row"><span class="ic">3</span><span class="v"><b class="w">Data Factory and gateways</b> connected on-premises sources</span></div>
+<div class="row"><span class="ic">4</span><span class="v"><b class="w">PySpark</b> automated the heavier reporting pipeline</span></div>
+</div>
+<p class="lead">SQL where the logic already lived, <b class="w">Spark where the heavy lifting was</b>.</p>
+</section>
+
+<section class="slide">
+<span class="tag">Save this</span>
+<h2>The decision in <em>five lines</em></h2>
+<div class="body">
+<div class="row"><span class="ic">1</span><span class="v"><b class="w">Both store Delta</b> in OneLake</span></div>
+<div class="row"><span class="ic">2</span><span class="v"><b class="w">Lakehouse</b>: Spark writes, files welcome</span></div>
+<div class="row"><span class="ic">3</span><span class="v"><b class="w">Warehouse</b>: full T-SQL, transactions</span></div>
+<div class="row"><span class="ic">4</span><span class="v"><b class="w">Choose by skills</b> and write pattern</span></div>
+<div class="row"><span class="ic">5</span><span class="v"><b class="w">Using both</b> is normal, not a compromise</span></div>
+</div>
+<p class="big">Tomorrow: <em>Delta tables</em>.<br>The format under every table in Fabric.</p>
+</section>
+
+<script src="../../assets/carousel.js"></script></body></html>

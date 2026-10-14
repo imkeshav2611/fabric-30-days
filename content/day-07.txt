@@ -1,0 +1,41 @@
+topic: Shortcuts
+cap_title: shortcuts
+title: *Shortcuts*:|use data|without|copying it
+sub: Data stays where it is.|Fabric reads it in place.
+pills: ADLS || Amazon S3 || Google Cloud
+p_h: Most pipelines exist only to ^copy data^.
+p_rows: Step one :: Copy it from the other cloud || Step two :: Schedule the copy || Step three :: Fix the copy when it breaks || Step four :: Explain why the copy is stale
+p_end: Two copies cost twice the storage, and **they are never quite the same**.
+s_h: A *desktop shortcut* to a file.
+s_leads: A shortcut on your desktop is not the file. It is a signpost. Double-click it and you open the real thing. || A OneLake shortcut does the same for **a folder or table that lives somewhere else**.
+s_rows: Looks like :: A normal folder in the lake || Actually is :: A pointer to the source || Copies made :: None
+m_h: What a shortcut can *point to*
+m_rows: Another **lakehouse or warehouse** in OneLake || **Azure Data Lake Storage** and Blob Storage || **Amazon S3** and S3-compatible storage || **Google Cloud Storage** || **OneDrive, SharePoint, Dataverse**, and on-premises via gateway
+m_bar: Delta is recognised :: Put a shortcut to a Delta table under Tables, and it behaves like a native table.
+e_h: The parts that ^trip people up^
+e_rows: Identity depends on the target :: Shortcuts inside OneLake check the calling user. External ones use the stored connection's credentials. || Deleting has two meanings :: Removing the shortcut leaves the source untouched. Deleting a file inside it deletes that file at the source. || Speed is the source's speed :: Queries still read from the other cloud, with its latency and egress cost. Caching is available for some sources. || Format still matters :: A shortcut to CSV gives you files, not a table. Delta or Parquet is what makes it queryable.
+h_h: Shortcut or *copy*?
+h_yes_t: Shortcut
+h_no_t: Copy the data
+h_yes: Data is already in Delta or Parquet || Another team owns and maintains it || You want zero duplication
+h_no: The source is slow or far away || You need to reshape it heavily anyway || The source may change without warning
+h_catch: The catch :: a shortcut makes you depend on someone else's storage. If they rename a folder or rotate a key, your reports break and nothing in your workspace changed.
+r_kind: watch
+r_h: Four things to ^check first^
+r_rows: **Who owns the connection** an external shortcut relies on || **Egress charges** when the source is in another cloud || **Access rules**: who can now reach the data through you || **A plan** for when the source moves or changes
+r_end: A shortcut removes the copy, **not the dependency**.
+z_h: Shortcuts in *five lines*
+z_rows: **A pointer**, not a copy || **Works across** OneLake, Azure, AWS and Google || **Delta targets** behave like native tables || **Performance** follows the source || **Ownership** of the source still matters
+z_next: Tomorrow :: Medallion architecture :: Bronze, Silver, Gold, and what each layer is for.
+q: Where do you draw the line between a shortcut and a proper copy?
+tags: #OneLake #MultiCloud #DataArchitecture
+caption:
+A surprising share of data engineering is copying data from one place to another and then keeping the copy fresh.
+
+Shortcuts remove a lot of that. A shortcut is a pointer inside OneLake to data that lives somewhere else: another lakehouse, Azure Data Lake Storage, Amazon S3, Google Cloud Storage and more. It looks like a normal folder. Nothing is copied, and if the target is a Delta table it behaves like any other table.
+
+The details matter more than the idea. A shortcut to another OneLake location checks the identity of the person querying. A shortcut to external storage uses the credentials saved in the connection. Removing a shortcut never deletes the data behind it, but deleting a file inside a shortcut does delete it at the source. And performance is the source's performance, including egress cost when it sits in another cloud.
+
+My rule of thumb: use a shortcut when the data is already in a good format and somebody else owns it. Copy when the source is slow, unstable or needs heavy reshaping anyway.
+
+No project story today. Only this: a shortcut removes the copy, not the dependency.

@@ -1,0 +1,94 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Day 18</title><link rel="stylesheet" href="../../assets/carousel.css"></head>
+<body data-series="Microsoft Fabric · 30 Days" data-day="18" data-total="30" data-author="Keshav Maheshwari" data-role="Data Engineer | Databricks · AWS &amp; Azure · Streaming · Applied AI">
+
+<section class="slide">
+<span class="tag">Day 18 of 30</span>
+<h1><em>Eventhouse</em><br>and KQL</h1>
+<p class="cover-sub">Where fast-moving data lives.<br>And the language built to query it.</p>
+<div><span class="pill">Time series</span><span class="pill">Logs</span><span class="pill">Telemetry</span></div>
+</section>
+
+<section class="slide">
+<span class="tag amber">The problem</span>
+<h2>A normal database <span class="amberc">chokes</span> on event data.</h2>
+<div class="body">
+<div class="row"><span class="ic">1</span><span class="k">Volume</span><span class="v">Billions of rows a day</span></div>
+<div class="row"><span class="ic">2</span><span class="k">Shape</span><span class="v">Semi-structured, always changing</span></div>
+<div class="row"><span class="ic">3</span><span class="k">Questions</span><span class="v">"What happened in the last 5 minutes?"</span></div>
+</div>
+<p class="lead">Row-by-row databases were built for orders and customers, <b class="w">not for a firehose</b>.</p>
+</section>
+
+<section class="slide">
+<span class="tag">The simple version</span>
+<h2>A <em>search engine</em> for events.</h2>
+<p class="lead">You do not read the whole internet to find a page. A search engine has already indexed it, so answers come back instantly.</p>
+<p class="lead">An Eventhouse <b class="w">indexes events as they arrive</b>, so queries over billions of rows return in seconds.</p>
+<div class="body">
+<div class="row"><span class="ic">✓</span><span class="k">Stores</span><span class="v">Logs, telemetry, time series</span></div>
+<div class="row"><span class="ic">✓</span><span class="k">Indexes</span><span class="v">Automatically, on arrival</span></div>
+<div class="row"><span class="ic">✓</span><span class="k">Answers</span><span class="v">In seconds, at huge scale</span></div>
+</div>
+</section>
+
+<section class="slide">
+<span class="tag">How it works</span>
+<h2>How an <em>Eventhouse</em> is organised</h2>
+<div class="steps">
+<div class="row"><span class="ic">1</span><span class="v">An <b class="w">Eventhouse</b> holds one or more <b class="w">KQL databases</b></span></div>
+<div class="row"><span class="ic">2</span><span class="v">Events are <b class="w">indexed and partitioned</b> as they land</span></div>
+<div class="row"><span class="ic">3</span><span class="v">You query with <b class="w">KQL</b>, a pipe-based language</span></div>
+<div class="row"><span class="ic">4</span><span class="v"><b class="w">Materialized views</b> keep common aggregates ready</span></div>
+</div>
+<div class="bar lake"><b>KQL reads top to bottom</b>Take a table, filter it, summarise it. Each step is a pipe, like a recipe.</div>
+
+</section>
+
+<section class="slide">
+<span class="tag amber">For engineers</span>
+<h2>Settings that <span class="amberc">control cost and speed</span></h2>
+<div class="body">
+<div class="row col"><span class="k">Caching policy</span><span class="v">Decides how much recent data is kept on fast storage. Hot data is fast, cold data is cheaper.</span></div>
+<div class="row col"><span class="k">Retention policy</span><span class="v">Decides how long data is kept at all. Set it per table, on purpose.</span></div>
+<div class="row col"><span class="k">OneLake availability</span><span class="v">Turn it on and the same data appears as Delta tables for Spark, SQL and Power BI.</span></div>
+<div class="row col"><span class="k">Minimum capacity</span><span class="v">An eventhouse can be kept always on, with a scheduled minimum size, to avoid slow first queries.</span></div>
+</div>
+</section>
+
+<section class="slide">
+<span class="tag">The honest part</span>
+<h2>Eventhouse or <em>Lakehouse</em>?</h2>
+<div class="split">
+<div class="box yes"><h3>Eventhouse</h3><ul><li>Time-stamped events at high volume</li><li>Queries about the last minutes or hours</li><li>Free-text or semi-structured data</li></ul></div>
+<div class="box no"><h3>Lakehouse</h3><ul><li>Large batch transformations</li><li>Data updated row by row</li><li>Classic star-schema reporting</li></ul></div>
+</div>
+<p class="quote"><b class="w">The catch:</b> default retention and caching are rarely right for your data. Leave them alone and you either pay for history nobody queries or lose data someone needed.</p>
+</section>
+
+<section class="slide">
+<span class="tag amber">From real work</span>
+<h2>KQL on <span class="amberc">real projects</span></h2>
+<p class="lead">Two different uses of the same engine.</p>
+<div class="steps">
+<div class="row"><span class="ic">1</span><span class="v"><b class="w">A consumer delivery platform</b>: Eventhouse and KQL at sub-second latency</span></div>
+<div class="row"><span class="ic">2</span><span class="v"><b class="w">Scale</b>: millions of daily active users</span></div>
+<div class="row"><span class="ic">3</span><span class="v"><b class="w">A manufacturing plant</b>: image and sensor telemetry stored in KQL</span></div>
+<div class="row"><span class="ic">4</span><span class="v"><b class="w">Purpose</b>: live monitoring of the factory floor</span></div>
+</div>
+<p class="lead">Very different businesses, <b class="w">the same question: what is happening now?</b></p>
+</section>
+
+<section class="slide">
+<span class="tag">Save this</span>
+<h2>Eventhouse in <em>five lines</em></h2>
+<div class="body">
+<div class="row"><span class="ic">1</span><span class="v"><b class="w">Built for</b> events, logs and time series</span></div>
+<div class="row"><span class="ic">2</span><span class="v"><b class="w">Indexes</b> everything on arrival</span></div>
+<div class="row"><span class="ic">3</span><span class="v"><b class="w">KQL</b> filters and summarises in pipes</span></div>
+<div class="row"><span class="ic">4</span><span class="v"><b class="w">Caching and retention</b> drive the cost</span></div>
+<div class="row"><span class="ic">5</span><span class="v"><b class="w">OneLake availability</b> links it to the rest</span></div>
+</div>
+<p class="big">Tomorrow: <em>Dashboards and Activator</em>.<br>Seeing it live, and acting on it.</p>
+</section>
+
+<script src="../../assets/carousel.js"></script></body></html>

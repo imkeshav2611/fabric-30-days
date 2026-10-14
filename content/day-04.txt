@@ -1,0 +1,40 @@
+topic: The Lakehouse
+cap_title: the Lakehouse
+title: The|*Lakehouse*
+sub: Where most Fabric projects begin.|Files and tables in one place.
+pills: Files || Tables || SQL endpoint
+p_h: Lakes and warehouses each solved ^half^ the problem.
+p_rows: Data lake :: Takes anything, hard to query || Warehouse :: Easy to query, strict on input || So teams ran :: Both, and copied between them
+p_end: Two systems, two copies, and **a pipeline whose only job is to move data between them**.
+s_h: A warehouse that accepts *unpacked boxes*.
+s_leads: A normal warehouse only takes goods that are already sorted and labelled. || A Lakehouse takes the **boxes as they arrive**, and gives you **shelves** for whatever you have sorted.
+s_rows: Files :: Raw data in any format || Tables :: Sorted data, as Delta tables || Both :: In the same item, on OneLake
+m_h: Inside a *Lakehouse*
+m_rows: **Files**: land CSV, JSON, Parquet, images, anything || **Spark notebooks** clean and shape the data || **Tables**: the result, saved as Delta || **SQL analytics endpoint**: query tables with T-SQL || **Power BI** reads the same tables
+m_bar: One copy :: The table Spark wrote is the table SQL and Power BI read. Nothing is exported.
+e_h: What to know ^before you build^
+e_rows: The SQL endpoint is read-only :: You can query and create views, not insert or update. Data is written by Spark or by ingestion tools. || Only Delta shows up as a table :: A folder of plain Parquet or CSV stays in Files until you load it into a Delta table. || Schemas organise tables :: New lakehouses created in the portal have schemas enabled, so group tables instead of one flat list. || Tables need care :: Many small writes create many small files. Plan compaction from the start.
+h_h: Is a Lakehouse the *right start*?
+h_yes: Your team is comfortable with Spark or Python || Data arrives as files, semi-structured or large || You want one store for engineering and BI
+h_no: The team only knows SQL || You need multi-table transactions in T-SQL || Everything is small and already relational
+h_catch: The catch :: because the endpoint is read-only, SQL-first teams often feel stuck on day two. Decide who writes the data, and with what, before choosing.
+r_kind: real
+r_h: A Lakehouse on a ^real project^
+r_lead: A people-analytics platform that replaced CSV files passed around by hand.
+r_rows: **Raw files** landed in the Lakehouse through pipelines || **PySpark** shaped them into Bronze, Silver and Gold tables || **Semantic models** sat on the Gold tables || **Row-level security** controlled who saw which rows
+r_end: One item held the raw files **and** the reporting tables.
+z_h: The Lakehouse in *five lines*
+z_rows: **Files** for raw data, **Tables** for clean data || **Tables are Delta**, stored once in OneLake || **The SQL endpoint** reads, it does not write || **Power BI** uses the same tables directly || **Small files** are the first thing to watch
+z_next: Tomorrow :: Lakehouse or Warehouse :: The question every Fabric team asks in week one.
+q: Did your team start with a Lakehouse or a Warehouse, and would you choose the same again?
+tags: #Lakehouse #DeltaLake #ApacheSpark
+caption:
+If a Fabric project has one item at its centre, it is usually a Lakehouse.
+
+The idea is simple. A data lake accepts any file but is awkward to query. A warehouse is easy to query but strict about what goes in. A Lakehouse gives you both in one item: a Files area for raw data in any format, and a Tables area for cleaned data stored as Delta tables.
+
+What makes it practical is the SQL analytics endpoint. Every Lakehouse gets one, so the tables Spark writes can be queried with T-SQL and used by Power BI without exporting anything.
+
+The detail that surprises people: that endpoint is read-only. Writes come from Spark, or from ingestion tools such as pipelines and dataflows. For a team that thinks in SQL, that matters a lot, and it is the main reason the Lakehouse versus Warehouse question exists.
+
+On a people-analytics platform I worked on, one Lakehouse held both the raw files and the Gold tables that the reports used. Fewer moving parts meant fewer places for numbers to drift.

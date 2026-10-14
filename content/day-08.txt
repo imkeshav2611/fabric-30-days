@@ -1,0 +1,42 @@
+topic: Medallion architecture
+cap_title: the medallion architecture
+title: Bronze,|Silver,|*Gold*
+sub: The medallion architecture.|What each layer is really for.
+pills: Raw || Cleaned || Business-ready
+p_h: One big "clean and report" job ^breaks badly^.
+p_rows: Source changes :: Everything fails at once || A bug in logic :: Raw data is already gone || New question :: Start again from the source || An audit :: No record of what arrived
+p_end: When raw, clean and reporting data are mixed, **every fix is a rebuild**.
+s_h: Raw vegetables, *chopped*, *cooked*.
+s_leads: A kitchen does not cook straight from the delivery crate. It stores, washes and chops first, then cooks to order. || Data works the same way, in **three stages you can inspect separately**.
+s_rows: Bronze :: Exactly as it arrived || Silver :: Cleaned and consistent || Gold :: Shaped for a business question
+m_h: What happens in *each layer*
+m_rows: **Bronze**: land the data as-is and keep its history || **Silver**: fix types, remove duplicates, apply rules || **Silver**: join sources into shared, trusted tables || **Gold**: aggregate and model for reports and KPIs
+m_bar: The point :: When logic changes, you rebuild from Bronze. You do not go back and ask the source again.
+e_h: Decisions that ^shape the build^
+e_rows: Layers are a contract, not a rule :: Three is a convention. What matters is that each layer has a clear promise about quality. || Where layers live :: Microsoft's guidance is one lakehouse per layer, each in its own workspace, so access and ownership stay clean. || Gold can be a warehouse :: If consumers think in SQL, serve Gold from a Warehouse and keep Bronze and Silver in a Lakehouse. || Materialized lake views :: Declare Silver and Gold as Spark SQL. Fabric stores them as Delta, orders the refreshes and applies quality rules.
+h_h: Do you always need *three* layers?
+h_yes_t: Worth it when
+h_no_t: Overkill when
+h_yes: Several sources feed the same reports || Logic changes often || You must show what arrived and when
+h_no: One small, clean source || A short-lived prototype || Nobody will maintain three layers
+h_catch: The catch :: medallion fails when Silver quietly becomes a second Bronze. If Silver has no quality rules, you have added a layer and gained nothing.
+r_kind: real
+r_h: Medallion on a ^real project^
+r_lead: A people-analytics platform built on Fabric with PySpark.
+r_rows: **Bronze**: raw employee data landed by daily pipelines || **Silver**: cleaned and conformed across HR sources || **Gold**: tables shaped for organisation KPIs || **Semantic models** read Gold for reporting
+r_end: Each layer had **one job**, which keeps changes contained.
+z_h: Medallion in *five lines*
+z_rows: **Bronze** keeps what arrived, untouched || **Silver** is where data becomes trustworthy || **Gold** answers business questions || **Rebuild from Bronze**, never from the source || **Each layer** needs a clear promise
+z_next: Tomorrow :: Data Factory pipelines :: The scheduler that moves everything.
+q: Do you keep each layer in its own lakehouse, its own workspace, or all in one?
+tags: #MedallionArchitecture #Lakehouse #DataModeling
+caption:
+Bronze, Silver, Gold is the most repeated diagram in data engineering. It is repeated because it solves a real problem.
+
+When ingestion, cleaning and reporting logic live in one job, every change is a rebuild and every failure is total. The medallion pattern separates them. Bronze keeps the data exactly as it arrived. Silver makes it clean and consistent. Gold shapes it for a specific business question.
+
+The benefit shows up the day something changes. A new rule or a bug fix means rebuilding from Bronze, not going back to the source system and hoping the history is still there.
+
+A few things I would decide up front in Fabric. Where each layer lives, since Microsoft now recommends a separate lakehouse and workspace per layer. Whether materialized lake views can replace hand-written notebooks for Silver and Gold. Whether Gold should be a Warehouse for SQL users. And what Silver actually promises, because a Silver layer with no quality rules is only a second Bronze.
+
+I built these layers in PySpark for a people-analytics platform, with semantic models reading from Gold. Keeping each concern in its own layer is what kept changes small.

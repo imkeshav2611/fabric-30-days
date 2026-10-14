@@ -1,0 +1,94 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Day 13</title><link rel="stylesheet" href="../../assets/carousel.css"></head>
+<body data-series="Microsoft Fabric · 30 Days" data-day="13" data-total="30" data-author="Keshav Maheshwari" data-role="Data Engineer | Databricks · AWS &amp; Azure · Streaming · Applied AI">
+
+<section class="slide">
+<span class="tag">Day 13 of 30</span>
+<h1>Keeping<br>tables<br><em>healthy</em></h1>
+<p class="cover-sub">OPTIMIZE, V-Order and VACUUM.<br>The housekeeping nobody schedules.</p>
+<div><span class="pill">Compaction</span><span class="pill">V-Order</span><span class="pill">VACUUM</span></div>
+</section>
+
+<section class="slide">
+<span class="tag amber">The problem</span>
+<h2>Tables get slower <span class="amberc">without anyone changing them</span>.</h2>
+<div class="body">
+<div class="row"><span class="ic">1</span><span class="k">Every load</span><span class="v">Adds a few more small files</span></div>
+<div class="row"><span class="ic">2</span><span class="k">Every update</span><span class="v">Leaves old files behind</span></div>
+<div class="row"><span class="ic">3</span><span class="k">After six months</span><span class="v">Thousands of files per table</span></div>
+</div>
+<p class="lead">The query has to open every one of them. <b class="w">The data did not grow. The mess did.</b></p>
+</section>
+
+<section class="slide">
+<span class="tag">The simple version</span>
+<h2>Tidying a <em>messy cupboard</em>.</h2>
+<p class="lead">Put things away in a hurry for months and the cupboard fills with half-empty boxes. Finding anything takes longer each week.</p>
+<p class="lead">Maintenance is <b class="w">repacking into full boxes and throwing out what is no longer needed</b>.</p>
+<div class="body">
+<div class="row"><span class="ic">✓</span><span class="k">OPTIMIZE</span><span class="v">Merge small files into big ones</span></div>
+<div class="row"><span class="ic">✓</span><span class="k">V-Order</span><span class="v">Arrange files for faster reading</span></div>
+<div class="row"><span class="ic">✓</span><span class="k">VACUUM</span><span class="v">Remove files no longer in use</span></div>
+</div>
+</section>
+
+<section class="slide">
+<span class="tag">How it works</span>
+<h2>The <em>three</em> commands</h2>
+<div class="steps">
+<div class="row"><span class="ic">1</span><span class="v"><b class="w">OPTIMIZE</b> rewrites many small files as fewer large ones</span></div>
+<div class="row"><span class="ic">2</span><span class="v"><b class="w">V-Order</b> sorts and compresses Parquet for fast reads</span></div>
+<div class="row"><span class="ic">3</span><span class="v"><b class="w">VACUUM</b> deletes old files past the retention period</span></div>
+<div class="row"><span class="ic">4</span><span class="v">The <b class="w">Maintenance</b> dialog on a lakehouse table runs all three</span></div>
+</div>
+<div class="bar lake"><b>Default retention is 7 days</b>VACUUM keeps a week of history. Shorter than that and time travel stops working for older versions.</div>
+
+</section>
+
+<section class="slide">
+<span class="tag amber">For engineers</span>
+<h2>What changed, and what to <span class="amberc">check</span></h2>
+<div class="body">
+<div class="row col"><span class="k">V-Order is off by default in new workspaces</span><span class="v">The default profile favours fast writes. Reports read faster with V-Order, so turn it on for serving tables.</span></div>
+<div class="row col"><span class="k">Resource profiles set the defaults</span><span class="v">writeHeavy is the default. The read-heavy profiles enable V-Order and optimised writes for you.</span></div>
+<div class="row col"><span class="k">Auto compaction is opt-in</span><span class="v">Microsoft recommends it for ingestion tables. It compacts after writes so you do not have to schedule it.</span></div>
+<div class="row col"><span class="k">Order matters</span><span class="v">Compact first, then vacuum. Vacuuming first just removes files you were about to rewrite.</span></div>
+</div>
+</section>
+
+<section class="slide">
+<span class="tag">The honest part</span>
+<h2>How <em>often</em> is enough?</h2>
+<div class="split">
+<div class="box yes"><h3>Maintain often</h3><ul><li>Tables loaded many times a day</li><li>Tables that Power BI reads directly</li><li>Tables with frequent updates or deletes</li></ul></div>
+<div class="box no"><h3>Leave alone</h3><ul><li>Large tables that are rarely written</li><li>Bronze tables nobody queries</li><li>Tables rebuilt in full each run</li></ul></div>
+</div>
+<p class="quote"><b class="w">The catch:</b> maintenance uses capacity too. OPTIMIZE on a huge table at 9 a.m. competes with everyone's reports. Schedule it like any other heavy job.</p>
+</section>
+
+<section class="slide">
+<span class="tag amber">From real work</span>
+<h2>Maintenance on a <span class="amberc">real platform</span></h2>
+<p class="lead">A Databricks platform for a financial services company, with daily loads into Delta Lake.</p>
+<div class="steps">
+<div class="row"><span class="ic">1</span><span class="v"><b class="w">Partitioning</b> on the large Delta tables</span></div>
+<div class="row"><span class="ic">2</span><span class="v"><b class="w">Compaction</b> to merge small files into larger ones</span></div>
+<div class="row"><span class="ic">3</span><span class="v"><b class="w">Z-Ordering</b> to keep related rows close together</span></div>
+<div class="row"><span class="ic">4</span><span class="v"><b class="w">Query scan times</b> improved as a result</span></div>
+</div>
+<p class="lead">The same three ideas apply to <b class="w">every Delta table in Fabric</b>.</p>
+</section>
+
+<section class="slide">
+<span class="tag">Save this</span>
+<h2>Maintenance in <em>five lines</em></h2>
+<div class="body">
+<div class="row"><span class="ic">1</span><span class="v"><b class="w">Small files</b> are the silent slowdown</span></div>
+<div class="row"><span class="ic">2</span><span class="v"><b class="w">OPTIMIZE</b> compacts them</span></div>
+<div class="row"><span class="ic">3</span><span class="v"><b class="w">V-Order</b> speeds up reads, check it is on</span></div>
+<div class="row"><span class="ic">4</span><span class="v"><b class="w">VACUUM</b> cleans up, mind the 7 days</span></div>
+<div class="row"><span class="ic">5</span><span class="v"><b class="w">Schedule it</b> away from peak hours</span></div>
+</div>
+<p class="big">Tomorrow: <em>The on-premises data gateway</em>.<br>Reaching data that sits inside a factory or office.</p>
+</section>
+
+<script src="../../assets/carousel.js"></script></body></html>

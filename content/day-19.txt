@@ -1,0 +1,42 @@
+topic: Real-Time Dashboards and Activator
+cap_title: dashboards and Activator
+title: See it.|Then|*act on it*.
+sub: Real-Time Dashboards and Activator.|From watching data to responding to it.
+pills: Live tiles || Rules || Alerts
+p_h: A dashboard only helps if someone is ^looking at it^.
+p_rows: 2 p.m. :: The line turns red || 2:01 p.m. :: Nobody is at the screen || 5 p.m. :: Someone notices
+p_end: Three hours lost, **with the answer on display the whole time**.
+s_h: A *smoke alarm*, not a window.
+s_leads: You could watch the kitchen through a window all day. Or you could fit a smoke alarm and get on with your work. || A dashboard is the **window**. Activator is the **alarm**.
+s_rows: Dashboard :: Shows what is happening now || Activator :: Watches for a condition || Action :: Tells someone, or starts a job
+m_h: From event to *action*
+m_rows: A **tile** on the dashboard is one KQL query || **Live refresh** updates it when new data arrives || An **Activator rule** watches a value or a pattern || When it is met, it sends **email or a Teams message** || Or it runs a **pipeline, notebook or Power Automate flow**
+m_bar: No polling loop to write :: You describe the condition. Fabric keeps checking it for you.
+e_h: Designing rules that ^people trust^
+e_rows: Alert on change, not on state :: "Temperature crossed 80" fires once. "Temperature is above 80" fires all afternoon. || Many things can feed a rule :: Eventstreams, KQL queries, Power BI visuals, dashboards and Fabric events can all trigger Activator. || Close the loop automatically :: The best rule does not page a person. It starts the job that fixes the problem. || Live refresh saves compute :: Tiles re-query when new data is ingested, instead of on a fixed timer.
+h_h: Alert or *just a report*?
+h_yes_t: Set an alert
+h_no_t: A report is enough
+h_yes: Someone must respond within minutes || The condition is clear and measurable || There is a defined next step
+h_no: The number is reviewed weekly || Nobody knows what to do when it fires || The threshold is a guess
+h_catch: The catch :: alert fatigue. Ten alerts a day and people mute the channel. One meaningful alert a week gets acted on. Fewer, sharper rules win.
+r_kind: real
+r_h: Live monitoring on a ^real project^
+r_lead: Quality control for a manufacturing group, using computer vision on the production line.
+r_rows: **A vision model** detected fibre defects automatically || **Inspection time** went from 10 hours to 10 seconds || **Image and sensor telemetry** was stored in KQL and OneLake || **The factory floor** was monitored live from that data
+r_end: When the answer arrives in seconds, **people can act while it still matters**.
+z_h: See and act in *five lines*
+z_rows: **Dashboards** show the present moment || **Each tile** is a query on live data || **Activator** watches so people do not have to || **Actions** can notify or start a job || **Few, sharp alerts** beat many noisy ones
+z_next: Tomorrow :: Semantic models :: One agreed meaning for every number.
+q: What is the one alert in your platform that people actually act on?
+tags: #RealTimeIntelligence #Activator #Monitoring
+caption:
+A live dashboard has one weakness: someone has to be looking at it.
+
+Fabric pairs two things to deal with that. A Real-Time Dashboard shows the current state, where each tile is a KQL query and live refresh updates it as new data arrives. Activator watches for a condition and does something when it is met. It can send an email or a Teams message, start a Power Automate flow, or run a Fabric item such as a pipeline or a notebook.
+
+The design of the rule matters more than the tool. Alert on a change, not on a state, or the rule fires all afternoon. Make sure there is a defined next step. And where possible, let the rule start the fix instead of paging a person.
+
+The failure mode is alert fatigue. Ten alerts a day get muted. One sharp alert a week gets acted on.
+
+I saw the value of speed on a quality-control project for a manufacturing group. A vision model cut inspection time from 10 hours to 10 seconds, with image and sensor telemetry stored in KQL and OneLake for live monitoring of the factory floor.

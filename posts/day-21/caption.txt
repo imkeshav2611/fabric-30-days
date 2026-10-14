@@ -1,0 +1,19 @@
+Microsoft Fabric, Day 21 of 30: Direct Lake.
+
+For years Power BI offered a trade-off. Import was fast but worked on a copy that went stale. DirectQuery was always current but slow on every click.
+
+Direct Lake removes most of that trade-off for data in OneLake. The semantic model points at Delta tables. When a report opens, the engine loads only the columns it needs straight into memory, with no import and no query translation. A step called framing moves the model to the latest version of the table.
+
+There are now two flavours, and the difference matters. Direct Lake on OneLake reads the tables directly and can mix with Import tables, but it has no fallback. Direct Lake on SQL goes through the SQL analytics endpoint and can fall back to DirectQuery, which keeps reports working but slower. Each capacity size has guardrails, and what happens beyond them depends on the flavour.
+
+The practical lesson is that Direct Lake exposes the quality of your tables. Many small files or missing V-Order show up directly as slow reports.
+
+No project story today. This is the mode where data engineering and reporting stop being separate jobs.
+
+Slides 1 to 4 cover the big picture. Slides 5 to 7 are where it gets practical. Slide 8 is the summary.
+
+Tomorrow: Security basics.
+
+Have you moved a large import model to Direct Lake? What changed?
+
+#MicrosoftFabric #DataEngineering #DirectLake #PowerBI #OneLake

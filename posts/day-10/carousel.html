@@ -1,0 +1,93 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Day 10</title><link rel="stylesheet" href="../../assets/carousel.css"></head>
+<body data-series="Microsoft Fabric · 30 Days" data-day="10" data-total="30" data-author="Keshav Maheshwari" data-role="Data Engineer | Databricks · AWS &amp; Azure · Streaming · Applied AI">
+
+<section class="slide">
+<span class="tag">Day 10 of 30</span>
+<h1><em>Dataflows</em><br>Gen2</h1>
+<p class="cover-sub">Cleaning data without code.<br>Where it shines, and where it stops.</p>
+<div><span class="pill">Power Query</span><span class="pill">Low-code</span><span class="pill">Destinations</span></div>
+</section>
+
+<section class="slide">
+<span class="tag amber">The problem</span>
+<h2>Not everyone who cleans data <span class="amberc">writes code</span>.</h2>
+<div class="body">
+<div class="row"><span class="ic">1</span><span class="k">The analyst</span><span class="v">Knows the data best</span></div>
+<div class="row"><span class="ic">2</span><span class="k">The tool they use</span><span class="v">Excel, by hand, every month</span></div>
+<div class="row"><span class="ic">3</span><span class="k">The risk</span><span class="v">Steps live in one person's head</span></div>
+</div>
+<p class="lead">The logic is real and valuable. <b class="w">It is just not written down anywhere a machine can run it.</b></p>
+</section>
+
+<section class="slide">
+<span class="tag">The simple version</span>
+<h2>A <em>recorded recipe</em>.</h2>
+<p class="lead">You clean the data once by clicking: remove this column, split that one, filter those rows. Every step is recorded.</p>
+<p class="lead">From then on the recipe <b class="w">runs by itself</b>, the same way every time.</p>
+<div class="body">
+<div class="row"><span class="ic">✓</span><span class="k">Built with</span><span class="v">Power Query, in the browser</span></div>
+<div class="row"><span class="ic">✓</span><span class="k">Steps</span><span class="v">Recorded and editable</span></div>
+<div class="row"><span class="ic">✓</span><span class="k">Output</span><span class="v">Lands in a table you choose</span></div>
+</div>
+</section>
+
+<section class="slide">
+<span class="tag">How it works</span>
+<h2>How a <em>dataflow</em> runs</h2>
+<div class="steps">
+<div class="row"><span class="ic">1</span><span class="v"><b class="w">Connect</b> to a source from a long list of connectors</span></div>
+<div class="row"><span class="ic">2</span><span class="v"><b class="w">Shape</b> the data with point-and-click steps</span></div>
+<div class="row"><span class="ic">3</span><span class="v"><b class="w">Choose a destination</b>: Lakehouse, Warehouse and more</span></div>
+<div class="row"><span class="ic">4</span><span class="v"><b class="w">Refresh</b> on a schedule or from a pipeline</span></div>
+</div>
+<div class="bar lake"><b>Same engine as Excel and Power BI</b>Anyone who has used Power Query already knows how to build one.</div>
+
+</section>
+
+<section class="slide">
+<span class="tag amber">For engineers</span>
+<h2>What engineers <span class="amberc">should know</span></h2>
+<div class="body">
+<div class="row col"><span class="k">Query folding decides the speed</span><span class="v">When steps can be pushed down to the source, it is fast. When they cannot, rows are pulled and processed in the engine.</span></div>
+<div class="row col"><span class="k">Staging has a cost</span><span class="v">Staging helps large transformations but adds compute. Turn it off for simple loads.</span></div>
+<div class="row col"><span class="k">Fast copy for big moves</span><span class="v">Large, simple ingestion can skip row-by-row processing.</span></div>
+<div class="row col"><span class="k">Git and CI/CD are built in</span><span class="v">Since April 2026 every new dataflow is created with Git and deployment support, like other code.</span></div>
+</div>
+</section>
+
+<section class="slide">
+<span class="tag">The honest part</span>
+<h2>Dataflow or <em>notebook</em>?</h2>
+<div class="split">
+<div class="box yes"><h3>Dataflow</h3><ul><li>Small to medium data</li><li>Analysts own the logic</li><li>Many sources with simple shaping</li></ul></div>
+<div class="box no"><h3>Notebook</h3><ul><li>Very large tables</li><li>Complex logic that needs tests</li><li>Tight control over performance</li></ul></div>
+</div>
+<p class="quote"><b class="w">The catch:</b> a dataflow that was fine at one million rows can struggle at one hundred million. Watch the refresh time, and move heavy steps to Spark before they hurt.</p>
+</section>
+
+<section class="slide">
+<span class="tag amber">Watch out</span>
+<h2>Four things to <span class="amberc">watch</span></h2>
+<div class="steps">
+<div class="row"><span class="ic">1</span><span class="v"><b class="w">Steps that break folding</b> early in the query</span></div>
+<div class="row"><span class="ic">2</span><span class="v"><b class="w">Staging left on</b> for loads that do not need it</span></div>
+<div class="row"><span class="ic">3</span><span class="v"><b class="w">One giant dataflow</b> instead of small, reusable ones</span></div>
+<div class="row"><span class="ic">4</span><span class="v"><b class="w">No owner</b> once the analyst who built it moves on</span></div>
+</div>
+<p class="lead">Low-code is still code. <b class="w">It needs the same care.</b></p>
+</section>
+
+<section class="slide">
+<span class="tag">Save this</span>
+<h2>Dataflows in <em>five lines</em></h2>
+<div class="body">
+<div class="row"><span class="ic">1</span><span class="v"><b class="w">Power Query</b> in the browser</span></div>
+<div class="row"><span class="ic">2</span><span class="v"><b class="w">Every step</b> is recorded and repeatable</span></div>
+<div class="row"><span class="ic">3</span><span class="v"><b class="w">Writes</b> to a Lakehouse or Warehouse</span></div>
+<div class="row"><span class="ic">4</span><span class="v"><b class="w">Great</b> for analysts and modest volumes</span></div>
+<div class="row"><span class="ic">5</span><span class="v"><b class="w">Spark</b> takes over when data gets big</span></div>
+</div>
+<p class="big">Tomorrow: <em>Notebooks and Spark</em>.<br>Where the heavy processing happens.</p>
+</section>
+
+<script src="../../assets/carousel.js"></script></body></html>

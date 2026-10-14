@@ -1,0 +1,19 @@
+Microsoft Fabric, Day 17 of 30: Eventstream.
+
+Before a stream can be analysed, it has to be collected, cleaned and delivered. That used to mean custom code for every source.
+
+Eventstream is Fabric's answer. You add sources, such as Event Hubs, IoT Hub, Kafka or change data from a database. You shape the events on a visual canvas with filters, aggregations, joins and time windows. Then you route them to one or more destinations: an Eventhouse for analysis, a Lakehouse for storage, or Activator to trigger actions.
+
+Two details matter in practice. An eventstream exposes a Kafka-compatible endpoint, so existing producers can often point at it with little change. And delivery is at-least-once, which means an event can arrive twice and downstream logic has to cope.
+
+My main advice is to filter early. Every event carried to the destination costs storage and compute, so dropping what nobody needs at the start of the flow is the cheapest optimisation available.
+
+On a real-time platform for a consumer delivery business, Event Hub and Eventstream carried terabytes per minute into Fabric, with Eventhouse answering queries in under a second.
+
+Slides 1 to 4 cover the big picture. Slides 5 to 7 are where it gets practical. Slide 8 is the summary.
+
+Tomorrow: Eventhouse and KQL.
+
+What is the highest-volume stream you have had to handle, and what broke first?
+
+#MicrosoftFabric #DataEngineering #Eventstream #Kafka #StreamProcessing

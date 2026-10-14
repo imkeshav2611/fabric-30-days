@@ -1,0 +1,19 @@
+Microsoft Fabric, Day 3 of 30: workspaces and capacities.
+
+Most Fabric performance questions I hear are really capacity questions.
+
+A workspace is where a team's items live. A capacity is the compute those items run on, measured in Capacity Units and bought as an F SKU. Every workload in every workspace on that capacity draws from the same pool: Spark, pipelines, the warehouse and Power BI.
+
+Fabric softens this with bursting and smoothing. A job can run faster than the capacity size suggests, and the cost is spread over time. That is useful, and it is also why problems show up late. Sustained overuse ends in throttling, where work is delayed and eventually rejected. Capacity overage, now generally available, lets you pay a premium for spikes instead, so it is worth knowing whether it is switched on.
+
+Two things I would settle early. First, who looks at the Capacity Metrics app every week. Second, whether development and production share a capacity. Sharing is cheaper and simpler. Splitting protects the reports people depend on.
+
+No project story on this one, only the pattern I keep seeing: capacity gets treated as a purchase when it is a design decision.
+
+Slides 1 to 4 cover the big picture. Slides 5 to 7 are where it gets practical. Slide 8 is the summary.
+
+Tomorrow: The Lakehouse.
+
+What was the first thing that pushed your capacity into throttling?
+
+#MicrosoftFabric #DataEngineering #FabricCapacity #PowerBI #FinOps

@@ -1,0 +1,40 @@
+topic: Faster Spark jobs
+cap_title: making Spark jobs faster
+title: Faster|*Spark*|jobs
+sub: Where the time really goes.|And the fixes that matter most.
+pills: Shuffle || Joins || File layout
+p_h: A bigger cluster is the ^expensive^ way to go faster.
+p_rows: The job is slow :: Double the nodes || It is still slow :: Double them again || The bill :: Four times higher || The real cause :: One bad join
+p_end: Most slow Spark jobs do not need more machines. **They need less wasted work.**
+s_h: *Fewer, better-packed trucks*.
+s_leads: A delivery firm does not get faster by buying more trucks if they leave half empty and drive across town for one parcel. || Fast Spark is the same: **move less data, fewer times, in sensible loads**.
+s_rows: Read less :: Skip data you do not need || Move less :: Avoid shuffling between machines || Pack well :: Right-sized files and partitions
+m_h: The fixes, *in order of payoff*
+m_rows: **Filter and select early**, so less data flows through || **Broadcast small tables** in joins to avoid a shuffle || **Fix skew**: one giant key can stall a whole job || **Cache** only what you reuse more than once || **Compact files** and choose a sensible layout
+m_bar: Read the plan first :: The Spark UI shows which stage takes the time. Tune that stage, not the whole job.
+e_h: What Fabric adds, and ^what to check^
+e_rows: Native execution engine :: A vectorised engine you enable in the environment. It speeds up many queries with no code change. || Resource profiles :: writeHeavy is the default. Read-heavy profiles change V-Order and write settings for serving tables. || Runtime version :: Runtime 2.0 is generally available and recommended for production. New workspaces still default to 1.3. || Autotune is not the answer on new runtimes :: It only works on Runtime 1.2, so do not rely on it for current workloads.
+h_h: Tune the code or *add compute*?
+h_yes_t: Tune first
+h_no_t: Add compute
+h_yes: One stage dominates the run time || A join or shuffle is the bottleneck || Thousands of small files are being read
+h_no: The plan is clean and data simply grew || The job is already well partitioned || The deadline is fixed and close
+h_catch: The catch :: caching everything feels safe and makes jobs slower. Cached data takes memory away from the work. Cache what you reuse, and release it after.
+r_kind: real
+r_h: Tuning on ^real platforms^
+r_lead: The same techniques, on three different Databricks workloads.
+r_rows: **Broadcast joins, partitioning and caching** cut average run time by 25% || **Liquid Clustering** improved layout on a petabyte-scale pipeline || **Daily volumes** there ran from hundreds of GB to several TB || **A migration** took one process from 2 hr 50 min to about 5 min
+r_end: The pattern each time: **remove wasted work first.**
+z_h: Faster Spark in *five lines*
+z_rows: **Read the plan** before changing anything || **Filter early**, select only what you need || **Broadcast** small tables in joins || **Fix skew** and small files || **Enable** the native engine and check the runtime
+z_next: Tomorrow :: AI on Fabric :: Asking your data questions in plain language.
+q: What single change gave you the biggest Spark speed-up?
+tags: #ApacheSpark #PerformanceTuning #PySpark
+caption:
+When a Spark job is slow, the tempting fix is a bigger cluster. It is also the most expensive one, and it often does not work.
+
+Most slow jobs waste effort. They read data they later throw away, shuffle rows between machines for a join that did not need it, or open thousands of tiny files. The fixes are well known and they pay off roughly in this order: filter and select early, broadcast small tables in joins, deal with skew, cache only what is reused, and keep files compacted.
+
+Fabric adds a few levers of its own. The native execution engine is a vectorised engine you enable in the environment, and it speeds up many queries without code changes. Resource profiles set sensible defaults for write-heavy or read-heavy work. Runtime 2.0 is generally available and recommended for production. One thing to note: autotune only works on Runtime 1.2, so it is not an option on current runtimes.
+
+On Databricks platforms I have worked on, partitioning, caching and broadcast joins cut average run time by 25%, and a migration took one process from 2 hours 50 minutes to about 5 minutes. The pattern was the same each time: remove wasted work first.

@@ -1,0 +1,94 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Day 23</title><link rel="stylesheet" href="../../assets/carousel.css"></head>
+<body data-series="Microsoft Fabric · 30 Days" data-day="23" data-total="30" data-author="Keshav Maheshwari" data-role="Data Engineer | Databricks · AWS &amp; Azure · Streaming · Applied AI">
+
+<section class="slide">
+<span class="tag">Day 23 of 30</span>
+<h1>Same report,<br><em>different</em><br>rows</h1>
+<p class="cover-sub">Row-level security.<br>One model, the right slice for each person.</p>
+<div><span class="pill">RLS</span><span class="pill">Roles</span><span class="pill">Predicates</span></div>
+</section>
+
+<section class="slide">
+<span class="tag amber">The problem</span>
+<h2>One report per region <span class="amberc">does not scale</span>.</h2>
+<div class="body">
+<div class="row"><span class="ic">1</span><span class="k">5 regions</span><span class="v">5 copies of the report</span></div>
+<div class="row"><span class="ic">2</span><span class="k">A new KPI</span><span class="v">Change it 5 times</span></div>
+<div class="row"><span class="ic">3</span><span class="k">50 managers</span><span class="v">Nobody maintains 50 copies</span></div>
+</div>
+<p class="lead">Copies drift, and sooner or later <b class="w">someone opens the wrong one</b>.</p>
+</section>
+
+<section class="slide">
+<span class="tag">The simple version</span>
+<h2>One <em>report card</em> per student.</h2>
+<p class="lead">A school prints one results system, not one per child. Each student opens it and sees only their own marks.</p>
+<p class="lead">Row-level security does that for data: <b class="w">one table, filtered by who is asking</b>.</p>
+<div class="body">
+<div class="row"><span class="ic">✓</span><span class="k">One table</span><span class="v">Holds everyone's rows</span></div>
+<div class="row"><span class="ic">✓</span><span class="k">A rule</span><span class="v">"Show rows where region is mine"</span></div>
+<div class="row"><span class="ic">✓</span><span class="k">Each user</span><span class="v">Sees only their slice</span></div>
+</div>
+</section>
+
+<section class="slide">
+<span class="tag">How it works</span>
+<h2>Where you can <em>define</em> it</h2>
+<div class="steps">
+<div class="row"><span class="ic">1</span><span class="v"><b class="w">OneLake security</b>: on the table, enforced across engines</span></div>
+<div class="row"><span class="ic">2</span><span class="v"><b class="w">Warehouse and SQL endpoint</b>: a T-SQL security policy</span></div>
+<div class="row"><span class="ic">3</span><span class="v"><b class="w">Semantic model</b>: roles with a DAX filter</span></div>
+<div class="row"><span class="ic">4</span><span class="v">Pick <b class="w">one place</b> as the source of truth</span></div>
+</div>
+<div class="bar lake"><b>The closer to the data, the better</b>A rule on the table protects every tool. A rule in one report protects only that report.</div>
+
+</section>
+
+<section class="slide">
+<span class="tag amber">For engineers</span>
+<h2>The gaps you <span class="amberc">must know</span></h2>
+<div class="body">
+<div class="row col"><span class="k">SQL rules do not cover Spark</span><span class="v">A security policy on the SQL endpoint does not protect direct access to the Delta files through a notebook.</span></div>
+<div class="row col"><span class="k">Model rules apply to Viewers only</span><span class="v">Admin, Member and Contributor roles on the workspace are not restricted by semantic model security.</span></div>
+<div class="row col"><span class="k">Direct Lake behaves differently</span><span class="v">With SQL rules, Direct Lake on SQL falls back to DirectQuery. Direct Lake on OneLake does not apply them at all.</span></div>
+<div class="row col"><span class="k">Test as the user</span><span class="v">Always check with a real restricted account. "It works for me" means nothing if you are an Admin.</span></div>
+</div>
+</section>
+
+<section class="slide">
+<span class="tag">The honest part</span>
+<h2>Where should the rule <em>live</em>?</h2>
+<div class="split">
+<div class="box yes"><h3>On the data</h3><ul><li>Several tools read the same table</li><li>Engineers and analysts both query it</li><li>The rule is a compliance requirement</li></ul></div>
+<div class="box no"><h3>In the model</h3><ul><li>Only Power BI consumes the data</li><li>Rules depend on business hierarchies</li><li>Report authors own the logic</li></ul></div>
+</div>
+<p class="quote"><b class="w">The catch:</b> security defined in two places will disagree. When it does, people see either too much or too little, and both end in an incident.</p>
+</section>
+
+<section class="slide">
+<span class="tag amber">From real work</span>
+<h2>Row-level security on a <span class="amberc">real project</span></h2>
+<p class="lead">A people-analytics platform holding sensitive personnel data.</p>
+<div class="steps">
+<div class="row"><span class="ic">1</span><span class="v"><b class="w">One set of tables</b> held employee data for the organisation</span></div>
+<div class="row"><span class="ic">2</span><span class="v"><b class="w">Row-level security</b> filtered rows for each user</span></div>
+<div class="row"><span class="ic">3</span><span class="v"><b class="w">Role-based access</b> controlled who entered at all</span></div>
+<div class="row"><span class="ic">4</span><span class="v"><b class="w">Semantic models</b> carried the KPIs on top</span></div>
+</div>
+<p class="lead">One platform for everyone, <b class="w">without everyone seeing everything</b>.</p>
+</section>
+
+<section class="slide">
+<span class="tag">Save this</span>
+<h2>RLS in <em>five lines</em></h2>
+<div class="body">
+<div class="row"><span class="ic">1</span><span class="v"><b class="w">One table</b>, filtered per user</span></div>
+<div class="row"><span class="ic">2</span><span class="v"><b class="w">Define it</b> as close to the data as you can</span></div>
+<div class="row"><span class="ic">3</span><span class="v"><b class="w">SQL rules</b> do not protect Spark access</span></div>
+<div class="row"><span class="ic">4</span><span class="v"><b class="w">Builders</b> in the workspace bypass model rules</span></div>
+<div class="row"><span class="ic">5</span><span class="v"><b class="w">Test</b> with a restricted account</span></div>
+</div>
+<p class="big">Tomorrow: <em>Governance</em>.<br>Lineage, labels and knowing what you have.</p>
+</section>
+
+<script src="../../assets/carousel.js"></script></body></html>

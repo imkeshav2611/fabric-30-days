@@ -1,0 +1,93 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Day 26</title><link rel="stylesheet" href="../../assets/carousel.css"></head>
+<body data-series="Microsoft Fabric · 30 Days" data-day="26" data-total="30" data-author="Keshav Maheshwari" data-role="Data Engineer | Databricks · AWS &amp; Azure · Streaming · Applied AI">
+
+<section class="slide">
+<span class="tag">Day 26 of 30</span>
+<h1>Know<br><em>before</em><br>they do</h1>
+<p class="cover-sub">Monitoring in Fabric.<br>Find the problem before the users.</p>
+<div><span class="pill">Monitoring hub</span><span class="pill">Metrics app</span><span class="pill">Alerts</span></div>
+</section>
+
+<section class="slide">
+<span class="tag amber">The problem</span>
+<h2>"The dashboard is wrong" is a <span class="amberc">bad way</span> to find out.</h2>
+<div class="body">
+<div class="row"><span class="ic">1</span><span class="k">2 a.m.</span><span class="v">A pipeline fails quietly</span></div>
+<div class="row"><span class="ic">2</span><span class="k">8 a.m.</span><span class="v">Reports show yesterday's data</span></div>
+<div class="row"><span class="ic">3</span><span class="k">9 a.m.</span><span class="v">A director emails you</span></div>
+</div>
+<p class="lead">The platform knew at 2 a.m. <b class="w">Nobody had asked it to say so.</b></p>
+</section>
+
+<section class="slide">
+<span class="tag">The simple version</span>
+<h2>A <em>car dashboard</em>.</h2>
+<p class="lead">You do not open the bonnet every morning. A few dials and warning lights tell you when something needs attention.</p>
+<p class="lead">Monitoring gives your platform <b class="w">the same dials and warning lights</b>.</p>
+<div class="body">
+<div class="row"><span class="ic">✓</span><span class="k">Did it run?</span><span class="v">Job status and history</span></div>
+<div class="row"><span class="ic">✓</span><span class="k">Is it healthy?</span><span class="v">Duration and failures</span></div>
+<div class="row"><span class="ic">✓</span><span class="k">Can we afford it?</span><span class="v">Capacity usage</span></div>
+</div>
+</section>
+
+<section class="slide">
+<span class="tag">How it works</span>
+<h2>Where to <em>look</em></h2>
+<div class="steps">
+<div class="row"><span class="ic">1</span><span class="v"><b class="w">Monitoring hub</b>: every run of every pipeline, notebook and refresh</span></div>
+<div class="row"><span class="ic">2</span><span class="v"><b class="w">Capacity Metrics app</b>: who used how much compute</span></div>
+<div class="row"><span class="ic">3</span><span class="v"><b class="w">Workspace monitoring</b>: detailed logs you can query with KQL</span></div>
+<div class="row"><span class="ic">4</span><span class="v"><b class="w">Activator</b>: turn any of this into an alert</span></div>
+</div>
+<div class="bar lake"><b>Three questions</b>Did it run, is it getting slower, and is it eating the capacity? Answer those and you cover most incidents.</div>
+
+</section>
+
+<section class="slide">
+<span class="tag amber">For engineers</span>
+<h2>What each tool is <span class="amberc">good for</span></h2>
+<div class="body">
+<div class="row col"><span class="k">Monitoring hub is your first stop</span><span class="v">It lists runs across the workspace with status and duration. Start every investigation here.</span></div>
+<div class="row col"><span class="k">The Metrics app looks back 14 days</span><span class="v">Compute history covers 14 days and storage 30. Longer trends need your own copy.</span></div>
+<div class="row col"><span class="k">The Metrics app has no alerts</span><span class="v">To be warned about capacity, use capacity events in Real-Time hub with Activator.</span></div>
+<div class="row col"><span class="k">Surge protection is a safety net</span><span class="v">It limits background work when the capacity is under pressure, protecting interactive users.</span></div>
+</div>
+</section>
+
+<section class="slide">
+<span class="tag">The honest part</span>
+<h2>What deserves an <em>alert</em>?</h2>
+<div class="split">
+<div class="box yes"><h3>Alert on</h3><ul><li>A production pipeline failing</li><li>A refresh taking twice as long as usual</li><li>Capacity nearing its limit</li></ul></div>
+<div class="box no"><h3>Just log</h3><ul><li>Every successful run</li><li>Failures in development workspaces</li><li>Warnings nobody acts on</li></ul></div>
+</div>
+<p class="quote"><b class="w">The catch:</b> a job that succeeds can still be wrong. It ran, it wrote zero rows, and everything is green. Monitor the data, not only the job.</p>
+</section>
+
+<section class="slide">
+<span class="tag amber">Watch out</span>
+<h2>Four checks that <span class="amberc">catch most problems</span></h2>
+<div class="steps">
+<div class="row"><span class="ic">1</span><span class="v"><b class="w">Freshness</b>: when did this table last get new rows?</span></div>
+<div class="row"><span class="ic">2</span><span class="v"><b class="w">Volume</b>: is today's row count in the normal range?</span></div>
+<div class="row"><span class="ic">3</span><span class="v"><b class="w">Duration</b>: is the job slower than last week?</span></div>
+<div class="row"><span class="ic">4</span><span class="v"><b class="w">Capacity</b>: what was running when throttling began?</span></div>
+</div>
+<p class="lead">Good monitoring is <b class="w">four questions, asked automatically</b>.</p>
+</section>
+
+<section class="slide">
+<span class="tag">Save this</span>
+<h2>Monitoring in <em>five lines</em></h2>
+<div class="body">
+<div class="row"><span class="ic">1</span><span class="v"><b class="w">Monitoring hub</b> for what ran</span></div>
+<div class="row"><span class="ic">2</span><span class="v"><b class="w">Metrics app</b> for what it cost</span></div>
+<div class="row"><span class="ic">3</span><span class="v"><b class="w">Workspace monitoring</b> for the details</span></div>
+<div class="row"><span class="ic">4</span><span class="v"><b class="w">Activator</b> to be told, not to check</span></div>
+<div class="row"><span class="ic">5</span><span class="v"><b class="w">Watch the data</b>, not only the jobs</span></div>
+</div>
+<p class="big">Tomorrow: <em>Faster Spark jobs</em>.<br>Where the time really goes.</p>
+</section>
+
+<script src="../../assets/carousel.js"></script></body></html>

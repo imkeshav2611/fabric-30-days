@@ -1,0 +1,94 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Day 28</title><link rel="stylesheet" href="../../assets/carousel.css"></head>
+<body data-series="Microsoft Fabric · 30 Days" data-day="28" data-total="30" data-author="Keshav Maheshwari" data-role="Data Engineer | Databricks · AWS &amp; Azure · Streaming · Applied AI">
+
+<section class="slide">
+<span class="tag">Day 28 of 30</span>
+<h1>Ask your<br>data a<br><em>question</em></h1>
+<p class="cover-sub">AI on Fabric.<br>What works, and what it depends on.</p>
+<div><span class="pill">Data agents</span><span class="pill">Copilot</span><span class="pill">AI functions</span></div>
+</section>
+
+<section class="slide">
+<span class="tag amber">The problem</span>
+<h2>Most people <span class="amberc">cannot write</span> a query.</h2>
+<div class="body">
+<div class="row"><span class="ic">1</span><span class="k">The question</span><span class="v">"Why did sales drop in the north?"</span></div>
+<div class="row"><span class="ic">2</span><span class="k">The path</span><span class="v">Ask an analyst, wait three days</span></div>
+<div class="row"><span class="ic">3</span><span class="k">The answer</span><span class="v">Arrives after the decision</span></div>
+</div>
+<p class="lead">The data exists. <b class="w">The distance between the question and the answer is the problem.</b></p>
+</section>
+
+<section class="slide">
+<span class="tag">The simple version</span>
+<h2>An <em>analyst</em> who knows where everything is.</h2>
+<p class="lead">A good analyst hears a question in normal language, knows which table holds the answer, writes the query and explains the result.</p>
+<p class="lead">A data agent does that same job, <b class="w">on the data and definitions you give it</b>.</p>
+<div class="body">
+<div class="row"><span class="ic">✓</span><span class="k">You ask</span><span class="v">In everyday language</span></div>
+<div class="row"><span class="ic">✓</span><span class="k">It finds</span><span class="v">The right tables and measures</span></div>
+<div class="row"><span class="ic">✓</span><span class="k">It answers</span><span class="v">With the query it used</span></div>
+</div>
+</section>
+
+<section class="slide">
+<span class="tag">How it works</span>
+<h2>The AI pieces in <em>Fabric</em></h2>
+<div class="steps">
+<div class="row"><span class="ic">1</span><span class="v"><b class="w">Copilot</b> helps you build: code, queries, reports</span></div>
+<div class="row"><span class="ic">2</span><span class="v"><b class="w">Fabric data agents</b> answer questions on your data</span></div>
+<div class="row"><span class="ic">3</span><span class="v"><b class="w">AI functions</b> summarise, classify and extract inside a pipeline</span></div>
+<div class="row"><span class="ic">4</span><span class="v"><b class="w">Custom agents</b> can be built on the same data with Azure OpenAI</span></div>
+</div>
+<div class="bar lake"><b>Grounded, not guessing</b>An agent writes a query against your real tables. The answer comes from the data, not from the model's memory.</div>
+
+</section>
+
+<section class="slide">
+<span class="tag amber">For engineers</span>
+<h2>What decides <span class="amberc">whether it works</span></h2>
+<div class="body">
+<div class="row col"><span class="k">The semantic layer does the heavy lifting</span><span class="v">Clear table names, descriptions and agreed measures matter more than which model you pick.</span></div>
+<div class="row col"><span class="k">Data agents have limits</span><span class="v">An agent takes up to five sources and is read-only. Scope it to one subject area, not the whole company.</span></div>
+<div class="row col"><span class="k">Security still applies</span><span class="v">The agent respects the permissions of the person asking. Row and column rules still decide what comes back.</span></div>
+<div class="row col"><span class="k">Copilot needs paid capacity</span><span class="v">It is on by default for paid Fabric capacities from F2 up, and not available on trial.</span></div>
+</div>
+</section>
+
+<section class="slide">
+<span class="tag">The honest part</span>
+<h2>Is your data <em>ready</em> for AI?</h2>
+<div class="split">
+<div class="box yes"><h3>Ready when</h3><ul><li>Gold tables are clean and documented</li><li>KPIs have one agreed definition</li><li>Access rules are already in place</li></ul></div>
+<div class="box no"><h3>Not yet when</h3><ul><li>Column names are cryptic codes</li><li>Three tables claim to be "sales"</li><li>Nobody can say which number is right</li></ul></div>
+</div>
+<p class="quote"><b class="w">The catch:</b> an agent makes a bad data model fail faster and more confidently. It will answer every question, including the ones your data cannot support.</p>
+</section>
+
+<section class="slide">
+<span class="tag amber">From real work</span>
+<h2>AI agents on <span class="amberc">real projects</span></h2>
+<p class="lead">Two assistants, both built on governed data in Fabric.</p>
+<div class="steps">
+<div class="row"><span class="ic">1</span><span class="v"><b class="w">An HR assistant</b> for leaders, built with Azure OpenAI and LangChain</span></div>
+<div class="row"><span class="ic">2</span><span class="v">It answered questions on <b class="w">attrition, performance and workforce metrics</b></span></div>
+<div class="row"><span class="ic">3</span><span class="v"><b class="w">An insight agent</b> for executives on real-time sales and logistics data</span></div>
+<div class="row"><span class="ic">4</span><span class="v">It used <b class="w">Agentic-RAG</b> on Fabric Real-Time Intelligence</span></div>
+</div>
+<p class="lead">In both, the model was the easy part. <b class="w">The data foundation was the work.</b></p>
+</section>
+
+<section class="slide">
+<span class="tag">Save this</span>
+<h2>AI on Fabric in <em>five lines</em></h2>
+<div class="body">
+<div class="row"><span class="ic">1</span><span class="v"><b class="w">Copilot</b> helps builders work faster</span></div>
+<div class="row"><span class="ic">2</span><span class="v"><b class="w">Data agents</b> answer business questions</span></div>
+<div class="row"><span class="ic">3</span><span class="v"><b class="w">AI functions</b> enrich data in pipelines</span></div>
+<div class="row"><span class="ic">4</span><span class="v"><b class="w">Security</b> applies to the agent too</span></div>
+<div class="row"><span class="ic">5</span><span class="v"><b class="w">A clean model</b> is what makes it useful</span></div>
+</div>
+<p class="big">Tomorrow: <em>Migration</em>.<br>Moving an old warehouse without losing anything.</p>
+</section>
+
+<script src="../../assets/carousel.js"></script></body></html>

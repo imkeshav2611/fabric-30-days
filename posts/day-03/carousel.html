@@ -1,0 +1,94 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Day 3</title><link rel="stylesheet" href="../../assets/carousel.css"></head>
+<body data-series="Microsoft Fabric · 30 Days" data-day="3" data-total="30" data-author="Keshav Maheshwari" data-role="Data Engineer | Databricks · AWS &amp; Azure · Streaming · Applied AI">
+
+<section class="slide">
+<span class="tag">Day 3 of 30</span>
+<h1>Work-<br>spaces &amp;<br><em>capacity</em></h1>
+<p class="cover-sub">How Fabric is organised.<br>And how the bill actually works.</p>
+<div><span class="pill">F SKUs</span><span class="pill">Capacity Units</span><span class="pill">Throttling</span></div>
+</section>
+
+<section class="slide">
+<span class="tag amber">The problem</span>
+<h2>"Why is my report slow?" has a <span class="amberc">billing</span> answer.</h2>
+<div class="body">
+<div class="row"><span class="ic">1</span><span class="k">Old world</span><span class="v">Each service had its own meter</span></div>
+<div class="row"><span class="ic">2</span><span class="k">Fabric</span><span class="v">One meter for everything</span></div>
+<div class="row"><span class="ic">3</span><span class="k">Result</span><span class="v">Workloads compete for it</span></div>
+</div>
+<p class="lead">If nobody understands the meter, <b class="w">the first heavy job teaches everyone at once</b>.</p>
+</section>
+
+<section class="slide">
+<span class="tag">The simple version</span>
+<h2>Rooms in a building, <em>one power meter</em>.</h2>
+<p class="lead">A <b class="w">workspace</b> is a room. A team keeps its lakehouses, pipelines and reports in it.</p>
+<p class="lead">A <b class="w">capacity</b> is the electricity. Every room plugged into it shares the same supply.</p>
+<div class="body">
+<div class="row"><span class="ic">✓</span><span class="k">Workspace</span><span class="v">Where items live</span></div>
+<div class="row"><span class="ic">✓</span><span class="k">Capacity</span><span class="v">The compute you pay for</span></div>
+<div class="row"><span class="ic">✓</span><span class="k">The link</span><span class="v">Each workspace uses one capacity</span></div>
+</div>
+</section>
+
+<section class="slide">
+<span class="tag">How it works</span>
+<h2>How the <em>meter</em> works</h2>
+<div class="steps tight">
+<div class="row"><span class="ic">1</span><span class="v">Compute is counted in <b class="w">Capacity Units</b></span></div>
+<div class="row"><span class="ic">2</span><span class="v">You buy a size: <b class="w">F2 up to F8192</b></span></div>
+<div class="row"><span class="ic">3</span><span class="v"><b class="w">Pay as you go</b> can be paused. <b class="w">Reserved</b> costs less</span></div>
+<div class="row"><span class="ic">4</span><span class="v"><b class="w">Bursting</b> lets a job run faster than the size allows</span></div>
+<div class="row"><span class="ic">5</span><span class="v"><b class="w">Smoothing</b> spreads that usage over time</span></div>
+</div>
+<div class="bar lake"><b>Throttling</b>Sustained overuse first delays interactive work, then rejects it, and finally rejects background jobs too.</div>
+
+</section>
+
+<section class="slide">
+<span class="tag amber">For engineers</span>
+<h2>Details worth <span class="amberc">knowing early</span></h2>
+<div class="body">
+<div class="row col"><span class="k">Interactive and background are smoothed differently</span><span class="v">A report click is smoothed over minutes. A scheduled job is spread across 24 hours.</span></div>
+<div class="row col"><span class="k">F64 is a licensing line</span><span class="v">From F64 up, people with a free licence and the Viewer role can open Power BI content. Below it, viewers need Pro.</span></div>
+<div class="row col"><span class="k">The Capacity Metrics app is the source of truth</span><span class="v">It shows which item used how much, and when throttling started.</span></div>
+<div class="row col"><span class="k">Overage is now an option</span><span class="v">Capacity overage bills spikes at a premium rate instead of throttling. It is on by default for new F capacities.</span></div>
+</div>
+</section>
+
+<section class="slide">
+<span class="tag">The honest part</span>
+<h2>One capacity or <em>several</em>?</h2>
+<div class="split">
+<div class="box yes"><h3>One shared capacity</h3><ul><li>Simple to run and to explain</li><li>Idle compute is shared, not wasted</li><li>Fine for a small or new team</li></ul></div>
+<div class="box no"><h3>Split capacities</h3><ul><li>Production reports need protection</li><li>Dev experiments are unpredictable</li><li>Departments want separate bills</li></ul></div>
+</div>
+<p class="quote"><b class="w">The catch:</b> a Spark experiment in a dev workspace and the CEO's dashboard can share one meter. Separate them before it hurts, not after.</p>
+</section>
+
+<section class="slide">
+<span class="tag amber">Watch out</span>
+<h2>Four mistakes I would <span class="amberc">avoid</span></h2>
+<div class="steps">
+<div class="row"><span class="ic">1</span><span class="v"><b class="w">Sizing from a guess.</b> Start small, measure, then resize</span></div>
+<div class="row"><span class="ic">2</span><span class="v"><b class="w">Dev and prod on one capacity</b> with no guardrails</span></div>
+<div class="row"><span class="ic">3</span><span class="v"><b class="w">Nobody owns the Metrics app</b>, so throttling is a surprise</span></div>
+<div class="row"><span class="ic">4</span><span class="v"><b class="w">Leaving pay-as-you-go running</b> on nights and weekends</span></div>
+</div>
+<p class="lead">Capacity is a design decision, <b class="w">not a purchase order</b>.</p>
+</section>
+
+<section class="slide">
+<span class="tag">Save this</span>
+<h2>Capacity in <em>five lines</em></h2>
+<div class="body">
+<div class="row"><span class="ic">1</span><span class="v"><b class="w">Workspace</b> is where things live</span></div>
+<div class="row"><span class="ic">2</span><span class="v"><b class="w">Capacity</b> is the compute they run on</span></div>
+<div class="row"><span class="ic">3</span><span class="v"><b class="w">Everything shares it</b>, so plan for contention</span></div>
+<div class="row"><span class="ic">4</span><span class="v"><b class="w">Smoothing helps</b>, throttling is the limit</span></div>
+<div class="row"><span class="ic">5</span><span class="v"><b class="w">Measure first</b>, then choose the size</span></div>
+</div>
+<p class="big">Tomorrow: <em>The Lakehouse</em>.<br>The item most Fabric projects start with.</p>
+</section>
+
+<script src="../../assets/carousel.js"></script></body></html>

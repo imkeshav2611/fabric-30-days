@@ -1,0 +1,95 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Day 17</title><link rel="stylesheet" href="../../assets/carousel.css"></head>
+<body data-series="Microsoft Fabric · 30 Days" data-day="17" data-total="30" data-author="Keshav Maheshwari" data-role="Data Engineer | Databricks · AWS &amp; Azure · Streaming · Applied AI">
+
+<section class="slide">
+<span class="tag">Day 17 of 30</span>
+<h1><em>Event-</em><br><em>stream</em></h1>
+<p class="cover-sub">Catching data as it happens.<br>And shaping it before it lands.</p>
+<div><span class="pill">Sources</span><span class="pill">Transform</span><span class="pill">Route</span></div>
+</section>
+
+<section class="slide">
+<span class="tag amber">The problem</span>
+<h2>Events come from <span class="amberc">everywhere</span>, in every shape.</h2>
+<div class="body">
+<div class="row"><span class="ic">1</span><span class="k">Apps</span><span class="v">Clicks and orders</span></div>
+<div class="row"><span class="ic">2</span><span class="k">Devices</span><span class="v">Sensor readings</span></div>
+<div class="row"><span class="ic">3</span><span class="k">Databases</span><span class="v">Row changes</span></div>
+<div class="row"><span class="ic">4</span><span class="k">Other clouds</span><span class="v">Kafka and message queues</span></div>
+</div>
+<p class="lead">Each one used to need <b class="w">its own custom code to collect, clean and deliver</b>.</p>
+</section>
+
+<section class="slide">
+<span class="tag">The simple version</span>
+<h2>A <em>conveyor belt</em> with sorting stations.</h2>
+<p class="lead">Parcels drop onto a belt from many loading doors. Along the way they are scanned, sorted and sent down the right chute.</p>
+<p class="lead">An eventstream is that belt: <b class="w">events in, shaped in motion, delivered where they are needed</b>.</p>
+<div class="body">
+<div class="row"><span class="ic">✓</span><span class="k">Sources</span><span class="v">Where events come from</span></div>
+<div class="row"><span class="ic">✓</span><span class="k">Operators</span><span class="v">What happens on the way</span></div>
+<div class="row"><span class="ic">✓</span><span class="k">Destinations</span><span class="v">Where they end up</span></div>
+</div>
+</section>
+
+<section class="slide">
+<span class="tag">How it works</span>
+<h2>Building an <em>eventstream</em></h2>
+<div class="steps">
+<div class="row"><span class="ic">1</span><span class="v"><b class="w">Add sources</b>: Event Hubs, IoT Hub, Kafka, database changes</span></div>
+<div class="row"><span class="ic">2</span><span class="v"><b class="w">Shape</b> on a canvas: filter, aggregate, join, group by</span></div>
+<div class="row"><span class="ic">3</span><span class="v"><b class="w">Route</b> to an Eventhouse, a Lakehouse or Activator</span></div>
+<div class="row"><span class="ic">4</span><span class="v"><b class="w">One stream</b> can feed several destinations at once</span></div>
+</div>
+<div class="bar lake"><b>No code required</b>The whole flow is drawn on a canvas. A SQL operator is there for logic that needs it.</div>
+
+</section>
+
+<section class="slide">
+<span class="tag amber">For engineers</span>
+<h2>What engineers <span class="amberc">should know</span></h2>
+<div class="body">
+<div class="row col"><span class="k">It speaks Kafka</span><span class="v">An eventstream exposes a Kafka-compatible endpoint, so existing producers can send to it with little change.</span></div>
+<div class="row col"><span class="k">Database changes are a source</span><span class="v">Change data capture from SQL Server, PostgreSQL, MySQL, Cosmos DB and others can flow in as events.</span></div>
+<div class="row col"><span class="k">Delivery is at-least-once</span><span class="v">An event can arrive twice. Downstream logic should tolerate duplicates.</span></div>
+<div class="row col"><span class="k">Windows are how you aggregate</span><span class="v">Group by time windows to turn an endless stream into counts and averages.</span></div>
+</div>
+</section>
+
+<section class="slide">
+<span class="tag">The honest part</span>
+<h2>Eventstream or a <em>pipeline</em>?</h2>
+<div class="split">
+<div class="box yes"><h3>Eventstream</h3><ul><li>Data arrives continuously</li><li>You need it within seconds</li><li>Several consumers need the same events</li></ul></div>
+<div class="box no"><h3>Pipeline</h3><ul><li>Files arrive on a schedule</li><li>Hourly or daily freshness is fine</li><li>The source can only be queried in bulk</li></ul></div>
+</div>
+<p class="quote"><b class="w">The catch:</b> filtering late is expensive. Every event you carry to the destination costs storage and compute. Drop what you do not need as early as possible.</p>
+</section>
+
+<section class="slide">
+<span class="tag amber">From real work</span>
+<h2>Eventstream on a <span class="amberc">real project</span></h2>
+<p class="lead">A consumer delivery platform with streaming operational data.</p>
+<div class="steps">
+<div class="row"><span class="ic">1</span><span class="v"><b class="w">Event Hub</b> received the raw events at high velocity</span></div>
+<div class="row"><span class="ic">2</span><span class="v"><b class="w">Eventstream</b> carried them into Fabric</span></div>
+<div class="row"><span class="ic">3</span><span class="v"><b class="w">Eventhouse</b> stored them for KQL queries</span></div>
+<div class="row"><span class="ic">4</span><span class="v"><b class="w">Leadership</b> asked for live numbers in natural language</span></div>
+</div>
+<p class="lead">Terabytes per minute, with <b class="w">sub-second answers</b> at the end.</p>
+</section>
+
+<section class="slide">
+<span class="tag">Save this</span>
+<h2>Eventstream in <em>five lines</em></h2>
+<div class="body">
+<div class="row"><span class="ic">1</span><span class="v"><b class="w">Many sources</b>, one way to connect them</span></div>
+<div class="row"><span class="ic">2</span><span class="v"><b class="w">Shape events</b> while they move</span></div>
+<div class="row"><span class="ic">3</span><span class="v"><b class="w">Send them</b> to more than one place</span></div>
+<div class="row"><span class="ic">4</span><span class="v"><b class="w">Expect duplicates</b>, design for them</span></div>
+<div class="row"><span class="ic">5</span><span class="v"><b class="w">Filter early</b>, pay less later</span></div>
+</div>
+<p class="big">Tomorrow: <em>Eventhouse and KQL</em>.<br>Asking questions of fast-moving data.</p>
+</section>
+
+<script src="../../assets/carousel.js"></script></body></html>

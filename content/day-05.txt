@@ -1,0 +1,43 @@
+topic: Lakehouse or Warehouse
+cap_title: Lakehouse or Warehouse
+title: Lakehouse|or|*Warehouse*?
+sub: The week-one question.|A practical way to decide.
+pills: Spark || T-SQL || Skills
+p_h: Two items that look like they do the ^same job^.
+p_rows: Both :: Store tables in OneLake || Both :: Use the Delta format || Both :: Can be queried with SQL
+p_end: So teams argue about features, when **the real difference is who writes the data, and how**.
+s_h: A *workshop* and a *showroom*.
+s_leads: The **workshop** takes raw material in any shape. You need tools and some skill, and you can build anything. || The **showroom** is orderly. Everything is finished, labelled and easy to browse.
+s_rows: Lakehouse :: The workshop. Spark and files || Warehouse :: The showroom. SQL all the way || OneLake :: The same floor under both
+m_tag: Side by side
+m_h: The *real* differences
+m_rows: **Write with**: Lakehouse uses Spark. Warehouse uses T-SQL || **Data types**: Lakehouse takes files. Warehouse takes tables || **Transactions**: Warehouse supports multi-table || **Skills**: Python and Spark, or SQL || **Storage**: both are Delta in OneLake
+m_bar: Not either-or :: A warehouse can query lakehouse tables in the same workspace. Many teams use both.
+e_h: How I would ^decide^
+e_rows: Start from the team, not the tool :: A SQL team will be productive in a Warehouse on day one. A Spark team will not want to leave notebooks. || Look at the raw data :: Files, JSON, images and large volumes point to a Lakehouse for the early layers. || Check the write pattern :: Stored procedures and multi-table updates in T-SQL point to a Warehouse. || Combine them :: Lakehouse for Bronze and Silver, Warehouse for Gold is a common, sensible split.
+h_h: Which one *first*?
+h_yes_t: Lakehouse first
+h_no_t: Warehouse first
+h_yes: Engineers who work in Spark || Raw, messy or very large data || Data science on the same data
+h_no: Analysts and developers who live in SQL || A migration from a SQL warehouse || Heavy use of stored procedures
+h_catch: The catch :: picking by feature list leads to rework. Pick by who will maintain it at 2 a.m., because that is who needs to read the code.
+r_kind: real
+r_h: The choice on a ^real project^
+r_lead: A manufacturing group with years of reporting logic in legacy SQL systems.
+r_rows: **Legacy SQL data** moved to Azure Synapse and Fabric || **Enterprise reporting** was centralised in one place || **Data Factory and gateways** connected on-premises sources || **PySpark** automated the heavier reporting pipeline
+r_end: SQL where the logic already lived, **Spark where the heavy lifting was**.
+z_h: The decision in *five lines*
+z_rows: **Both store Delta** in OneLake || **Lakehouse**: Spark writes, files welcome || **Warehouse**: full T-SQL, transactions || **Choose by skills** and write pattern || **Using both** is normal, not a compromise
+z_next: Tomorrow :: Delta tables :: The format under every table in Fabric.
+q: Lakehouse for everything, Warehouse for everything, or a mix? What does your team run?
+tags: #Lakehouse #DataWarehouse #TSQL
+caption:
+"Lakehouse or Warehouse?" comes up in the first week of almost every Fabric project.
+
+They look similar because they share the foundation. Both store tables in OneLake, both use Delta, and both can be queried with SQL. The difference is how data gets written. A Lakehouse is written with Spark and happily takes raw files. A Warehouse is written with T-SQL and supports multi-table transactions and stored procedures.
+
+So I would not start from a feature comparison. I would start from the people. A team that thinks in SQL will be productive in a Warehouse immediately. A team that works in notebooks will want a Lakehouse. Then look at the raw data and the write pattern.
+
+It is also not either-or. A warehouse can query lakehouse tables in the same workspace, and a Lakehouse for the early layers with a Warehouse for the serving layer is a common split.
+
+On a project for a manufacturing group, years of logic lived in legacy SQL. That moved to Synapse and Fabric to centralise reporting, while PySpark handled the heavier pipeline. Each tool did the job it was good at.

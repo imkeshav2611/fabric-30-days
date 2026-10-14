@@ -1,0 +1,19 @@
+Microsoft Fabric, Day 24 of 30: governance.
+
+A year into any data platform, the technology is rarely the problem. The problem is that nobody knows which table to trust.
+
+Governance is how you fix that, and Fabric has more built in than most teams use. The OneLake catalog is the single place to explore, govern and secure data. Domains group workspaces by business area. Endorsement marks items as Promoted, Certified or Master data. Sensitivity labels from Microsoft Purview follow the data downstream. Lineage view shows what feeds what inside a workspace.
+
+The tools are the easy part. What makes them work is restraint and ownership. If everything is Certified, the badge means nothing. If a table has no named owner, the catalog entry is a question with nobody to answer it.
+
+I would start small: an owner for every Gold table, labels on personal data, certification for the few datasets the business runs on. Heavy process gets bypassed.
+
+On a project for a manufacturing group, standardising governance and access control across international units was a core part of the work, alongside the pipelines themselves.
+
+Slides 1 to 4 cover the big picture. Slides 5 to 7 are where it gets practical. Slide 8 is the summary.
+
+Tomorrow: Git and deployment pipelines.
+
+Does every Gold table in your platform have a named owner?
+
+#MicrosoftFabric #DataEngineering #DataGovernance #MicrosoftPurview #DataCatalog

@@ -1,0 +1,95 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Day 16</title><link rel="stylesheet" href="../../assets/carousel.css"></head>
+<body data-series="Microsoft Fabric · 30 Days" data-day="16" data-total="30" data-author="Keshav Maheshwari" data-role="Data Engineer | Databricks · AWS &amp; Azure · Streaming · Applied AI">
+
+<section class="slide">
+<span class="tag">Day 16 of 30</span>
+<h1>Real-Time<br><em>Intelligence</em></h1>
+<p class="cover-sub">What "real time" actually means.<br>And when you truly need it.</p>
+<div><span class="pill">Streaming</span><span class="pill">Events</span><span class="pill">Sub-second</span></div>
+</section>
+
+<section class="slide">
+<span class="tag amber">The problem</span>
+<h2>A nightly report tells you what <span class="amberc">already went wrong</span>.</h2>
+<div class="body">
+<div class="row"><span class="ic">1</span><span class="k">A machine overheats</span><span class="v">You find out tomorrow</span></div>
+<div class="row"><span class="ic">2</span><span class="k">Orders pile up</span><span class="v">You see it in the weekly review</span></div>
+<div class="row"><span class="ic">3</span><span class="k">A payment fails</span><span class="v">The customer tells you first</span></div>
+</div>
+<p class="lead">Batch data answers "what happened". <b class="w">Some questions need "what is happening".</b></p>
+</section>
+
+<section class="slide">
+<span class="tag">The simple version</span>
+<h2>A <em>live scoreboard</em>, not tomorrow's paper.</h2>
+<p class="lead">The newspaper gives you the final score the next morning. The scoreboard changes the moment a goal is scored.</p>
+<p class="lead">Real-Time Intelligence is <b class="w">the scoreboard for your business data</b>.</p>
+<div class="body">
+<div class="row"><span class="ic">✓</span><span class="k">Batch</span><span class="v">Collect, then process later</span></div>
+<div class="row"><span class="ic">✓</span><span class="k">Streaming</span><span class="v">Process as each event arrives</span></div>
+<div class="row"><span class="ic">✓</span><span class="k">The gain</span><span class="v">Seconds instead of hours</span></div>
+</div>
+</section>
+
+<section class="slide">
+<span class="tag">The map</span>
+<h2>The <em>five</em> building blocks</h2>
+<div class="steps tight">
+<div class="row"><span class="ic">1</span><span class="v"><b class="w">Real-Time hub</b>: find every stream in the organisation</span></div>
+<div class="row"><span class="ic">2</span><span class="v"><b class="w">Eventstream</b>: bring events in and shape them on the way</span></div>
+<div class="row"><span class="ic">3</span><span class="v"><b class="w">Eventhouse</b>: store and query huge volumes of events</span></div>
+<div class="row"><span class="ic">4</span><span class="v"><b class="w">Real-Time Dashboard</b>: see what is happening now</span></div>
+<div class="row"><span class="ic">5</span><span class="v"><b class="w">Activator</b>: act automatically when a condition is met</span></div>
+</div>
+<div class="bar lake"><b>One flow</b>Capture, store, analyse, visualise, act. All inside Fabric, all on OneLake.</div>
+
+</section>
+
+<section class="slide">
+<span class="tag amber">For engineers</span>
+<h2>How to <span class="amberc">think about it</span></h2>
+<div class="body">
+<div class="row col"><span class="k">Events, not tables</span><span class="v">A stream is an endless series of small messages. You query windows of time, not a finished dataset.</span></div>
+<div class="row col"><span class="k">Latency is a requirement, not a default</span><span class="v">Ask how fresh the answer really needs to be. Seconds, minutes and hours are very different builds.</span></div>
+<div class="row col"><span class="k">It can meet batch in OneLake</span><span class="v">Event data can be exposed as Delta tables, so streaming and batch data can be joined.</span></div>
+<div class="row col"><span class="k">Different capacity behaviour</span><span class="v">Streaming runs all day. Budget for steady usage, not occasional peaks.</span></div>
+</div>
+</section>
+
+<section class="slide">
+<span class="tag">The honest part</span>
+<h2>Do you <em>need</em> real time?</h2>
+<div class="split">
+<div class="box yes"><h3>Yes when</h3><ul><li>Someone acts on the data within minutes</li><li>Sensors, clicks or logs arrive nonstop</li><li>Delay costs money or safety</li></ul></div>
+<div class="box no"><h3>Probably not when</h3><ul><li>Decisions are made daily or weekly</li><li>The source only updates overnight</li><li>Nobody is watching the screen</li></ul></div>
+</div>
+<p class="quote"><b class="w">The catch:</b> real time is expensive to run and easy to over-buy. If nobody acts faster because of it, an hourly batch gives the same outcome for much less.</p>
+</section>
+
+<section class="slide">
+<span class="tag amber">From real work</span>
+<h2>Real time on a <span class="amberc">real project</span></h2>
+<p class="lead">A consumer delivery platform that needed live operational numbers for its leadership.</p>
+<div class="steps">
+<div class="row"><span class="ic">1</span><span class="v"><b class="w">Event Hub and Eventstream</b> carried the streaming data in</span></div>
+<div class="row"><span class="ic">2</span><span class="v"><b class="w">Volumes</b> reached terabytes per minute</span></div>
+<div class="row"><span class="ic">3</span><span class="v"><b class="w">Eventhouse and KQL</b> delivered sub-second analytics</span></div>
+<div class="row"><span class="ic">4</span><span class="v"><b class="w">The first production use case</b> shipped in under 14 days</span></div>
+</div>
+<p class="lead">At that scale, the architecture <b class="w">is</b> the product.</p>
+</section>
+
+<section class="slide">
+<span class="tag">Save this</span>
+<h2>Real-Time Intelligence in <em>five lines</em></h2>
+<div class="body">
+<div class="row"><span class="ic">1</span><span class="v"><b class="w">Batch</b> tells you what happened</span></div>
+<div class="row"><span class="ic">2</span><span class="v"><b class="w">Streaming</b> tells you what is happening</span></div>
+<div class="row"><span class="ic">3</span><span class="v"><b class="w">Eventstream</b> in, <b class="w">Eventhouse</b> to store</span></div>
+<div class="row"><span class="ic">4</span><span class="v"><b class="w">Dashboards</b> to see, <b class="w">Activator</b> to act</span></div>
+<div class="row"><span class="ic">5</span><span class="v"><b class="w">Use it</b> where minutes truly matter</span></div>
+</div>
+<p class="big">Tomorrow: <em>Eventstream</em>.<br>Catching data as it happens.</p>
+</section>
+
+<script src="../../assets/carousel.js"></script></body></html>

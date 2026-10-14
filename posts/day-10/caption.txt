@@ -1,0 +1,19 @@
+Microsoft Fabric, Day 10 of 30: Dataflows Gen2.
+
+A lot of valuable data logic lives in spreadsheets, repeated by hand every month by the person who understands the data best.
+
+Dataflows Gen2 are how that logic becomes something a platform can run. They use Power Query in the browser. You shape the data by clicking, each step is recorded, and the result lands in a destination such as a Lakehouse or Warehouse. After that it refreshes on a schedule or as a step in a pipeline.
+
+For engineers, the important concept is query folding. When the steps can be translated and pushed to the source system, a dataflow is fast. When they cannot, the rows are pulled out and processed in the engine, and that is where refreshes slow down. Staging is the other setting to understand, since it helps heavy transformations and adds cost to simple ones. New dataflows also come with Git and CI/CD support by default now, so they can be versioned and deployed like the rest of the platform.
+
+My view: dataflows are a strength of Fabric, not a toy. They let the people who know the data own the logic. They are also not a replacement for Spark at large volumes.
+
+No project story today. Low-code is still code, and it needs an owner like any other.
+
+Slides 1 to 4 cover the big picture. Slides 5 to 7 are where it gets practical. Slide 8 is the summary.
+
+Tomorrow: Notebooks and Spark.
+
+Where is your team's line between a dataflow and a notebook?
+
+#MicrosoftFabric #DataEngineering #PowerQuery #DataflowGen2 #LowCode

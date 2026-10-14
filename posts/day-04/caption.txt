@@ -1,0 +1,19 @@
+Microsoft Fabric, Day 4 of 30: the Lakehouse.
+
+If a Fabric project has one item at its centre, it is usually a Lakehouse.
+
+The idea is simple. A data lake accepts any file but is awkward to query. A warehouse is easy to query but strict about what goes in. A Lakehouse gives you both in one item: a Files area for raw data in any format, and a Tables area for cleaned data stored as Delta tables.
+
+What makes it practical is the SQL analytics endpoint. Every Lakehouse gets one, so the tables Spark writes can be queried with T-SQL and used by Power BI without exporting anything.
+
+The detail that surprises people: that endpoint is read-only. Writes come from Spark, or from ingestion tools such as pipelines and dataflows. For a team that thinks in SQL, that matters a lot, and it is the main reason the Lakehouse versus Warehouse question exists.
+
+On a people-analytics platform I worked on, one Lakehouse held both the raw files and the Gold tables that the reports used. Fewer moving parts meant fewer places for numbers to drift.
+
+Slides 1 to 4 cover the big picture. Slides 5 to 7 are where it gets practical. Slide 8 is the summary.
+
+Tomorrow: Lakehouse or Warehouse.
+
+Did your team start with a Lakehouse or a Warehouse, and would you choose the same again?
+
+#MicrosoftFabric #DataEngineering #Lakehouse #DeltaLake #ApacheSpark

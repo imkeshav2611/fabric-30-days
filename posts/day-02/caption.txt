@@ -1,0 +1,19 @@
+Microsoft Fabric, Day 2 of 30: OneLake, one copy of your data.
+
+Yesterday I said Fabric keeps data once. OneLake is the part that makes that true.
+
+The simplest way to think about it is OneDrive for data. An organisation gets one lake, created automatically. Workspaces act as folders, and lakehouses and warehouses live inside them. Tables are stored in Delta format, so Spark, SQL and Power BI all read the same files.
+
+For engineers, two details matter early. OneLake supports the same APIs as Azure Data Lake Storage Gen2, so existing tools keep working. And a workspace's data lives in the region of its capacity, which matters the moment data residency comes up.
+
+The honest part: one lake does not remove silos by default. It removes the technical reason for them. Ownership, naming and workspace design are still decisions people have to make, and they are much cheaper to make before the data arrives.
+
+On a people-analytics platform I worked on, the win was not storage. It was that performance, ratings and learning data finally sat in one agreed copy that every report used.
+
+Slides 1 to 4 cover the big picture. Slides 5 to 7 are where it gets practical. Slide 8 is the summary.
+
+Tomorrow: Workspaces and capacities.
+
+How do you draw workspace boundaries: by team, by project or by data layer?
+
+#MicrosoftFabric #DataEngineering #OneLake #DataLake #Azure

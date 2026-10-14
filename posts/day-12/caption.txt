@@ -1,0 +1,19 @@
+Microsoft Fabric, Day 12 of 30: incremental loads.
+
+The first version of most pipelines reloads everything. It works until the table grows and the nightly window does not.
+
+An incremental load is the fix. Remember where the last load stopped, fetch only what changed, and merge it in. A MERGE statement updates the rows that exist and inserts the ones that do not, in a single transaction. In Fabric it works in Spark and is generally available in the Warehouse, and Copy job can do watermark-based incremental copy without custom code.
+
+The idea is simple. The edge cases are where the work is. A watermark on a modified date never sees deletes. Rows that arrive late are skipped if the bookmark has already moved. A retry that inserts the same rows twice turns a fast load into a wrong one.
+
+What makes this dangerous is that failures are quiet. The job succeeds, the counts look plausible, and the table drifts from the source a little each day. A scheduled reconcile against the source is cheap insurance.
+
+On a Databricks platform I worked on for a financial services company, we processed over 10 million records a day through incremental pipelines. Full reloads were never an option at that volume, so getting these details right was the job.
+
+Slides 1 to 4 cover the big picture. Slides 5 to 7 are where it gets practical. Slide 8 is the summary.
+
+Tomorrow: Table maintenance.
+
+How do you handle deletes in your incremental loads?
+
+#MicrosoftFabric #DataEngineering #IncrementalLoad #DeltaLake #ETL

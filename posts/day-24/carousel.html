@@ -1,0 +1,96 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Day 24</title><link rel="stylesheet" href="../../assets/carousel.css"></head>
+<body data-series="Microsoft Fabric · 30 Days" data-day="24" data-total="30" data-author="Keshav Maheshwari" data-role="Data Engineer | Databricks · AWS &amp; Azure · Streaming · Applied AI">
+
+<section class="slide">
+<span class="tag">Day 24 of 30</span>
+<h1>Knowing<br>what you<br><em>have</em></h1>
+<p class="cover-sub">Governance in Fabric.<br>Lineage, labels and trust.</p>
+<div><span class="pill">Catalog</span><span class="pill">Lineage</span><span class="pill">Endorsement</span></div>
+</section>
+
+<section class="slide">
+<span class="tag amber">The problem</span>
+<h2>After a year, nobody knows <span class="amberc">which table to trust</span>.</h2>
+<div class="body">
+<div class="row"><span class="ic">1</span><span class="k">sales_final</span><span class="v">Is this the real one?</span></div>
+<div class="row"><span class="ic">2</span><span class="k">sales_final_v2</span><span class="v">Or this?</span></div>
+<div class="row"><span class="ic">3</span><span class="k">Who owns it</span><span class="v">Left the company in March</span></div>
+<div class="row"><span class="ic">4</span><span class="k">Contains personal data</span><span class="v">Nobody is sure</span></div>
+</div>
+<p class="lead">The platform works. <b class="w">Finding and trusting the right data is the hard part.</b></p>
+</section>
+
+<section class="slide">
+<span class="tag">The simple version</span>
+<h2><em>Labels and receipts</em> on every box.</h2>
+<p class="lead">A warehouse without labels is just a room full of boxes. With labels, receipts and a floor plan, anyone can find what they need and know where it came from.</p>
+<p class="lead">Governance gives your data <b class="w">those labels, receipts and a floor plan</b>.</p>
+<div class="body">
+<div class="row"><span class="ic">✓</span><span class="k">Catalog</span><span class="v">The floor plan</span></div>
+<div class="row"><span class="ic">✓</span><span class="k">Lineage</span><span class="v">The receipt trail</span></div>
+<div class="row"><span class="ic">✓</span><span class="k">Labels</span><span class="v">What is inside, and how sensitive</span></div>
+</div>
+</section>
+
+<section class="slide">
+<span class="tag">How it works</span>
+<h2>The tools Fabric <em>gives you</em></h2>
+<div class="steps tight">
+<div class="row"><span class="ic">1</span><span class="v"><b class="w">OneLake catalog</b>: explore, govern and secure in one place</span></div>
+<div class="row"><span class="ic">2</span><span class="v"><b class="w">Domains</b> group workspaces by business area</span></div>
+<div class="row"><span class="ic">3</span><span class="v"><b class="w">Endorsement</b>: Promoted, Certified, Master data</span></div>
+<div class="row"><span class="ic">4</span><span class="v"><b class="w">Sensitivity labels</b> follow the data downstream</span></div>
+<div class="row"><span class="ic">5</span><span class="v"><b class="w">Lineage view</b> shows what feeds what</span></div>
+</div>
+<div class="bar lake"><b>Purview underneath</b>Labels and protection policies come from Microsoft Purview, the same ones used across Microsoft 365.</div>
+
+</section>
+
+<section class="slide">
+<span class="tag amber">For engineers</span>
+<h2>Making it <span class="amberc">work in practice</span></h2>
+<div class="body">
+<div class="row col"><span class="k">Certify sparingly</span><span class="v">If everything is Certified, the badge means nothing. Reserve it for data a named owner stands behind.</span></div>
+<div class="row col"><span class="k">Lineage is per workspace</span><span class="v">The lineage view covers one workspace. Cross-workspace flows need more deliberate tracking.</span></div>
+<div class="row col"><span class="k">Labels inherit</span><span class="v">A label on a lakehouse carries through to items built on it, which protects exports too.</span></div>
+<div class="row col"><span class="k">Ownership before tooling</span><span class="v">A catalog full of items with no owner is a tidy list of unanswered questions.</span></div>
+</div>
+</section>
+
+<section class="slide">
+<span class="tag">The honest part</span>
+<h2>How much governance is <em>enough</em>?</h2>
+<div class="split">
+<div class="box yes"><h3>Start with</h3><ul><li>A named owner for every Gold table</li><li>Sensitivity labels on personal data</li><li>Certification for core datasets</li></ul></div>
+<div class="box no"><h3>Add later</h3><ul><li>A committee for every change</li><li>Detailed documentation of Bronze</li><li>Approval steps nobody will follow</li></ul></div>
+</div>
+<p class="quote"><b class="w">The catch:</b> governance that slows people down gets bypassed. The version that works is the lightest one people will actually follow.</p>
+</section>
+
+<section class="slide">
+<span class="tag amber">From real work</span>
+<h2>Governance on a <span class="amberc">real project</span></h2>
+<p class="lead">A manufacturing group with plants and business units in several countries.</p>
+<div class="steps">
+<div class="row"><span class="ic">1</span><span class="v"><b class="w">Data governance</b> was standardised across international units</span></div>
+<div class="row"><span class="ic">2</span><span class="v"><b class="w">Access control</b> followed one model everywhere</span></div>
+<div class="row"><span class="ic">3</span><span class="v"><b class="w">System architecture diagrams</b> documented the flows</span></div>
+<div class="row"><span class="ic">4</span><span class="v"><b class="w">Audit-ready KPIs</b> went to top leadership</span></div>
+</div>
+<p class="lead">Across borders, <b class="w">shared rules</b> mattered more than shared tools.</p>
+</section>
+
+<section class="slide">
+<span class="tag">Save this</span>
+<h2>Governance in <em>five lines</em></h2>
+<div class="body">
+<div class="row"><span class="ic">1</span><span class="v"><b class="w">A catalog</b> so data can be found</span></div>
+<div class="row"><span class="ic">2</span><span class="v"><b class="w">Owners</b> so questions have answers</span></div>
+<div class="row"><span class="ic">3</span><span class="v"><b class="w">Endorsement</b> so people know what to trust</span></div>
+<div class="row"><span class="ic">4</span><span class="v"><b class="w">Labels</b> so sensitive data stays protected</span></div>
+<div class="row"><span class="ic">5</span><span class="v"><b class="w">Lineage</b> so changes do not surprise anyone</span></div>
+</div>
+<p class="big">Tomorrow: <em>Git and deployment pipelines</em>.<br>Shipping changes without breaking production.</p>
+</section>
+
+<script src="../../assets/carousel.js"></script></body></html>

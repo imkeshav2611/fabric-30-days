@@ -1,0 +1,19 @@
+Microsoft Fabric, Day 14 of 30: the on-premises data gateway.
+
+Plenty of important data still lives on servers inside offices and factories. The cloud cannot reach it, and the security team will not open the firewall to let it in.
+
+The on-premises data gateway solves this in a way security teams tend to accept. It is software installed on a machine inside the network. It only makes outbound connections. When a Fabric pipeline or report needs data, the request waits in a secure relay, the gateway calls out to collect it, runs the query locally and sends the result back.
+
+For production I would insist on three things. Standard mode, since personal mode only works with Power BI. A cluster of at least two machines, so one failure does not stop every load. And a patching routine, because a new version ships monthly and only the last six releases are supported.
+
+On a project for a manufacturing group, gateways and Data Factory connected a plant in Sweden to an Azure platform in India, centralising reporting across both.
+
+The lesson I took from it: the gateway is a server, and it needs an owner.
+
+Slides 1 to 4 cover the big picture. Slides 5 to 7 are where it gets practical. Slide 8 is the summary.
+
+Tomorrow: Mirroring.
+
+Who owns the gateway in your organisation: the data team or infrastructure?
+
+#MicrosoftFabric #DataEngineering #HybridCloud #DataGateway #DataIntegration

@@ -1,0 +1,19 @@
+Microsoft Fabric, Day 19 of 30: dashboards and Activator.
+
+A live dashboard has one weakness: someone has to be looking at it.
+
+Fabric pairs two things to deal with that. A Real-Time Dashboard shows the current state, where each tile is a KQL query and live refresh updates it as new data arrives. Activator watches for a condition and does something when it is met. It can send an email or a Teams message, start a Power Automate flow, or run a Fabric item such as a pipeline or a notebook.
+
+The design of the rule matters more than the tool. Alert on a change, not on a state, or the rule fires all afternoon. Make sure there is a defined next step. And where possible, let the rule start the fix instead of paging a person.
+
+The failure mode is alert fatigue. Ten alerts a day get muted. One sharp alert a week gets acted on.
+
+I saw the value of speed on a quality-control project for a manufacturing group. A vision model cut inspection time from 10 hours to 10 seconds, with image and sensor telemetry stored in KQL and OneLake for live monitoring of the factory floor.
+
+Slides 1 to 4 cover the big picture. Slides 5 to 7 are where it gets practical. Slide 8 is the summary.
+
+Tomorrow: Semantic models.
+
+What is the one alert in your platform that people actually act on?
+
+#MicrosoftFabric #DataEngineering #RealTimeIntelligence #Activator #Monitoring

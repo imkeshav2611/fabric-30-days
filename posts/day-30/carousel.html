@@ -1,0 +1,97 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Day 30</title><link rel="stylesheet" href="../../assets/carousel.css"></head>
+<body data-series="Microsoft Fabric · 30 Days" data-day="30" data-total="30" data-author="Keshav Maheshwari" data-role="Data Engineer | Databricks · AWS &amp; Azure · Streaming · Applied AI">
+
+<section class="slide">
+<span class="tag">Day 30 of 30</span>
+<h1>The<br><em>full</em><br>picture</h1>
+<p class="cover-sub">Thirty days, one architecture.<br>How every piece fits together.</p>
+<div><span class="pill">Ingest</span><span class="pill">Store</span><span class="pill">Serve</span></div>
+</section>
+
+<section class="slide">
+<span class="tag amber">The problem</span>
+<h2>Thirty topics are <span class="amberc">hard to hold</span> in your head.</h2>
+<div class="body">
+<div class="row"><span class="ic">1</span><span class="k">Each piece</span><span class="v">Makes sense on its own</span></div>
+<div class="row"><span class="ic">2</span><span class="k">The question</span><span class="v">Where does it sit?</span></div>
+<div class="row"><span class="ic">3</span><span class="k">The risk</span><span class="v">Using tools without a design</span></div>
+</div>
+<p class="lead">A platform is not a list of features. <b class="w">It is how they connect.</b></p>
+</section>
+
+<section class="slide">
+<span class="tag">The simple version</span>
+<h2>The <em>whole kitchen</em>, in one view.</h2>
+<p class="lead">On day one I called Fabric a fitted kitchen. Over thirty days we opened every cupboard.</p>
+<p class="lead">Now step back to the doorway and look at the <b class="w">whole room at once</b>.</p>
+<div class="body">
+<div class="row"><span class="ic">✓</span><span class="k">Deliveries</span><span class="v">Data coming in</span></div>
+<div class="row"><span class="ic">✓</span><span class="k">The pantry</span><span class="v">OneLake, stored once</span></div>
+<div class="row"><span class="ic">✓</span><span class="k">The pass</span><span class="v">Reports, alerts and answers going out</span></div>
+</div>
+</section>
+
+<section class="slide">
+<span class="tag">The map</span>
+<h2>One platform, <em>end to end</em></h2>
+<div class="grid">
+<div class="tile"><b>Ingest</b><span>Pipelines, Copy job, mirroring, shortcuts, Eventstream</span></div>
+<div class="tile"><b>Store</b><span>OneLake, Delta tables, Lakehouse and Warehouse</span></div>
+<div class="tile"><b>Transform</b><span>Spark notebooks, dataflows, medallion layers</span></div>
+<div class="tile"><b>Serve</b><span>Semantic models and Direct Lake</span></div>
+<div class="tile"><b>Real time</b><span>Eventhouse, dashboards, Activator</span></div>
+<div class="tile"><b>Ask</b><span>Data agents and Copilot</span></div>
+</div>
+<div class="bar lake"><b>OneLake underneath</b>Every stage reads and writes the same Delta tables. Nothing is copied between tools.</div>
+<div class="bar cap"><b>Across everything</b> · capacity, security, governance, CI/CD and monitoring</div>
+
+</section>
+
+<section class="slide">
+<span class="tag amber">For engineers</span>
+<h2>If I started <span class="amberc">tomorrow</span></h2>
+<div class="body">
+<div class="row col"><span class="k">Design capacity and workspaces first</span><span class="v">Decide what shares compute and who owns what before any data lands.</span></div>
+<div class="row col"><span class="k">Pick the write path by team skills</span><span class="v">Lakehouse for Spark teams, Warehouse for SQL teams, both where it helps.</span></div>
+<div class="row col"><span class="k">Keep tables healthy</span><span class="v">Compaction and V-Order on serving tables. Direct Lake and reports depend on it.</span></div>
+<div class="row col"><span class="k">Put security on the data</span><span class="v">Define access once, as close to the tables as possible, and test as a restricted user.</span></div>
+</div>
+</section>
+
+<section class="slide">
+<span class="tag">The honest part</span>
+<h2>What Fabric <em>is</em>, and is not</h2>
+<div class="split">
+<div class="box yes"><h3>It gives you</h3><ul><li>One platform instead of six services</li><li>One copy of the data in an open format</li><li>Batch, real time, BI and AI together</li></ul></div>
+<div class="box no"><h3>You still bring</h3><ul><li>A clear data model and definitions</li><li>Ownership for every important table</li><li>The discipline to monitor and maintain</li></ul></div>
+</div>
+<p class="quote"><b class="w">The honest summary:</b> Fabric removes the plumbing between tools. It does not remove the engineering. Good platforms are still designed, not purchased.</p>
+</section>
+
+<section class="slide">
+<span class="tag amber">From real work</span>
+<h2>Where I have <span class="amberc">used all of this</span></h2>
+<p class="lead">Four platforms, four industries, the same building blocks.</p>
+<div class="steps">
+<div class="row"><span class="ic">1</span><span class="v"><b class="w">People analytics</b>: Lakehouse, medallion layers, security, a GenAI assistant</span></div>
+<div class="row"><span class="ic">2</span><span class="v"><b class="w">Consumer delivery</b>: Eventstream, Eventhouse, real-time agents</span></div>
+<div class="row"><span class="ic">3</span><span class="v"><b class="w">Manufacturing</b>: gateways, hybrid pipelines, governance</span></div>
+<div class="row"><span class="ic">4</span><span class="v"><b class="w">Quality control</b>: computer vision with live telemetry</span></div>
+</div>
+<p class="lead">The tools repeat. <b class="w">The design is what changes.</b></p>
+</section>
+
+<section class="slide">
+<span class="tag">Save this</span>
+<h2>Thirty days in <em>five lines</em></h2>
+<div class="body">
+<div class="row"><span class="ic">1</span><span class="v"><b class="w">Store once</b> in OneLake, as Delta</span></div>
+<div class="row"><span class="ic">2</span><span class="v"><b class="w">Layer it</b>: Bronze, Silver, Gold</span></div>
+<div class="row"><span class="ic">3</span><span class="v"><b class="w">Serve it</b> through a semantic model</span></div>
+<div class="row"><span class="ic">4</span><span class="v"><b class="w">Secure and govern</b> it on the data</span></div>
+<div class="row"><span class="ic">5</span><span class="v"><b class="w">Watch</b> capacity, tables and freshness</span></div>
+</div>
+<p class="big">What next: <em>your call</em>.<br>Tell me which topic deserves a deeper series.</p>
+</section>
+
+<script src="../../assets/carousel.js"></script></body></html>

@@ -1,0 +1,46 @@
+topic: The full picture
+cap_title: the full picture
+title: The|*full*|picture
+sub: Thirty days, one architecture.|How every piece fits together.
+pills: Ingest || Store || Serve
+p_h: Thirty topics are ^hard to hold^ in your head.
+p_rows: Each piece :: Makes sense on its own || The question :: Where does it sit? || The risk :: Using tools without a design
+p_end: A platform is not a list of features. **It is how they connect.**
+s_h: The *whole kitchen*, in one view.
+s_leads: On day one I called Fabric a fitted kitchen. Over thirty days we opened every cupboard. || Now step back to the doorway and look at the **whole room at once**.
+s_rows: Deliveries :: Data coming in || The pantry :: OneLake, stored once || The pass :: Reports, alerts and answers going out
+m_tag: The map
+m_h: One platform, *end to end*
+m_tiles: Ingest :: Pipelines, Copy job, mirroring, shortcuts, Eventstream || Store :: OneLake, Delta tables, Lakehouse and Warehouse || Transform :: Spark notebooks, dataflows, medallion layers || Serve :: Semantic models and Direct Lake || Real time :: Eventhouse, dashboards, Activator || Ask :: Data agents and Copilot
+m_bar: OneLake underneath :: Every stage reads and writes the same Delta tables. Nothing is copied between tools.
+m_caps: Across everything :: capacity, security, governance, CI/CD and monitoring
+e_h: If I started ^tomorrow^
+e_rows: Design capacity and workspaces first :: Decide what shares compute and who owns what before any data lands. || Pick the write path by team skills :: Lakehouse for Spark teams, Warehouse for SQL teams, both where it helps. || Keep tables healthy :: Compaction and V-Order on serving tables. Direct Lake and reports depend on it. || Put security on the data :: Define access once, as close to the tables as possible, and test as a restricted user.
+h_h: What Fabric *is*, and is not
+h_yes_t: It gives you
+h_no_t: You still bring
+h_yes: One platform instead of six services || One copy of the data in an open format || Batch, real time, BI and AI together
+h_no: A clear data model and definitions || Ownership for every important table || The discipline to monitor and maintain
+h_catch: The honest summary :: Fabric removes the plumbing between tools. It does not remove the engineering. Good platforms are still designed, not purchased.
+r_kind: real
+r_h: Where I have ^used all of this^
+r_lead: Four platforms, four industries, the same building blocks.
+r_rows: **People analytics**: Lakehouse, medallion layers, security, a GenAI assistant || **Consumer delivery**: Eventstream, Eventhouse, real-time agents || **Manufacturing**: gateways, hybrid pipelines, governance || **Quality control**: computer vision with live telemetry
+r_end: The tools repeat. **The design is what changes.**
+z_h: Thirty days in *five lines*
+z_rows: **Store once** in OneLake, as Delta || **Layer it**: Bronze, Silver, Gold || **Serve it** through a semantic model || **Secure and govern** it on the data || **Watch** capacity, tables and freshness
+z_next: What next :: your call :: Tell me which topic deserves a deeper series.
+q: Which of the thirty topics should I go deeper on?
+tags: #DataArchitecture #OneLake #PowerBI
+caption:
+Thirty days ago I started with one question: what is Microsoft Fabric, really? This is the picture I would draw now.
+
+Data comes in through pipelines, Copy job, mirroring, shortcuts or Eventstream. It is stored once in OneLake as Delta tables, in a Lakehouse or a Warehouse. Spark notebooks and dataflows shape it through Bronze, Silver and Gold. Semantic models and Direct Lake serve it to reports. Eventhouse, dashboards and Activator handle what has to be live. Data agents and Copilot answer questions on top. Capacity, security, governance, CI/CD and monitoring run across all of it.
+
+If I were starting a new platform tomorrow, I would do four things first. Design capacity and workspaces before loading data. Choose Lakehouse or Warehouse by the team's skills. Keep serving tables healthy. Put security on the data and test it as a restricted user.
+
+My honest summary is this. Fabric removes the plumbing between tools. It does not remove the engineering. Good platforms are still designed, not purchased.
+
+I have used these building blocks across people analytics, consumer delivery, manufacturing and quality control. The tools repeat. The design is what changes.
+
+Thank you to everyone who followed along.

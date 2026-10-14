@@ -1,0 +1,95 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Day 4</title><link rel="stylesheet" href="../../assets/carousel.css"></head>
+<body data-series="Microsoft Fabric · 30 Days" data-day="4" data-total="30" data-author="Keshav Maheshwari" data-role="Data Engineer | Databricks · AWS &amp; Azure · Streaming · Applied AI">
+
+<section class="slide">
+<span class="tag">Day 4 of 30</span>
+<h1>The<br><em>Lakehouse</em></h1>
+<p class="cover-sub">Where most Fabric projects begin.<br>Files and tables in one place.</p>
+<div><span class="pill">Files</span><span class="pill">Tables</span><span class="pill">SQL endpoint</span></div>
+</section>
+
+<section class="slide">
+<span class="tag amber">The problem</span>
+<h2>Lakes and warehouses each solved <span class="amberc">half</span> the problem.</h2>
+<div class="body">
+<div class="row"><span class="ic">1</span><span class="k">Data lake</span><span class="v">Takes anything, hard to query</span></div>
+<div class="row"><span class="ic">2</span><span class="k">Warehouse</span><span class="v">Easy to query, strict on input</span></div>
+<div class="row"><span class="ic">3</span><span class="k">So teams ran</span><span class="v">Both, and copied between them</span></div>
+</div>
+<p class="lead">Two systems, two copies, and <b class="w">a pipeline whose only job is to move data between them</b>.</p>
+</section>
+
+<section class="slide">
+<span class="tag">The simple version</span>
+<h2>A warehouse that accepts <em>unpacked boxes</em>.</h2>
+<p class="lead">A normal warehouse only takes goods that are already sorted and labelled.</p>
+<p class="lead">A Lakehouse takes the <b class="w">boxes as they arrive</b>, and gives you <b class="w">shelves</b> for whatever you have sorted.</p>
+<div class="body">
+<div class="row"><span class="ic">✓</span><span class="k">Files</span><span class="v">Raw data in any format</span></div>
+<div class="row"><span class="ic">✓</span><span class="k">Tables</span><span class="v">Sorted data, as Delta tables</span></div>
+<div class="row"><span class="ic">✓</span><span class="k">Both</span><span class="v">In the same item, on OneLake</span></div>
+</div>
+</section>
+
+<section class="slide">
+<span class="tag">How it works</span>
+<h2>Inside a <em>Lakehouse</em></h2>
+<div class="steps tight">
+<div class="row"><span class="ic">1</span><span class="v"><b class="w">Files</b>: land CSV, JSON, Parquet, images, anything</span></div>
+<div class="row"><span class="ic">2</span><span class="v"><b class="w">Spark notebooks</b> clean and shape the data</span></div>
+<div class="row"><span class="ic">3</span><span class="v"><b class="w">Tables</b>: the result, saved as Delta</span></div>
+<div class="row"><span class="ic">4</span><span class="v"><b class="w">SQL analytics endpoint</b>: query tables with T-SQL</span></div>
+<div class="row"><span class="ic">5</span><span class="v"><b class="w">Power BI</b> reads the same tables</span></div>
+</div>
+<div class="bar lake"><b>One copy</b>The table Spark wrote is the table SQL and Power BI read. Nothing is exported.</div>
+
+</section>
+
+<section class="slide">
+<span class="tag amber">For engineers</span>
+<h2>What to know <span class="amberc">before you build</span></h2>
+<div class="body">
+<div class="row col"><span class="k">The SQL endpoint is read-only</span><span class="v">You can query and create views, not insert or update. Data is written by Spark or by ingestion tools.</span></div>
+<div class="row col"><span class="k">Only Delta shows up as a table</span><span class="v">A folder of plain Parquet or CSV stays in Files until you load it into a Delta table.</span></div>
+<div class="row col"><span class="k">Schemas organise tables</span><span class="v">New lakehouses created in the portal have schemas enabled, so group tables instead of one flat list.</span></div>
+<div class="row col"><span class="k">Tables need care</span><span class="v">Many small writes create many small files. Plan compaction from the start.</span></div>
+</div>
+</section>
+
+<section class="slide">
+<span class="tag">The honest part</span>
+<h2>Is a Lakehouse the <em>right start</em>?</h2>
+<div class="split">
+<div class="box yes"><h3>Good fit</h3><ul><li>Your team is comfortable with Spark or Python</li><li>Data arrives as files, semi-structured or large</li><li>You want one store for engineering and BI</li></ul></div>
+<div class="box no"><h3>Think twice</h3><ul><li>The team only knows SQL</li><li>You need multi-table transactions in T-SQL</li><li>Everything is small and already relational</li></ul></div>
+</div>
+<p class="quote"><b class="w">The catch:</b> because the endpoint is read-only, SQL-first teams often feel stuck on day two. Decide who writes the data, and with what, before choosing.</p>
+</section>
+
+<section class="slide">
+<span class="tag amber">From real work</span>
+<h2>A Lakehouse on a <span class="amberc">real project</span></h2>
+<p class="lead">A people-analytics platform that replaced CSV files passed around by hand.</p>
+<div class="steps">
+<div class="row"><span class="ic">1</span><span class="v"><b class="w">Raw files</b> landed in the Lakehouse through pipelines</span></div>
+<div class="row"><span class="ic">2</span><span class="v"><b class="w">PySpark</b> shaped them into Bronze, Silver and Gold tables</span></div>
+<div class="row"><span class="ic">3</span><span class="v"><b class="w">Semantic models</b> sat on the Gold tables</span></div>
+<div class="row"><span class="ic">4</span><span class="v"><b class="w">Row-level security</b> controlled who saw which rows</span></div>
+</div>
+<p class="lead">One item held the raw files <b class="w">and</b> the reporting tables.</p>
+</section>
+
+<section class="slide">
+<span class="tag">Save this</span>
+<h2>The Lakehouse in <em>five lines</em></h2>
+<div class="body">
+<div class="row"><span class="ic">1</span><span class="v"><b class="w">Files</b> for raw data, <b class="w">Tables</b> for clean data</span></div>
+<div class="row"><span class="ic">2</span><span class="v"><b class="w">Tables are Delta</b>, stored once in OneLake</span></div>
+<div class="row"><span class="ic">3</span><span class="v"><b class="w">The SQL endpoint</b> reads, it does not write</span></div>
+<div class="row"><span class="ic">4</span><span class="v"><b class="w">Power BI</b> uses the same tables directly</span></div>
+<div class="row"><span class="ic">5</span><span class="v"><b class="w">Small files</b> are the first thing to watch</span></div>
+</div>
+<p class="big">Tomorrow: <em>Lakehouse or Warehouse</em>.<br>The question every Fabric team asks in week one.</p>
+</section>
+
+<script src="../../assets/carousel.js"></script></body></html>

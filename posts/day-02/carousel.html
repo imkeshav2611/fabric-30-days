@@ -1,0 +1,95 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Day 2</title><link rel="stylesheet" href="../../assets/carousel.css"></head>
+<body data-series="Microsoft Fabric · 30 Days" data-day="2" data-total="30" data-author="Keshav Maheshwari" data-role="Data Engineer | Databricks · AWS &amp; Azure · Streaming · Applied AI">
+
+<section class="slide">
+<span class="tag">Day 2 of 30</span>
+<h1>OneLake:<br><em>one copy</em><br>of your<br>data</h1>
+<p class="cover-sub">The storage layer under everything.<br>And why it changes how teams share data.</p>
+<div><span class="pill">Shortcuts</span><span class="pill">Delta</span><span class="pill">Workspaces</span></div>
+</section>
+
+<section class="slide">
+<span class="tag amber">The problem</span>
+<h2>Every team kept its <span class="amberc">own copy</span> of the data.</h2>
+<div class="body">
+<div class="row"><span class="ic">1</span><span class="k">Finance</span><span class="v">Its own storage account</span></div>
+<div class="row"><span class="ic">2</span><span class="k">Marketing</span><span class="v">Another lake, another copy</span></div>
+<div class="row"><span class="ic">3</span><span class="k">Data science</span><span class="v">Exports on a shared drive</span></div>
+<div class="row"><span class="ic">4</span><span class="k">Reporting</span><span class="v">One more copy in the BI tool</span></div>
+</div>
+<p class="lead">Four copies, four versions of the truth. <b class="w">Nobody knows which one is current.</b></p>
+</section>
+
+<section class="slide">
+<span class="tag">The simple version</span>
+<h2>OneLake is <em>OneDrive for data</em>.</h2>
+<p class="lead">Your company has one OneDrive, not one per team. Everyone works in it, and permissions decide who sees what.</p>
+<p class="lead">OneLake is the same idea for analytics data. <b class="w">One lake per organisation</b>, already there on day one.</p>
+<div class="body">
+<div class="row"><span class="ic">✓</span><span class="k">One per tenant</span><span class="v">Nothing to create or size</span></div>
+<div class="row"><span class="ic">✓</span><span class="k">Familiar layout</span><span class="v">Workspaces, then items</span></div>
+<div class="row"><span class="ic">✓</span><span class="k">One format</span><span class="v">Tables are stored as Delta</span></div>
+</div>
+</section>
+
+<section class="slide">
+<span class="tag">How it works</span>
+<h2>How OneLake is <em>organised</em></h2>
+<div class="steps">
+<div class="row"><span class="ic">1</span><span class="v"><b class="w">Tenant</b>: the whole organisation, one lake</span></div>
+<div class="row"><span class="ic">2</span><span class="v"><b class="w">Workspace</b>: a folder for a team or project</span></div>
+<div class="row"><span class="ic">3</span><span class="v"><b class="w">Item</b>: a lakehouse, warehouse or database</span></div>
+<div class="row"><span class="ic">4</span><span class="v"><b class="w">Inside a lakehouse</b>: Tables and Files</span></div>
+</div>
+<div class="bar lake"><b>Shortcuts</b>A pointer to data that lives somewhere else. It appears in the lake without being copied.</div>
+
+</section>
+
+<section class="slide">
+<span class="tag amber">For engineers</span>
+<h2>What matters <span class="amberc">under the hood</span></h2>
+<div class="body">
+<div class="row col"><span class="k">It speaks ADLS Gen2</span><span class="v">OneLake supports the ADLS Gen2 APIs and SDKs, so tools built for Data Lake Storage keep working.</span></div>
+<div class="row col"><span class="k">Region follows capacity</span><span class="v">A workspace's data lives in the region of the capacity it is assigned to.</span></div>
+<div class="row col"><span class="k">Storage is billed on its own</span><span class="v">Stored gigabytes are charged separately from the compute capacity.</span></div>
+<div class="row col"><span class="k">Open table formats</span><span class="v">Fabric engines write Delta Parquet. OneLake can also present tables as Iceberg for other engines.</span></div>
+</div>
+</section>
+
+<section class="slide">
+<span class="tag">The honest part</span>
+<h2>Does one lake mean <em>no silos</em>?</h2>
+<div class="split">
+<div class="box yes"><h3>It helps when</h3><ul><li>Teams need the same data without copying it</li><li>Data is spread across Azure, AWS and Google</li><li>You want one place to govern access</li></ul></div>
+<div class="box no"><h3>It will not fix</h3><ul><li>Unclear ownership of each dataset</li><li>A messy workspace structure</li><li>Poor data quality at the source</li></ul></div>
+</div>
+<p class="quote"><b class="w">The catch:</b> one lake can still become one swamp. Decide workspace boundaries and who owns each table before teams start loading data.</p>
+</section>
+
+<section class="slide">
+<span class="tag amber">From real work</span>
+<h2>OneLake on a <span class="amberc">real project</span></h2>
+<p class="lead">A people-analytics platform where employee data was split across many files.</p>
+<div class="steps">
+<div class="row"><span class="ic">1</span><span class="v"><b class="w">Performance, ratings and learning data</b> landed in one Lakehouse</span></div>
+<div class="row"><span class="ic">2</span><span class="v"><b class="w">Semantic models</b> read from that single copy</span></div>
+<div class="row"><span class="ic">3</span><span class="v"><b class="w">Role-based access and row-level security</b> protected it</span></div>
+<div class="row"><span class="ic">4</span><span class="v"><b class="w">Daily pipelines</b> kept it fresh</span></div>
+</div>
+<p class="lead">The value was not the storage. It was <b class="w">one agreed copy</b>.</p>
+</section>
+
+<section class="slide">
+<span class="tag">Save this</span>
+<h2>OneLake in <em>five lines</em></h2>
+<div class="body">
+<div class="row"><span class="ic">1</span><span class="v"><b class="w">One lake</b> per organisation, created for you</span></div>
+<div class="row"><span class="ic">2</span><span class="v"><b class="w">Workspaces</b> are the folders, items live inside</span></div>
+<div class="row"><span class="ic">3</span><span class="v"><b class="w">Tables are Delta</b>, so every engine reads them</span></div>
+<div class="row"><span class="ic">4</span><span class="v"><b class="w">Shortcuts</b> bring in outside data with no copy</span></div>
+<div class="row"><span class="ic">5</span><span class="v"><b class="w">Ownership</b> still has to be decided by people</span></div>
+</div>
+<p class="big">Tomorrow: <em>Workspaces and capacities</em>.<br>How Fabric is organised, and how you pay for it.</p>
+</section>
+
+<script src="../../assets/carousel.js"></script></body></html>

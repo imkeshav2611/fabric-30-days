@@ -1,0 +1,93 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Day 15</title><link rel="stylesheet" href="../../assets/carousel.css"></head>
+<body data-series="Microsoft Fabric · 30 Days" data-day="15" data-total="30" data-author="Keshav Maheshwari" data-role="Data Engineer | Databricks · AWS &amp; Azure · Streaming · Applied AI">
+
+<section class="slide">
+<span class="tag">Day 15 of 30</span>
+<h1><em>Mirroring</em></h1>
+<p class="cover-sub">A live copy of your database in Fabric.<br>Without building a pipeline.</p>
+<div><span class="pill">Near real time</span><span class="pill">Delta</span><span class="pill">No ETL</span></div>
+</section>
+
+<section class="slide">
+<span class="tag amber">The problem</span>
+<h2>Analysts want live data. Databases want to be <span class="amberc">left alone</span>.</h2>
+<div class="body">
+<div class="row"><span class="ic">1</span><span class="k">Query production directly</span><span class="v">The application slows down</span></div>
+<div class="row"><span class="ic">2</span><span class="k">Nightly export</span><span class="v">Reports are a day old</span></div>
+<div class="row"><span class="ic">3</span><span class="k">Build change capture</span><span class="v">Weeks of engineering</span></div>
+</div>
+<p class="lead">Every team ends up choosing between <b class="w">fresh data and a healthy database</b>.</p>
+</section>
+
+<section class="slide">
+<span class="tag">The simple version</span>
+<h2>A <em>mirror</em>, not a photograph.</h2>
+<p class="lead">A photograph shows how things looked when you took it. A mirror shows how they look now.</p>
+<p class="lead">Mirroring keeps a <b class="w">continuously updated copy</b> of your database in OneLake, ready for analytics.</p>
+<div class="body">
+<div class="row"><span class="ic">✓</span><span class="k">You do</span><span class="v">Pick the database and tables</span></div>
+<div class="row"><span class="ic">✓</span><span class="k">Fabric does</span><span class="v">The copying, continuously</span></div>
+<div class="row"><span class="ic">✓</span><span class="k">You get</span><span class="v">Delta tables, a few moments behind</span></div>
+</div>
+</section>
+
+<section class="slide">
+<span class="tag">How it works</span>
+<h2>What happens <em>behind</em> the mirror</h2>
+<div class="steps">
+<div class="row"><span class="ic">1</span><span class="v">Fabric takes an <b class="w">initial snapshot</b> of the tables</span></div>
+<div class="row"><span class="ic">2</span><span class="v">It then reads the <b class="w">changes</b> as they happen</span></div>
+<div class="row"><span class="ic">3</span><span class="v">Changes land as <b class="w">Delta tables</b> in OneLake</span></div>
+<div class="row"><span class="ic">4</span><span class="v">A <b class="w">SQL analytics endpoint</b> lets you query them</span></div>
+</div>
+<div class="bar lake"><b>Three kinds</b>Database mirroring copies data. Metadata mirroring links a catalog. Open mirroring lets any system push changes in.</div>
+
+</section>
+
+<section class="slide">
+<span class="tag amber">For engineers</span>
+<h2>The fine print that <span class="amberc">matters</span></h2>
+<div class="body">
+<div class="row col"><span class="k">Many sources now</span><span class="v">Azure SQL, SQL Server, Cosmos DB, PostgreSQL, Snowflake, Oracle, SAP, BigQuery and Databricks catalogs, among others.</span></div>
+<div class="row col"><span class="k">What is free</span><span class="v">Replication compute is free. Storage is free up to 1 TB per capacity unit. Querying uses capacity as normal.</span></div>
+<div class="row col"><span class="k">It is a replica, not a transformation</span><span class="v">Tables arrive as they are in the source. Cleaning and modelling still happen downstream.</span></div>
+<div class="row col"><span class="k">Read-only</span><span class="v">You query the mirror. You do not write to it.</span></div>
+</div>
+</section>
+
+<section class="slide">
+<span class="tag">The honest part</span>
+<h2>Mirror it or <em>build a pipeline</em>?</h2>
+<div class="split">
+<div class="box yes"><h3>Mirror</h3><ul><li>You need the tables as they are, kept fresh</li><li>The source is on the supported list</li><li>You want less code to maintain</li></ul></div>
+<div class="box no"><h3>Pipeline</h3><ul><li>You only need a small filtered slice</li><li>The source is not supported</li><li>You must reshape data before it lands</li></ul></div>
+</div>
+<p class="quote"><b class="w">The catch:</b> mirroring gives you a raw copy of an operational schema. Without a Silver layer on top, analysts inherit every quirk of the application database.</p>
+</section>
+
+<section class="slide">
+<span class="tag amber">Watch out</span>
+<h2>Four checks <span class="amberc">before you mirror</span></h2>
+<div class="steps">
+<div class="row"><span class="ic">1</span><span class="v"><b class="w">Unsupported tables or column types</b> in your source</span></div>
+<div class="row"><span class="ic">2</span><span class="v"><b class="w">Network path</b>: can Fabric reach the database?</span></div>
+<div class="row"><span class="ic">3</span><span class="v"><b class="w">Retention</b> of history on the mirrored tables</span></div>
+<div class="row"><span class="ic">4</span><span class="v"><b class="w">Who models the data</b> after it lands</span></div>
+</div>
+<p class="lead">Mirroring replaces the ingestion pipeline, <b class="w">not the modelling work</b>.</p>
+</section>
+
+<section class="slide">
+<span class="tag">Save this</span>
+<h2>Mirroring in <em>five lines</em></h2>
+<div class="body">
+<div class="row"><span class="ic">1</span><span class="v"><b class="w">A live replica</b> of your database in OneLake</span></div>
+<div class="row"><span class="ic">2</span><span class="v"><b class="w">No pipeline</b> to build or schedule</span></div>
+<div class="row"><span class="ic">3</span><span class="v"><b class="w">Delta tables</b>, queryable with SQL</span></div>
+<div class="row"><span class="ic">4</span><span class="v"><b class="w">Replication</b> is free, queries are not</span></div>
+<div class="row"><span class="ic">5</span><span class="v"><b class="w">Model it</b> before people report on it</span></div>
+</div>
+<p class="big">Tomorrow: <em>Real-Time Intelligence</em>.<br>What "real time" actually means.</p>
+</section>
+
+<script src="../../assets/carousel.js"></script></body></html>

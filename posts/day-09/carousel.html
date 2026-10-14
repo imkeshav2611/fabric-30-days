@@ -1,0 +1,95 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Day 9</title><link rel="stylesheet" href="../../assets/carousel.css"></head>
+<body data-series="Microsoft Fabric · 30 Days" data-day="9" data-total="30" data-author="Keshav Maheshwari" data-role="Data Engineer | Databricks · AWS &amp; Azure · Streaming · Applied AI">
+
+<section class="slide">
+<span class="tag">Day 9 of 30</span>
+<h1>Data<br>Factory<br><em>pipelines</em></h1>
+<p class="cover-sub">The part that runs everything.<br>On time, in order, with retries.</p>
+<div><span class="pill">Copy</span><span class="pill">Schedule</span><span class="pill">Orchestrate</span></div>
+</section>
+
+<section class="slide">
+<span class="tag amber">The problem</span>
+<h2>Good code is useless if it runs <span class="amberc">at the wrong time</span>.</h2>
+<div class="body">
+<div class="row"><span class="ic">1</span><span class="k">A script on a laptop</span><span class="v">Runs when someone remembers</span></div>
+<div class="row"><span class="ic">2</span><span class="k">Cron on a server</span><span class="v">No retries, no visibility</span></div>
+<div class="row"><span class="ic">3</span><span class="k">Jobs out of order</span><span class="v">Reports built on old data</span></div>
+</div>
+<p class="lead">Someone has to decide <b class="w">what runs, when, in what order, and what happens on failure</b>.</p>
+</section>
+
+<section class="slide">
+<span class="tag">The simple version</span>
+<h2>A <em>delivery schedule</em> for data.</h2>
+<p class="lead">A logistics planner does not drive the trucks. They decide which truck leaves when, what it waits for, and what to do if one breaks down.</p>
+<p class="lead">A pipeline is <b class="w">that planner</b> for your data jobs.</p>
+<div class="body">
+<div class="row"><span class="ic">✓</span><span class="k">Activities</span><span class="v">The individual jobs</span></div>
+<div class="row"><span class="ic">✓</span><span class="k">Dependencies</span><span class="v">What waits for what</span></div>
+<div class="row"><span class="ic">✓</span><span class="k">Triggers</span><span class="v">When it all starts</span></div>
+</div>
+</section>
+
+<section class="slide">
+<span class="tag">How it works</span>
+<h2>Building blocks of a <em>pipeline</em></h2>
+<div class="steps tight">
+<div class="row"><span class="ic">1</span><span class="v"><b class="w">Copy data</b> moves data from a source to a destination</span></div>
+<div class="row"><span class="ic">2</span><span class="v"><b class="w">Notebook</b> runs your Spark code</span></div>
+<div class="row"><span class="ic">3</span><span class="v"><b class="w">Dataflow</b> and <b class="w">Stored procedure</b> run other logic</span></div>
+<div class="row"><span class="ic">4</span><span class="v"><b class="w">ForEach</b> and <b class="w">If</b> add loops and branches</span></div>
+<div class="row"><span class="ic">5</span><span class="v"><b class="w">Triggers</b> start it on a schedule or on an event</span></div>
+</div>
+<div class="bar lake"><b>Orchestrate, do not transform</b>Pipelines are best at moving and sequencing. Heavy logic belongs in notebooks or SQL.</div>
+
+</section>
+
+<section class="slide">
+<span class="tag amber">For engineers</span>
+<h2>Habits that <span class="amberc">save you later</span></h2>
+<div class="body">
+<div class="row col"><span class="k">Parameterise from day one</span><span class="v">One pipeline driven by a list of tables beats fifty copies of the same pipeline.</span></div>
+<div class="row col"><span class="k">Make every run repeatable</span><span class="v">A rerun after failure should not create duplicates. Design loads to be idempotent.</span></div>
+<div class="row col"><span class="k">Use event triggers where they fit</span><span class="v">Starting when a file lands, or when another job finishes, beats polling on a schedule.</span></div>
+<div class="row col"><span class="k">Plan the failure path</span><span class="v">Retries, alerts and a clear owner. A silent failure is worse than a loud one.</span></div>
+</div>
+</section>
+
+<section class="slide">
+<span class="tag">The honest part</span>
+<h2>Pipeline or <em>something else</em>?</h2>
+<div class="split">
+<div class="box yes"><h3>Use a pipeline</h3><ul><li>Moving data between systems</li><li>Running steps in a set order</li><li>Scheduling and retrying jobs</li></ul></div>
+<div class="box no"><h3>Look elsewhere</h3><ul><li>Complex row-level transformations</li><li>Data that arrives every second</li><li>Logic that needs unit tests</li></ul></div>
+</div>
+<p class="quote"><b class="w">The catch:</b> pipelines grow by copy and paste. Without parameters, a small platform becomes hundreds of near-identical pipelines nobody dares to change.</p>
+</section>
+
+<section class="slide">
+<span class="tag amber">From real work</span>
+<h2>Pipelines on a <span class="amberc">real project</span></h2>
+<p class="lead">A people-analytics platform where HR data was shared as CSV files by hand.</p>
+<div class="steps">
+<div class="row"><span class="ic">1</span><span class="v"><b class="w">Manual CSV workflows</b> were replaced with pipelines</span></div>
+<div class="row"><span class="ic">2</span><span class="v"><b class="w">Triggers</b> started the loads automatically</span></div>
+<div class="row"><span class="ic">3</span><span class="v"><b class="w">Data refreshed daily</b> with no manual step</span></div>
+<div class="row"><span class="ic">4</span><span class="v"><b class="w">PySpark notebooks</b> did the transformation work</span></div>
+</div>
+<p class="lead">The pipeline did not make the data better. It made it <b class="w">arrive, every day</b>.</p>
+</section>
+
+<section class="slide">
+<span class="tag">Save this</span>
+<h2>Pipelines in <em>five lines</em></h2>
+<div class="body">
+<div class="row"><span class="ic">1</span><span class="v"><b class="w">Activities</b> do the work</span></div>
+<div class="row"><span class="ic">2</span><span class="v"><b class="w">Dependencies</b> set the order</span></div>
+<div class="row"><span class="ic">3</span><span class="v"><b class="w">Triggers</b> decide when</span></div>
+<div class="row"><span class="ic">4</span><span class="v"><b class="w">Parameters</b> keep it maintainable</span></div>
+<div class="row"><span class="ic">5</span><span class="v"><b class="w">Failure handling</b> is part of the design</span></div>
+</div>
+<p class="big">Tomorrow: <em>Dataflows Gen2</em>.<br>Cleaning data without writing code.</p>
+</section>
+
+<script src="../../assets/carousel.js"></script></body></html>

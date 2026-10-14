@@ -1,0 +1,1 @@
+Microsoft Fabric, Day 25 of 30: Git integration and deployment pipelines

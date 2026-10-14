@@ -1,0 +1,21 @@
+Microsoft Fabric, Day 26 of 30: monitoring.
+
+The worst monitoring system is a director emailing to say the numbers look wrong.
+
+Fabric has the pieces to do better. The Monitoring hub lists every run of every pipeline, notebook and refresh, with status and duration. The Capacity Metrics app shows which items consumed how much compute. Workspace monitoring collects detailed logs that you can query with KQL. Activator turns any of these signals into an alert.
+
+Two limits are worth knowing. The Metrics app covers 14 days of compute history, so longer trends need your own copy of the data. And the app itself does not send alerts. To be warned about capacity pressure, use capacity events in Real-Time hub together with Activator.
+
+The gap I see most often is not tooling. It is that teams monitor jobs and not data. A pipeline can succeed, write zero rows, and show green everywhere.
+
+So I would automate four checks on every important table: freshness, volume, duration and capacity. They catch most problems before anyone opens a report.
+
+No project story today, only the habit that prevents the awkward email.
+
+Slides 1 to 4 cover the big picture. Slides 5 to 7 are where it gets practical. Slide 8 is the summary.
+
+Tomorrow: Faster Spark jobs.
+
+What is your earliest warning signal that a load went wrong?
+
+#MicrosoftFabric #DataEngineering #Observability #DataOps #Monitoring

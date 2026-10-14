@@ -1,0 +1,42 @@
+topic: Incremental loads
+cap_title: incremental loads
+title: Load only|what|*changed*
+sub: Incremental loading.|Faster, cheaper, and easy to get wrong.
+pills: Watermark || MERGE || Change data
+p_h: Reloading everything, every night, ^stops scaling^.
+p_rows: Year one :: The full load takes 10 minutes || Year three :: It takes four hours || The data that changed :: Less than one percent
+p_end: You are paying to move and rewrite **data that is exactly the same as yesterday**.
+s_h: Read *today's newspaper*, not the archive.
+s_leads: To catch up on the news, you do not reread every paper ever printed. You read what came out since you last looked. || An incremental load does that: **remember where you stopped, fetch only what is new**.
+s_rows: Bookmark :: The last point you loaded || Fetch :: Only rows after it || Apply :: Add or update, never duplicate
+m_h: The *three steps*
+m_rows: **Find the changes**: a modified date, an ID, or a change feed || **Bring only those rows** into the lake || **Merge** them: update what exists, insert what is new || **Move the bookmark** only after the load succeeds
+m_bar: MERGE is the key :: One statement updates matching rows and inserts new ones, as a single transaction.
+e_h: Where it ^goes wrong^
+e_rows: Deletes are invisible :: A watermark on "modified date" never sees a deleted row. You need a change feed or a periodic compare. || Late data :: Rows that arrive after the bookmark has moved are skipped unless you reload a safety window. || Reruns must be safe :: If a retry inserts the same rows twice, the load is not incremental, it is wrong. || Trust but verify :: A scheduled full reconcile catches drift before the business does.
+h_h: Incremental or *full* load?
+h_yes_t: Incremental
+h_no_t: Full reload
+h_yes: Large tables with few daily changes || A reliable change marker exists || Loads must finish in a tight window
+h_no: Small tables that load in seconds || No trustworthy change marker || History gets rewritten often
+h_catch: The catch :: an incremental load fails quietly. It still finishes, the row counts look fine, and the table drifts a little further from the source every day.
+r_kind: real
+r_h: Incremental on a ^real platform^
+r_lead: A data consolidation platform on Databricks for a financial services company.
+r_rows: **Over 10 million records** processed each day || **Incremental pipelines** and automated loading workflows || **Sources** included FTP, AWS S3 and Kafka || **dbt tests** enforced data quality on the results
+r_end: At that volume, full reloads were **never an option**.
+z_h: Incremental in *five lines*
+z_rows: **Bookmark** where the last load ended || **Fetch** only what changed since || **MERGE** to update and insert safely || **Plan for** deletes and late data || **Reconcile** against the source regularly
+z_next: Tomorrow :: Table maintenance :: OPTIMIZE, V-Order and VACUUM.
+q: How do you handle deletes in your incremental loads?
+tags: #IncrementalLoad #DeltaLake #ETL
+caption:
+The first version of most pipelines reloads everything. It works until the table grows and the nightly window does not.
+
+An incremental load is the fix. Remember where the last load stopped, fetch only what changed, and merge it in. A MERGE statement updates the rows that exist and inserts the ones that do not, in a single transaction. In Fabric it works in Spark and is generally available in the Warehouse, and Copy job can do watermark-based incremental copy without custom code.
+
+The idea is simple. The edge cases are where the work is. A watermark on a modified date never sees deletes. Rows that arrive late are skipped if the bookmark has already moved. A retry that inserts the same rows twice turns a fast load into a wrong one.
+
+What makes this dangerous is that failures are quiet. The job succeeds, the counts look plausible, and the table drifts from the source a little each day. A scheduled reconcile against the source is cheap insurance.
+
+On a Databricks platform I worked on for a financial services company, we processed over 10 million records a day through incremental pipelines. Full reloads were never an option at that volume, so getting these details right was the job.

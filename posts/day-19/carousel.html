@@ -1,0 +1,95 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Day 19</title><link rel="stylesheet" href="../../assets/carousel.css"></head>
+<body data-series="Microsoft Fabric · 30 Days" data-day="19" data-total="30" data-author="Keshav Maheshwari" data-role="Data Engineer | Databricks · AWS &amp; Azure · Streaming · Applied AI">
+
+<section class="slide">
+<span class="tag">Day 19 of 30</span>
+<h1>See it.<br>Then<br><em>act on it</em>.</h1>
+<p class="cover-sub">Real-Time Dashboards and Activator.<br>From watching data to responding to it.</p>
+<div><span class="pill">Live tiles</span><span class="pill">Rules</span><span class="pill">Alerts</span></div>
+</section>
+
+<section class="slide">
+<span class="tag amber">The problem</span>
+<h2>A dashboard only helps if someone is <span class="amberc">looking at it</span>.</h2>
+<div class="body">
+<div class="row"><span class="ic">1</span><span class="k">2 p.m.</span><span class="v">The line turns red</span></div>
+<div class="row"><span class="ic">2</span><span class="k">2:01 p.m.</span><span class="v">Nobody is at the screen</span></div>
+<div class="row"><span class="ic">3</span><span class="k">5 p.m.</span><span class="v">Someone notices</span></div>
+</div>
+<p class="lead">Three hours lost, <b class="w">with the answer on display the whole time</b>.</p>
+</section>
+
+<section class="slide">
+<span class="tag">The simple version</span>
+<h2>A <em>smoke alarm</em>, not a window.</h2>
+<p class="lead">You could watch the kitchen through a window all day. Or you could fit a smoke alarm and get on with your work.</p>
+<p class="lead">A dashboard is the <b class="w">window</b>. Activator is the <b class="w">alarm</b>.</p>
+<div class="body">
+<div class="row"><span class="ic">✓</span><span class="k">Dashboard</span><span class="v">Shows what is happening now</span></div>
+<div class="row"><span class="ic">✓</span><span class="k">Activator</span><span class="v">Watches for a condition</span></div>
+<div class="row"><span class="ic">✓</span><span class="k">Action</span><span class="v">Tells someone, or starts a job</span></div>
+</div>
+</section>
+
+<section class="slide">
+<span class="tag">How it works</span>
+<h2>From event to <em>action</em></h2>
+<div class="steps tight">
+<div class="row"><span class="ic">1</span><span class="v">A <b class="w">tile</b> on the dashboard is one KQL query</span></div>
+<div class="row"><span class="ic">2</span><span class="v"><b class="w">Live refresh</b> updates it when new data arrives</span></div>
+<div class="row"><span class="ic">3</span><span class="v">An <b class="w">Activator rule</b> watches a value or a pattern</span></div>
+<div class="row"><span class="ic">4</span><span class="v">When it is met, it sends <b class="w">email or a Teams message</b></span></div>
+<div class="row"><span class="ic">5</span><span class="v">Or it runs a <b class="w">pipeline, notebook or Power Automate flow</b></span></div>
+</div>
+<div class="bar lake"><b>No polling loop to write</b>You describe the condition. Fabric keeps checking it for you.</div>
+
+</section>
+
+<section class="slide">
+<span class="tag amber">For engineers</span>
+<h2>Designing rules that <span class="amberc">people trust</span></h2>
+<div class="body">
+<div class="row col"><span class="k">Alert on change, not on state</span><span class="v">"Temperature crossed 80" fires once. "Temperature is above 80" fires all afternoon.</span></div>
+<div class="row col"><span class="k">Many things can feed a rule</span><span class="v">Eventstreams, KQL queries, Power BI visuals, dashboards and Fabric events can all trigger Activator.</span></div>
+<div class="row col"><span class="k">Close the loop automatically</span><span class="v">The best rule does not page a person. It starts the job that fixes the problem.</span></div>
+<div class="row col"><span class="k">Live refresh saves compute</span><span class="v">Tiles re-query when new data is ingested, instead of on a fixed timer.</span></div>
+</div>
+</section>
+
+<section class="slide">
+<span class="tag">The honest part</span>
+<h2>Alert or <em>just a report</em>?</h2>
+<div class="split">
+<div class="box yes"><h3>Set an alert</h3><ul><li>Someone must respond within minutes</li><li>The condition is clear and measurable</li><li>There is a defined next step</li></ul></div>
+<div class="box no"><h3>A report is enough</h3><ul><li>The number is reviewed weekly</li><li>Nobody knows what to do when it fires</li><li>The threshold is a guess</li></ul></div>
+</div>
+<p class="quote"><b class="w">The catch:</b> alert fatigue. Ten alerts a day and people mute the channel. One meaningful alert a week gets acted on. Fewer, sharper rules win.</p>
+</section>
+
+<section class="slide">
+<span class="tag amber">From real work</span>
+<h2>Live monitoring on a <span class="amberc">real project</span></h2>
+<p class="lead">Quality control for a manufacturing group, using computer vision on the production line.</p>
+<div class="steps">
+<div class="row"><span class="ic">1</span><span class="v"><b class="w">A vision model</b> detected fibre defects automatically</span></div>
+<div class="row"><span class="ic">2</span><span class="v"><b class="w">Inspection time</b> went from 10 hours to 10 seconds</span></div>
+<div class="row"><span class="ic">3</span><span class="v"><b class="w">Image and sensor telemetry</b> was stored in KQL and OneLake</span></div>
+<div class="row"><span class="ic">4</span><span class="v"><b class="w">The factory floor</b> was monitored live from that data</span></div>
+</div>
+<p class="lead">When the answer arrives in seconds, <b class="w">people can act while it still matters</b>.</p>
+</section>
+
+<section class="slide">
+<span class="tag">Save this</span>
+<h2>See and act in <em>five lines</em></h2>
+<div class="body">
+<div class="row"><span class="ic">1</span><span class="v"><b class="w">Dashboards</b> show the present moment</span></div>
+<div class="row"><span class="ic">2</span><span class="v"><b class="w">Each tile</b> is a query on live data</span></div>
+<div class="row"><span class="ic">3</span><span class="v"><b class="w">Activator</b> watches so people do not have to</span></div>
+<div class="row"><span class="ic">4</span><span class="v"><b class="w">Actions</b> can notify or start a job</span></div>
+<div class="row"><span class="ic">5</span><span class="v"><b class="w">Few, sharp alerts</b> beat many noisy ones</span></div>
+</div>
+<p class="big">Tomorrow: <em>Semantic models</em>.<br>One agreed meaning for every number.</p>
+</section>
+
+<script src="../../assets/carousel.js"></script></body></html>

@@ -1,0 +1,21 @@
+Microsoft Fabric, Day 30 of 30: the full picture.
+
+Thirty days ago I started with one question: what is Microsoft Fabric, really? This is the picture I would draw now.
+
+Data comes in through pipelines, Copy job, mirroring, shortcuts or Eventstream. It is stored once in OneLake as Delta tables, in a Lakehouse or a Warehouse. Spark notebooks and dataflows shape it through Bronze, Silver and Gold. Semantic models and Direct Lake serve it to reports. Eventhouse, dashboards and Activator handle what has to be live. Data agents and Copilot answer questions on top. Capacity, security, governance, CI/CD and monitoring run across all of it.
+
+If I were starting a new platform tomorrow, I would do four things first. Design capacity and workspaces before loading data. Choose Lakehouse or Warehouse by the team's skills. Keep serving tables healthy. Put security on the data and test it as a restricted user.
+
+My honest summary is this. Fabric removes the plumbing between tools. It does not remove the engineering. Good platforms are still designed, not purchased.
+
+I have used these building blocks across people analytics, consumer delivery, manufacturing and quality control. The tools repeat. The design is what changes.
+
+Thank you to everyone who followed along.
+
+Slides 1 to 4 cover the big picture. Slides 5 to 7 are where it gets practical. Slide 8 is the summary.
+
+What next: your call.
+
+Which of the thirty topics should I go deeper on?
+
+#MicrosoftFabric #DataEngineering #DataArchitecture #OneLake #PowerBI

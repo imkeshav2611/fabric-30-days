@@ -1,0 +1,19 @@
+Microsoft Fabric, Day 23 of 30: row-level security.
+
+The alternative to row-level security is a copy of the report for every audience. That works for five regions and collapses at fifty managers.
+
+Row-level security keeps one table and filters it by who is asking. In Fabric you can define it in three places: OneLake security on the table itself, a T-SQL security policy on a warehouse or SQL analytics endpoint, or roles with a DAX filter in a semantic model.
+
+The closer to the data the rule sits, the more it protects. And the gaps between these options are where incidents come from. A SQL security policy does not cover someone reading the Delta files through Spark. Semantic model security only restricts Viewers, so Admins, Members and Contributors see everything. Direct Lake on SQL falls back to DirectQuery when SQL rules exist, while Direct Lake on OneLake does not apply them.
+
+My rule is to choose one place as the source of truth and test with a real restricted account. Testing as an Admin proves nothing.
+
+I applied row-level security on a people-analytics platform so that one set of tables could serve the whole organisation without everyone seeing everything.
+
+Slides 1 to 4 cover the big picture. Slides 5 to 7 are where it gets practical. Slide 8 is the summary.
+
+Tomorrow: Governance.
+
+Where does your row-level security live: on the data, in SQL, or in the model?
+
+#MicrosoftFabric #DataEngineering #RowLevelSecurity #PowerBI #DataSecurity

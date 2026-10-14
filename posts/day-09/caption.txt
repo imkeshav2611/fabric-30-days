@@ -1,0 +1,19 @@
+Microsoft Fabric, Day 9 of 30: Data Factory pipelines.
+
+Every data platform needs something that decides what runs, when, and in what order. In Fabric that is a pipeline in Data Factory.
+
+A pipeline is a set of activities with dependencies between them. Copy moves data. Notebook runs Spark code. Stored procedure and Dataflow run other logic. ForEach and If add loops and branches. A trigger starts it all, on a schedule or when something happens, such as a file landing.
+
+The mental model I use: a pipeline is the planner, not the driver. It is excellent at moving data and sequencing work. Heavy transformation logic is easier to test and maintain in a notebook or in SQL. And for plain copying, Copy job now handles bulk and incremental loads without building a pipeline at all.
+
+Three habits pay off quickly. Parameterise so one pipeline handles many tables. Make runs repeatable so a retry never duplicates data. And design the failure path, with retries, alerts and an owner.
+
+On a people-analytics platform I worked on, pipelines replaced CSV files that people passed around by hand. The data refreshed daily with no manual step.
+
+Slides 1 to 4 cover the big picture. Slides 5 to 7 are where it gets practical. Slide 8 is the summary.
+
+Tomorrow: Dataflows Gen2.
+
+Schedule or event trigger: which one runs most of your loads?
+
+#MicrosoftFabric #DataEngineering #DataFactory #ETL #Orchestration

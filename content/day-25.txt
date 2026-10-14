@@ -1,0 +1,41 @@
+topic: Git integration and deployment pipelines
+cap_title: Git and deployment pipelines
+title: Ship it|*safely*
+sub: Git integration and deployment pipelines.|Changes that do not break production.
+pills: Dev || Test || Prod
+p_h: "I just changed one thing" ^in production^.
+p_rows: The change :: Made directly in the live workspace || The test :: The CEO opening the report || The undo button :: Does not exist
+p_end: Without versions and stages, **every edit is a live experiment on real users**.
+s_h: *Rehearsal* before the live show.
+s_leads: No theatre opens a play without rehearsing it. Mistakes happen on an empty stage, not in front of the audience. || Deployment stages are your **rehearsal rooms**, and Git is the **script with every revision kept**.
+s_rows: Git :: Every change saved, with history || Dev and Test :: Where mistakes are cheap || Production :: Only what passed
+m_h: The path of a *change*
+m_rows: Connect the workspace to a **Git branch** || Work in **Dev**, commit, and open a pull request || **Deploy** to Test and check the result || **Deploy** to Production when it passes || **Undo** a bad change by reverting the commit in Git
+m_bar: Two tools, two jobs :: Git keeps the history of your items. Deployment pipelines move them between stages.
+e_h: What to ^set up^
+e_rows: Git providers :: Azure DevOps, GitHub and GitHub Enterprise are supported, in their cloud versions. || Stages are flexible :: A deployment pipeline can have from 2 to 10 stages. Three is the default. || Variable libraries :: Keep values that differ per stage, such as connection names, out of the items themselves. || Automate when ready :: The fabric-cicd library and the Fabric CLI let a build server deploy for you.
+h_h: How much *process* do you need?
+h_yes_t: Minimum for everyone
+h_no_t: Add when you grow
+h_yes: Separate Dev and Prod workspaces || Everything committed to Git || No direct edits in production
+h_no: Automated deployments from a build server || Pull request reviews for each change || Automated tests on deployment
+h_catch: The catch :: deployment moves definitions, not data. A lakehouse arrives in Test with its structure and no rows. Plan how each stage gets its data.
+r_kind: watch
+r_h: Four things to ^plan for^
+r_rows: **Item support varies**: check each item type you use || **Stage-specific values** such as connections and IDs || **Data in lower stages**: sample, shortcut or reload || **Who may deploy** to production, and who approves
+r_end: The goal is boring releases. **Boring is good.**
+z_h: Shipping in *five lines*
+z_rows: **Git** keeps every version of every item || **Stages** keep mistakes away from users || **Variables** handle per-stage differences || **Definitions move**, data does not || **Nobody edits** production by hand
+z_next: Tomorrow :: Monitoring :: Knowing something is wrong before the users do.
+q: Do you deploy through deployment pipelines, a build server, or both?
+tags: #CICD #DevOps #DataOps
+caption:
+The fastest way to lose trust in a data platform is to change production directly and find out who notices.
+
+Fabric gives you two tools to avoid that, and they do different jobs. Git integration connects a workspace to a branch in Azure DevOps or GitHub, so every item has history and changes go through commits and pull requests. Deployment pipelines move items between stages, typically Dev, Test and Production, with anywhere from two to ten stages supported.
+
+A few things make this work in practice. Variable libraries hold the values that differ between stages, so items do not need editing on the way through. The fabric-cicd library and the Fabric CLI let a build server run deployments once the team is ready for automation.
+
+The detail that surprises people: deployment moves definitions, not data. A lakehouse reaches Test with its structure and no rows, so each stage needs a plan for how it gets data.
+
+My minimum for any team is small. Separate Dev and Production workspaces, everything in Git, and no hand edits in production. The goal is boring releases.

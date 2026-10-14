@@ -1,0 +1,1 @@
+Microsoft Fabric, Day 8 of 30: Medallion architecture

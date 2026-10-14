@@ -1,0 +1,41 @@
+topic: Direct Lake
+cap_title: Direct Lake
+title: *Direct*|Lake
+sub: Fast reports without copying data.|How it works, and where it stops.
+pills: Import || DirectQuery || Framing
+p_h: Power BI always made you ^pick a compromise^.
+p_rows: Import :: Fast, but data is a copy and goes stale || DirectQuery :: Always fresh, but every click is slow || Big tables :: Refresh takes hours
+p_end: Speed or freshness. **For years you could not have both.**
+s_h: Reading the book *in the library*.
+s_leads: Import is photocopying the whole library and carrying it home. DirectQuery is phoning the librarian with every question. || Direct Lake is **walking in and reading the book off the shelf**: no copy, no middleman.
+s_rows: No import :: Data stays in OneLake || No query hop :: Columns load straight into memory || Result :: Near-import speed on current data
+m_h: What happens when you *open a report*
+m_rows: The model points at **Delta tables** in OneLake || Only the **columns the visual needs** are loaded || They go straight into **memory** for fast analysis || **Framing** moves the model to the latest table version
+m_bar: Why it is fast :: Delta's Parquet files are already columnar. The engine reads them as they are instead of converting them.
+e_h: The two ^flavours^
+e_rows: Direct Lake on OneLake :: Reads Delta tables directly. Can combine several sources and mix with Import tables. No DirectQuery fallback. || Direct Lake on SQL :: Goes through a SQL analytics endpoint. Falls back to DirectQuery when it has to, which is slower. || Guardrails depend on capacity size :: Each SKU has limits on rows and files per table. Past them, one flavour falls back and the other fails. || Table health shows up here :: Many small files and missing V-Order make Direct Lake slower.
+h_h: Direct Lake or *Import*?
+h_yes_t: Direct Lake
+h_no_t: Import
+h_yes: Data already lives in OneLake as Delta || Tables are large or refreshed often || You want one copy of the data
+h_no: Small models where import is simple || Sources outside Fabric || Heavy use of calculated columns
+h_catch: The catch :: Direct Lake is only as fast as the Delta tables under it. A table with thousands of small files turns a fast mode into a slow one.
+r_kind: watch
+r_h: Four things to ^check^
+r_rows: **Which flavour** your model uses, and whether it can fall back || **Guardrails** for your capacity size || **V-Order and compaction** on the tables reports read || **Security**: SQL row-level rules do not apply to the OneLake flavour
+r_end: Direct Lake rewards **good table engineering** more than any other mode.
+z_h: Direct Lake in *five lines*
+z_rows: **No import**, no copy of the data || **Reads Delta** files straight into memory || **Two flavours**: on OneLake and on SQL || **Guardrails** scale with capacity || **Healthy tables** make it fast
+z_next: Tomorrow :: Security basics :: Who can see what, and how Fabric decides.
+q: Have you moved a large import model to Direct Lake? What changed?
+tags: #DirectLake #PowerBI #OneLake
+caption:
+For years Power BI offered a trade-off. Import was fast but worked on a copy that went stale. DirectQuery was always current but slow on every click.
+
+Direct Lake removes most of that trade-off for data in OneLake. The semantic model points at Delta tables. When a report opens, the engine loads only the columns it needs straight into memory, with no import and no query translation. A step called framing moves the model to the latest version of the table.
+
+There are now two flavours, and the difference matters. Direct Lake on OneLake reads the tables directly and can mix with Import tables, but it has no fallback. Direct Lake on SQL goes through the SQL analytics endpoint and can fall back to DirectQuery, which keeps reports working but slower. Each capacity size has guardrails, and what happens beyond them depends on the flavour.
+
+The practical lesson is that Direct Lake exposes the quality of your tables. Many small files or missing V-Order show up directly as slow reports.
+
+No project story today. This is the mode where data engineering and reporting stop being separate jobs.

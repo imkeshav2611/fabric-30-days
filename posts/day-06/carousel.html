@@ -1,0 +1,95 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Day 6</title><link rel="stylesheet" href="../../assets/carousel.css"></head>
+<body data-series="Microsoft Fabric · 30 Days" data-day="6" data-total="30" data-author="Keshav Maheshwari" data-role="Data Engineer | Databricks · AWS &amp; Azure · Streaming · Applied AI">
+
+<section class="slide">
+<span class="tag">Day 6 of 30</span>
+<h1><em>Delta</em><br>tables</h1>
+<p class="cover-sub">The format under every table.<br>Why it matters more than it looks.</p>
+<div><span class="pill">Parquet</span><span class="pill">Transaction log</span><span class="pill">Time travel</span></div>
+</section>
+
+<section class="slide">
+<span class="tag amber">The problem</span>
+<h2>Plain files in a lake have <span class="amberc">no safety net</span>.</h2>
+<div class="body">
+<div class="row"><span class="ic">1</span><span class="k">Job fails midway</span><span class="v">Half-written data stays</span></div>
+<div class="row"><span class="ic">2</span><span class="k">Two writers at once</span><span class="v">They overwrite each other</span></div>
+<div class="row"><span class="ic">3</span><span class="k">A bad load</span><span class="v">No way to go back</span></div>
+<div class="row"><span class="ic">4</span><span class="k">A changed column</span><span class="v">Readers quietly break</span></div>
+</div>
+<p class="lead">Files are cheap and open, but <b class="w">nobody is keeping the books</b>.</p>
+</section>
+
+<section class="slide">
+<span class="tag">The simple version</span>
+<h2>A notebook that <em>keeps every edit</em>.</h2>
+<p class="lead">Imagine a ledger where nothing is erased. Each change is a new dated entry, so you can always see what the page said last week.</p>
+<p class="lead">A Delta table is <b class="w">data files plus that ledger</b>.</p>
+<div class="body">
+<div class="row"><span class="ic">✓</span><span class="k">Data files</span><span class="v">Stored as Parquet</span></div>
+<div class="row"><span class="ic">✓</span><span class="k">The ledger</span><span class="v">A transaction log</span></div>
+<div class="row"><span class="ic">✓</span><span class="k">Together</span><span class="v">A table you can trust</span></div>
+</div>
+</section>
+
+<section class="slide">
+<span class="tag">How it works</span>
+<h2>What a <em>write</em> really does</h2>
+<div class="steps">
+<div class="row"><span class="ic">1</span><span class="v">New Parquet files are written <b class="w">next to</b> the old ones</span></div>
+<div class="row"><span class="ic">2</span><span class="v">A new entry is added to the <b class="w">_delta_log</b> folder</span></div>
+<div class="row"><span class="ic">3</span><span class="v">The entry lists which files are <b class="w">in</b> and which are <b class="w">out</b></span></div>
+<div class="row"><span class="ic">4</span><span class="v">Readers follow the log, so they see <b class="w">all or nothing</b></span></div>
+</div>
+<div class="bar lake"><b>Why it matters</b>A failed job leaves no entry in the log, so readers never see the half-written files.</div>
+
+</section>
+
+<section class="slide">
+<span class="tag amber">For engineers</span>
+<h2>What you <span class="amberc">get</span> from the log</h2>
+<div class="body">
+<div class="row col"><span class="k">ACID transactions</span><span class="v">Concurrent readers and writers see a consistent table, even while a load is running.</span></div>
+<div class="row col"><span class="k">Time travel</span><span class="v">Query the table as of an earlier version or timestamp. Useful for audits and for undoing mistakes.</span></div>
+<div class="row col"><span class="k">Schema enforcement</span><span class="v">A write with the wrong columns is rejected instead of silently corrupting the table.</span></div>
+<div class="row col"><span class="k">Open format</span><span class="v">The same files are read by Spark, the SQL engines and Power BI in Fabric.</span></div>
+</div>
+</section>
+
+<section class="slide">
+<span class="tag">The honest part</span>
+<h2>What Delta <em>will not</em> do for you</h2>
+<div class="split">
+<div class="box yes"><h3>It handles</h3><ul><li>Consistency during writes</li><li>History and rollback</li><li>Schema checks on write</li></ul></div>
+<div class="box no"><h3>You still own</h3><ul><li>Compacting many small files</li><li>Cleaning up old versions</li><li>Choosing a sensible layout</li></ul></div>
+</div>
+<p class="quote"><b class="w">The catch:</b> every write adds files. A table loaded every few minutes can collect thousands of tiny files and get slower each day until it is compacted.</p>
+</section>
+
+<section class="slide">
+<span class="tag amber">From real work</span>
+<h2>Delta on a <span class="amberc">real migration</span></h2>
+<p class="lead">A warehouse migration to Databricks for an energy company in Europe.</p>
+<div class="steps">
+<div class="row"><span class="ic">1</span><span class="v"><b class="w">SQL stored procedures</b> were rewritten in PySpark</span></div>
+<div class="row"><span class="ic">2</span><span class="v"><b class="w">Delta Lake</b> gave the new pipelines ACID reliability</span></div>
+<div class="row"><span class="ic">3</span><span class="v"><b class="w">Processing time</b> went from 2 hr 50 min to about 5 min</span></div>
+<div class="row"><span class="ic">4</span><span class="v"><b class="w">Rebuilt data models</b> fed KPIs into Power BI</span></div>
+</div>
+<p class="lead">Different platform, <b class="w">same format</b> Fabric is built on.</p>
+</section>
+
+<section class="slide">
+<span class="tag">Save this</span>
+<h2>Delta in <em>five lines</em></h2>
+<div class="body">
+<div class="row"><span class="ic">1</span><span class="v"><b class="w">Parquet files</b> hold the data</span></div>
+<div class="row"><span class="ic">2</span><span class="v"><b class="w">A transaction log</b> records every change</span></div>
+<div class="row"><span class="ic">3</span><span class="v"><b class="w">Readers</b> see complete versions only</span></div>
+<div class="row"><span class="ic">4</span><span class="v"><b class="w">Time travel</b> lets you look back</span></div>
+<div class="row"><span class="ic">5</span><span class="v"><b class="w">Maintenance</b> is still your job</span></div>
+</div>
+<p class="big">Tomorrow: <em>Shortcuts</em>.<br>Using data that lives elsewhere, without copying it.</p>
+</section>
+
+<script src="../../assets/carousel.js"></script></body></html>

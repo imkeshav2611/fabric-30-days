@@ -1,0 +1,95 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Day 8</title><link rel="stylesheet" href="../../assets/carousel.css"></head>
+<body data-series="Microsoft Fabric · 30 Days" data-day="8" data-total="30" data-author="Keshav Maheshwari" data-role="Data Engineer | Databricks · AWS &amp; Azure · Streaming · Applied AI">
+
+<section class="slide">
+<span class="tag">Day 8 of 30</span>
+<h1>Bronze,<br>Silver,<br><em>Gold</em></h1>
+<p class="cover-sub">The medallion architecture.<br>What each layer is really for.</p>
+<div><span class="pill">Raw</span><span class="pill">Cleaned</span><span class="pill">Business-ready</span></div>
+</section>
+
+<section class="slide">
+<span class="tag amber">The problem</span>
+<h2>One big "clean and report" job <span class="amberc">breaks badly</span>.</h2>
+<div class="body">
+<div class="row"><span class="ic">1</span><span class="k">Source changes</span><span class="v">Everything fails at once</span></div>
+<div class="row"><span class="ic">2</span><span class="k">A bug in logic</span><span class="v">Raw data is already gone</span></div>
+<div class="row"><span class="ic">3</span><span class="k">New question</span><span class="v">Start again from the source</span></div>
+<div class="row"><span class="ic">4</span><span class="k">An audit</span><span class="v">No record of what arrived</span></div>
+</div>
+<p class="lead">When raw, clean and reporting data are mixed, <b class="w">every fix is a rebuild</b>.</p>
+</section>
+
+<section class="slide">
+<span class="tag">The simple version</span>
+<h2>Raw vegetables, <em>chopped</em>, <em>cooked</em>.</h2>
+<p class="lead">A kitchen does not cook straight from the delivery crate. It stores, washes and chops first, then cooks to order.</p>
+<p class="lead">Data works the same way, in <b class="w">three stages you can inspect separately</b>.</p>
+<div class="body">
+<div class="row"><span class="ic">✓</span><span class="k">Bronze</span><span class="v">Exactly as it arrived</span></div>
+<div class="row"><span class="ic">✓</span><span class="k">Silver</span><span class="v">Cleaned and consistent</span></div>
+<div class="row"><span class="ic">✓</span><span class="k">Gold</span><span class="v">Shaped for a business question</span></div>
+</div>
+</section>
+
+<section class="slide">
+<span class="tag">How it works</span>
+<h2>What happens in <em>each layer</em></h2>
+<div class="steps">
+<div class="row"><span class="ic">1</span><span class="v"><b class="w">Bronze</b>: land the data as-is and keep its history</span></div>
+<div class="row"><span class="ic">2</span><span class="v"><b class="w">Silver</b>: fix types, remove duplicates, apply rules</span></div>
+<div class="row"><span class="ic">3</span><span class="v"><b class="w">Silver</b>: join sources into shared, trusted tables</span></div>
+<div class="row"><span class="ic">4</span><span class="v"><b class="w">Gold</b>: aggregate and model for reports and KPIs</span></div>
+</div>
+<div class="bar lake"><b>The point</b>When logic changes, you rebuild from Bronze. You do not go back and ask the source again.</div>
+
+</section>
+
+<section class="slide">
+<span class="tag amber">For engineers</span>
+<h2>Decisions that <span class="amberc">shape the build</span></h2>
+<div class="body">
+<div class="row col"><span class="k">Layers are a contract, not a rule</span><span class="v">Three is a convention. What matters is that each layer has a clear promise about quality.</span></div>
+<div class="row col"><span class="k">Where layers live</span><span class="v">Microsoft's guidance is one lakehouse per layer, each in its own workspace, so access and ownership stay clean.</span></div>
+<div class="row col"><span class="k">Gold can be a warehouse</span><span class="v">If consumers think in SQL, serve Gold from a Warehouse and keep Bronze and Silver in a Lakehouse.</span></div>
+<div class="row col"><span class="k">Materialized lake views</span><span class="v">Declare Silver and Gold as Spark SQL. Fabric stores them as Delta, orders the refreshes and applies quality rules.</span></div>
+</div>
+</section>
+
+<section class="slide">
+<span class="tag">The honest part</span>
+<h2>Do you always need <em>three</em> layers?</h2>
+<div class="split">
+<div class="box yes"><h3>Worth it when</h3><ul><li>Several sources feed the same reports</li><li>Logic changes often</li><li>You must show what arrived and when</li></ul></div>
+<div class="box no"><h3>Overkill when</h3><ul><li>One small, clean source</li><li>A short-lived prototype</li><li>Nobody will maintain three layers</li></ul></div>
+</div>
+<p class="quote"><b class="w">The catch:</b> medallion fails when Silver quietly becomes a second Bronze. If Silver has no quality rules, you have added a layer and gained nothing.</p>
+</section>
+
+<section class="slide">
+<span class="tag amber">From real work</span>
+<h2>Medallion on a <span class="amberc">real project</span></h2>
+<p class="lead">A people-analytics platform built on Fabric with PySpark.</p>
+<div class="steps">
+<div class="row"><span class="ic">1</span><span class="v"><b class="w">Bronze</b>: raw employee data landed by daily pipelines</span></div>
+<div class="row"><span class="ic">2</span><span class="v"><b class="w">Silver</b>: cleaned and conformed across HR sources</span></div>
+<div class="row"><span class="ic">3</span><span class="v"><b class="w">Gold</b>: tables shaped for organisation KPIs</span></div>
+<div class="row"><span class="ic">4</span><span class="v"><b class="w">Semantic models</b> read Gold for reporting</span></div>
+</div>
+<p class="lead">Each layer had <b class="w">one job</b>, which keeps changes contained.</p>
+</section>
+
+<section class="slide">
+<span class="tag">Save this</span>
+<h2>Medallion in <em>five lines</em></h2>
+<div class="body">
+<div class="row"><span class="ic">1</span><span class="v"><b class="w">Bronze</b> keeps what arrived, untouched</span></div>
+<div class="row"><span class="ic">2</span><span class="v"><b class="w">Silver</b> is where data becomes trustworthy</span></div>
+<div class="row"><span class="ic">3</span><span class="v"><b class="w">Gold</b> answers business questions</span></div>
+<div class="row"><span class="ic">4</span><span class="v"><b class="w">Rebuild from Bronze</b>, never from the source</span></div>
+<div class="row"><span class="ic">5</span><span class="v"><b class="w">Each layer</b> needs a clear promise</span></div>
+</div>
+<p class="big">Tomorrow: <em>Data Factory pipelines</em>.<br>The scheduler that moves everything.</p>
+</section>
+
+<script src="../../assets/carousel.js"></script></body></html>

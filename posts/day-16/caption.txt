@@ -1,0 +1,19 @@
+Microsoft Fabric, Day 16 of 30: Real-Time Intelligence.
+
+"Real time" is one of the most over-used phrases in data. It is worth being precise about it.
+
+Batch processing collects data and handles it later, which answers "what happened". Streaming handles each event as it arrives, which answers "what is happening". Real-Time Intelligence is the part of Fabric built for the second kind of question.
+
+It has five building blocks. Real-Time hub is where you discover streams. Eventstream brings events in and shapes them. Eventhouse stores them and makes them queryable at very large scale. Real-Time Dashboards show the current state. Activator takes an action when a condition is met.
+
+The question I ask first is not technical: who will act on this, and how quickly? If the answer is "tomorrow morning", a batch pipeline is cheaper and simpler. Real time earns its cost when minutes matter.
+
+I worked on a real-time platform for a consumer delivery business, where streaming data arrived at terabytes per minute through Event Hub and Eventstream, and Eventhouse served sub-second analytics. The first production use case shipped in under 14 days.
+
+Slides 1 to 4 cover the big picture. Slides 5 to 7 are where it gets practical. Slide 8 is the summary.
+
+Tomorrow: Eventstream.
+
+Which of your reports would really change a decision if it were live?
+
+#MicrosoftFabric #DataEngineering #RealTimeIntelligence #Streaming #Eventhouse

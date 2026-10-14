@@ -1,0 +1,19 @@
+Microsoft Fabric, Day 11 of 30: notebooks and Spark.
+
+At some point the data outgrows a single machine. Spark is the usual answer, and Fabric makes it much less painful to use.
+
+Spark splits a job across many machines and combines the results. You write the logic once, in PySpark, Spark SQL, Scala or R, and the engine handles the distribution. In Fabric you write that code in a notebook attached to a Lakehouse, and the output lands as Delta tables in OneLake.
+
+What changes with Fabric is the operations side. There is no cluster to build. Starter pools give you a session in seconds. Environments hold your libraries and Spark settings so every run behaves the same. High concurrency mode lets several notebooks share one session. One thing to check: Runtime 2.0, built on Spark 4, is generally available and is what Microsoft recommends for production, while new workspaces still default to 1.3.
+
+The trade-off is that Spark shares the same capacity as everything else. A forgotten session or an oversized pool takes compute away from reports and pipelines. Stopping sessions and right-sizing pools is part of the job.
+
+PySpark has been at the centre of most of my work, from medallion layers on Fabric to multi-terabyte daily loads on Databricks. The skills carry across both.
+
+Slides 1 to 4 cover the big picture. Slides 5 to 7 are where it gets practical. Slide 8 is the summary.
+
+Tomorrow: Incremental loads.
+
+Starter pool or custom pool: which one do your production jobs run on?
+
+#MicrosoftFabric #DataEngineering #ApacheSpark #PySpark #Notebooks

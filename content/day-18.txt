@@ -1,0 +1,42 @@
+topic: Eventhouse and KQL
+cap_title: Eventhouse and KQL
+title: *Eventhouse*|and KQL
+sub: Where fast-moving data lives.|And the language built to query it.
+pills: Time series || Logs || Telemetry
+p_h: A normal database ^chokes^ on event data.
+p_rows: Volume :: Billions of rows a day || Shape :: Semi-structured, always changing || Questions :: "What happened in the last 5 minutes?"
+p_end: Row-by-row databases were built for orders and customers, **not for a firehose**.
+s_h: A *search engine* for events.
+s_leads: You do not read the whole internet to find a page. A search engine has already indexed it, so answers come back instantly. || An Eventhouse **indexes events as they arrive**, so queries over billions of rows return in seconds.
+s_rows: Stores :: Logs, telemetry, time series || Indexes :: Automatically, on arrival || Answers :: In seconds, at huge scale
+m_h: How an *Eventhouse* is organised
+m_rows: An **Eventhouse** holds one or more **KQL databases** || Events are **indexed and partitioned** as they land || You query with **KQL**, a pipe-based language || **Materialized views** keep common aggregates ready
+m_bar: KQL reads top to bottom :: Take a table, filter it, summarise it. Each step is a pipe, like a recipe.
+e_h: Settings that ^control cost and speed^
+e_rows: Caching policy :: Decides how much recent data is kept on fast storage. Hot data is fast, cold data is cheaper. || Retention policy :: Decides how long data is kept at all. Set it per table, on purpose. || OneLake availability :: Turn it on and the same data appears as Delta tables for Spark, SQL and Power BI. || Minimum capacity :: An eventhouse can be kept always on, with a scheduled minimum size, to avoid slow first queries.
+h_h: Eventhouse or *Lakehouse*?
+h_yes_t: Eventhouse
+h_no_t: Lakehouse
+h_yes: Time-stamped events at high volume || Queries about the last minutes or hours || Free-text or semi-structured data
+h_no: Large batch transformations || Data updated row by row || Classic star-schema reporting
+h_catch: The catch :: default retention and caching are rarely right for your data. Leave them alone and you either pay for history nobody queries or lose data someone needed.
+r_kind: real
+r_h: KQL on ^real projects^
+r_lead: Two different uses of the same engine.
+r_rows: **A consumer delivery platform**: Eventhouse and KQL at sub-second latency || **Scale**: millions of daily active users || **A manufacturing plant**: image and sensor telemetry stored in KQL || **Purpose**: live monitoring of the factory floor
+r_end: Very different businesses, **the same question: what is happening now?**
+z_h: Eventhouse in *five lines*
+z_rows: **Built for** events, logs and time series || **Indexes** everything on arrival || **KQL** filters and summarises in pipes || **Caching and retention** drive the cost || **OneLake availability** links it to the rest
+z_next: Tomorrow :: Dashboards and Activator :: Seeing it live, and acting on it.
+q: KQL or SQL for event data: which do you reach for first?
+tags: #KQL #Eventhouse #TimeSeries
+caption:
+Event data breaks the assumptions of a normal database. It arrives in huge volumes, its shape keeps changing, and the questions are almost always about a recent window of time.
+
+Eventhouse is the Fabric store built for that. It holds one or more KQL databases and indexes events as they arrive, which is why queries over billions of rows come back in seconds. You query it with KQL, a language that reads top to bottom: take a table, filter it, summarise it, one pipe at a time.
+
+The settings that deserve attention are the unglamorous ones. The caching policy decides how much recent data sits on fast storage. The retention policy decides how long data is kept. The defaults are rarely right, and both directly drive cost.
+
+One feature ties it to the rest of Fabric. With OneLake availability turned on, the same event data is exposed as Delta tables, so Spark, SQL and Power BI can use it alongside batch data.
+
+I have used this engine in two very different places: sub-second analytics for a consumer platform with millions of daily users, and live factory-floor monitoring from sensor and image telemetry.

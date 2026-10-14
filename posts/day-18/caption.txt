@@ -1,0 +1,19 @@
+Microsoft Fabric, Day 18 of 30: Eventhouse and KQL.
+
+Event data breaks the assumptions of a normal database. It arrives in huge volumes, its shape keeps changing, and the questions are almost always about a recent window of time.
+
+Eventhouse is the Fabric store built for that. It holds one or more KQL databases and indexes events as they arrive, which is why queries over billions of rows come back in seconds. You query it with KQL, a language that reads top to bottom: take a table, filter it, summarise it, one pipe at a time.
+
+The settings that deserve attention are the unglamorous ones. The caching policy decides how much recent data sits on fast storage. The retention policy decides how long data is kept. The defaults are rarely right, and both directly drive cost.
+
+One feature ties it to the rest of Fabric. With OneLake availability turned on, the same event data is exposed as Delta tables, so Spark, SQL and Power BI can use it alongside batch data.
+
+I have used this engine in two very different places: sub-second analytics for a consumer platform with millions of daily users, and live factory-floor monitoring from sensor and image telemetry.
+
+Slides 1 to 4 cover the big picture. Slides 5 to 7 are where it gets practical. Slide 8 is the summary.
+
+Tomorrow: Dashboards and Activator.
+
+KQL or SQL for event data: which do you reach for first?
+
+#MicrosoftFabric #DataEngineering #KQL #Eventhouse #TimeSeries

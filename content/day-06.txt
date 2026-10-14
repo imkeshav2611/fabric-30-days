@@ -1,0 +1,42 @@
+topic: Delta tables
+cap_title: Delta tables
+title: *Delta*|tables
+sub: The format under every table.|Why it matters more than it looks.
+pills: Parquet || Transaction log || Time travel
+p_h: Plain files in a lake have ^no safety net^.
+p_rows: Job fails midway :: Half-written data stays || Two writers at once :: They overwrite each other || A bad load :: No way to go back || A changed column :: Readers quietly break
+p_end: Files are cheap and open, but **nobody is keeping the books**.
+s_h: A notebook that *keeps every edit*.
+s_leads: Imagine a ledger where nothing is erased. Each change is a new dated entry, so you can always see what the page said last week. || A Delta table is **data files plus that ledger**.
+s_rows: Data files :: Stored as Parquet || The ledger :: A transaction log || Together :: A table you can trust
+m_h: What a *write* really does
+m_rows: New Parquet files are written **next to** the old ones || A new entry is added to the **_delta_log** folder || The entry lists which files are **in** and which are **out** || Readers follow the log, so they see **all or nothing**
+m_bar: Why it matters :: A failed job leaves no entry in the log, so readers never see the half-written files.
+e_h: What you ^get^ from the log
+e_rows: ACID transactions :: Concurrent readers and writers see a consistent table, even while a load is running. || Time travel :: Query the table as of an earlier version or timestamp. Useful for audits and for undoing mistakes. || Schema enforcement :: A write with the wrong columns is rejected instead of silently corrupting the table. || Open format :: The same files are read by Spark, the SQL engines and Power BI in Fabric.
+h_h: What Delta *will not* do for you
+h_yes_t: It handles
+h_no_t: You still own
+h_yes: Consistency during writes || History and rollback || Schema checks on write
+h_no: Compacting many small files || Cleaning up old versions || Choosing a sensible layout
+h_catch: The catch :: every write adds files. A table loaded every few minutes can collect thousands of tiny files and get slower each day until it is compacted.
+r_kind: real
+r_h: Delta on a ^real migration^
+r_lead: A warehouse migration to Databricks for an energy company in Europe.
+r_rows: **SQL stored procedures** were rewritten in PySpark || **Delta Lake** gave the new pipelines ACID reliability || **Processing time** went from 2 hr 50 min to about 5 min || **Rebuilt data models** fed KPIs into Power BI
+r_end: Different platform, **same format** Fabric is built on.
+z_h: Delta in *five lines*
+z_rows: **Parquet files** hold the data || **A transaction log** records every change || **Readers** see complete versions only || **Time travel** lets you look back || **Maintenance** is still your job
+z_next: Tomorrow :: Shortcuts :: Using data that lives elsewhere, without copying it.
+q: Has time travel ever saved you after a bad load?
+tags: #DeltaLake #Parquet #Lakehouse
+caption:
+Every table in a Fabric Lakehouse or Warehouse is a Delta table. It is worth ten minutes to understand what that means.
+
+A Delta table is two things: Parquet files that hold the data, and a transaction log that records every change. A write adds new files and then adds an entry to the log saying which files are now part of the table. Readers follow the log, so they see a complete version or nothing.
+
+That one idea gives you most of what plain files lack. Failed jobs leave no half-written data. Readers and writers do not corrupt each other. You can query the table as it was yesterday, and a write with the wrong schema is rejected.
+
+What Delta does not do is tidy up. Every write adds files, and frequent small loads lead to thousands of small files and slower queries. Compaction and cleanup are still the engineer's job, and I will cover them later in this series.
+
+I leaned on Delta during a warehouse migration to Databricks, where processing time went from 2 hours 50 minutes to about 5 minutes. Different platform, but the same format Fabric is built on.

@@ -1,0 +1,42 @@
+topic: Security basics
+cap_title: security basics
+title: Who can|see|*what*?
+sub: Security in Fabric, layer by layer.|From the workspace down to the row.
+pills: Roles || Permissions || OneLake security
+p_h: One platform means ^one place to get it wrong^.
+p_rows: Before :: Each tool had its own access list || Now :: Many tools, one copy of the data || The risk :: Access granted in one, open in all
+p_end: When everything shares the same data, **a careless permission travels further**.
+s_h: *Keys* to a building.
+s_leads: Some people get a key to the whole building. Some get one room. Some may only look through a window into one cabinet. || Fabric works in the same layers: **workspace, item, then the data inside**.
+s_rows: Workspace role :: A key to the room || Item permission :: A key to one cabinet || Data security :: Which drawers you may open
+m_h: The *layers*, from wide to narrow
+m_rows: **Microsoft Entra ID** proves who you are || **Workspace roles**: Admin, Member, Contributor, Viewer || **Item permissions**: share one lakehouse or report || **OneLake security**: tables, folders, columns and rows
+m_bar: Least privilege :: Start people at the narrowest layer that lets them do the job, and widen only when needed.
+e_h: Details people ^get wrong^
+e_rows: Viewer is not harmless :: A Viewer can query data through SQL and reports, but gets no direct OneLake file access unless a role grants it. || Contributor sees everything :: Admin, Member and Contributor can read all data in the workspace. Row-level rules do not hold them back. || OneLake security travels with the data :: Roles defined on the data are enforced across Fabric engines, not only in one tool. || Use groups, not names :: Assign roles to security groups. Individual assignments are impossible to audit later.
+h_h: Workspace role or *finer control*?
+h_yes_t: Role is enough
+h_no_t: Go finer
+h_yes: A small team that all sees the same data || Development workspaces || Everyone builds, nobody only consumes
+h_no: Sensitive columns such as salary || Different regions see different rows || Consumers outside the build team
+h_catch: The catch :: the quickest fix for "I cannot see it" is making someone a Contributor. That one click bypasses every row and column rule you designed.
+r_kind: real
+r_h: Security on a ^real project^
+r_lead: A people-analytics platform holding sensitive employee data.
+r_rows: **Role-based access control** decided who could reach the platform || **Row-level security** limited which employees each user saw || **Sensitive personnel data** stayed protected inside Fabric || **HR leaders** queried it through reports and an assistant
+r_end: With employee data, **security is the first design decision**, not the last.
+z_h: Security in *five lines*
+z_rows: **Identity** first, through Entra ID || **Workspace roles** for builders || **Item permissions** for sharing one thing || **OneLake security** for tables, columns, rows || **Contributor and above** bypass fine rules
+z_next: Tomorrow :: Row-level security :: Same report, different rows for each person.
+q: How do you stop "just make them a Contributor" from becoming the default fix?
+tags: #DataSecurity #OneLake #DataGovernance
+caption:
+Fabric keeps one copy of the data and lets many tools use it. That is the benefit. It also means a careless permission reaches further than it used to.
+
+Security works in layers. Microsoft Entra ID establishes who someone is. Workspace roles, which are Admin, Member, Contributor and Viewer, decide what they can do in a workspace. Item permissions share a single lakehouse or report. OneLake security then controls access inside the data, down to tables, folders, columns and rows, and it is enforced across Fabric engines.
+
+Two details catch teams out. A Viewer can still query data through the SQL endpoint and reports. And Admin, Member and Contributor can read everything in the workspace, so row and column rules do not restrain them.
+
+That second point is why the quick fix is dangerous. Making someone a Contributor so they "can see the table" bypasses every fine-grained rule in one click.
+
+On a people-analytics platform I worked on, role-based access and row-level security protected sensitive employee data. With data like that, security belongs in the first design conversation, not in a final checklist.

@@ -1,0 +1,42 @@
+topic: On-premises data gateway
+cap_title: the on-premises data gateway
+title: The data|*gateway*
+sub: Reaching data inside a factory or office.|Without opening the firewall.
+pills: Outbound only || Clusters || Hybrid
+p_h: The cloud cannot see ^inside your building^.
+p_rows: The database :: On a server in the plant || The firewall :: Blocks everything from outside || The security team :: Will not open an inbound port
+p_end: And they are right. **So how does a cloud pipeline read that table?**
+s_h: A *courier* who works from the inside.
+s_leads: The office does not let strangers walk in. Instead, an employee carries parcels out to the delivery van when asked. || The gateway is that employee: **software inside your network that fetches data on request**.
+s_rows: Installed :: On a machine in your network || Connects :: Outward, to the cloud || Firewall :: No inbound ports opened
+m_h: How a *request* travels
+m_rows: A pipeline or report in Fabric asks for on-premises data || The request waits in a **secure cloud relay** || The gateway **calls out**, picks it up and queries the source || Results travel back through the same outbound connection
+m_bar: Why security teams accept it :: The gateway only makes outbound connections. Nothing on the internet can dial in.
+e_h: Running it ^properly^
+e_rows: Use standard mode :: Standard mode serves many users and sources. Personal mode works only with Power BI and cannot be shared. || Build a cluster :: Two or more gateway machines in a cluster avoid a single point of failure. || Keep it updated :: A new version ships every month, and only the last six releases are supported. || Put it near the data :: The gateway machine does real work. Place it close to the source and size it for the load.
+h_h: Gateway or *something else*?
+h_yes_t: On-premises gateway
+h_no_t: Consider instead
+h_yes: Sources on servers in your own network || Strict rules against inbound access || A mix of cloud and on-premises data
+h_no: Sources in an Azure virtual network || Data already replicated to the cloud || A source that can push files out
+h_catch: The catch :: the gateway is a server someone must own. Most "the pipeline failed" tickets on hybrid projects trace back to a gateway that was offline, full or out of date.
+r_kind: real
+r_h: A gateway on a ^real project^
+r_lead: A manufacturing group with a plant in Sweden and its analytics platform in Azure in India.
+r_rows: **On-premises gateways** connected the plant's systems || **Data Factory** moved the data across to Azure || **Legacy SQL data** landed in Synapse and Fabric || **Reporting was centralised** across cloud and on-premises systems
+r_end: Two countries and two networks, **one reporting platform**.
+z_h: The gateway in *five lines*
+z_rows: **Software** inside your network || **Outbound only**, no open inbound ports || **Standard mode** and a cluster for production || **Monthly updates**, so plan them || **It needs an owner** like any server
+z_next: Tomorrow :: Mirroring :: A live copy of your database inside Fabric.
+q: Who owns the gateway in your organisation: the data team or infrastructure?
+tags: #HybridCloud #DataGateway #DataIntegration
+caption:
+Plenty of important data still lives on servers inside offices and factories. The cloud cannot reach it, and the security team will not open the firewall to let it in.
+
+The on-premises data gateway solves this in a way security teams tend to accept. It is software installed on a machine inside the network. It only makes outbound connections. When a Fabric pipeline or report needs data, the request waits in a secure relay, the gateway calls out to collect it, runs the query locally and sends the result back.
+
+For production I would insist on three things. Standard mode, since personal mode only works with Power BI. A cluster of at least two machines, so one failure does not stop every load. And a patching routine, because a new version ships monthly and only the last six releases are supported.
+
+On a project for a manufacturing group, gateways and Data Factory connected a plant in Sweden to an Azure platform in India, centralising reporting across both.
+
+The lesson I took from it: the gateway is a server, and it needs an owner.

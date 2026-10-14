@@ -1,0 +1,95 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Day 7</title><link rel="stylesheet" href="../../assets/carousel.css"></head>
+<body data-series="Microsoft Fabric · 30 Days" data-day="7" data-total="30" data-author="Keshav Maheshwari" data-role="Data Engineer | Databricks · AWS &amp; Azure · Streaming · Applied AI">
+
+<section class="slide">
+<span class="tag">Day 7 of 30</span>
+<h1><em>Shortcuts</em>:<br>use data<br>without<br>copying it</h1>
+<p class="cover-sub">Data stays where it is.<br>Fabric reads it in place.</p>
+<div><span class="pill">ADLS</span><span class="pill">Amazon S3</span><span class="pill">Google Cloud</span></div>
+</section>
+
+<section class="slide">
+<span class="tag amber">The problem</span>
+<h2>Most pipelines exist only to <span class="amberc">copy data</span>.</h2>
+<div class="body">
+<div class="row"><span class="ic">1</span><span class="k">Step one</span><span class="v">Copy it from the other cloud</span></div>
+<div class="row"><span class="ic">2</span><span class="k">Step two</span><span class="v">Schedule the copy</span></div>
+<div class="row"><span class="ic">3</span><span class="k">Step three</span><span class="v">Fix the copy when it breaks</span></div>
+<div class="row"><span class="ic">4</span><span class="k">Step four</span><span class="v">Explain why the copy is stale</span></div>
+</div>
+<p class="lead">Two copies cost twice the storage, and <b class="w">they are never quite the same</b>.</p>
+</section>
+
+<section class="slide">
+<span class="tag">The simple version</span>
+<h2>A <em>desktop shortcut</em> to a file.</h2>
+<p class="lead">A shortcut on your desktop is not the file. It is a signpost. Double-click it and you open the real thing.</p>
+<p class="lead">A OneLake shortcut does the same for <b class="w">a folder or table that lives somewhere else</b>.</p>
+<div class="body">
+<div class="row"><span class="ic">✓</span><span class="k">Looks like</span><span class="v">A normal folder in the lake</span></div>
+<div class="row"><span class="ic">✓</span><span class="k">Actually is</span><span class="v">A pointer to the source</span></div>
+<div class="row"><span class="ic">✓</span><span class="k">Copies made</span><span class="v">None</span></div>
+</div>
+</section>
+
+<section class="slide">
+<span class="tag">How it works</span>
+<h2>What a shortcut can <em>point to</em></h2>
+<div class="steps tight">
+<div class="row"><span class="ic">1</span><span class="v">Another <b class="w">lakehouse or warehouse</b> in OneLake</span></div>
+<div class="row"><span class="ic">2</span><span class="v"><b class="w">Azure Data Lake Storage</b> and Blob Storage</span></div>
+<div class="row"><span class="ic">3</span><span class="v"><b class="w">Amazon S3</b> and S3-compatible storage</span></div>
+<div class="row"><span class="ic">4</span><span class="v"><b class="w">Google Cloud Storage</b></span></div>
+<div class="row"><span class="ic">5</span><span class="v"><b class="w">OneDrive, SharePoint, Dataverse</b>, and on-premises via gateway</span></div>
+</div>
+<div class="bar lake"><b>Delta is recognised</b>Put a shortcut to a Delta table under Tables, and it behaves like a native table.</div>
+
+</section>
+
+<section class="slide">
+<span class="tag amber">For engineers</span>
+<h2>The parts that <span class="amberc">trip people up</span></h2>
+<div class="body">
+<div class="row col"><span class="k">Identity depends on the target</span><span class="v">Shortcuts inside OneLake check the calling user. External ones use the stored connection's credentials.</span></div>
+<div class="row col"><span class="k">Deleting has two meanings</span><span class="v">Removing the shortcut leaves the source untouched. Deleting a file inside it deletes that file at the source.</span></div>
+<div class="row col"><span class="k">Speed is the source's speed</span><span class="v">Queries still read from the other cloud, with its latency and egress cost. Caching is available for some sources.</span></div>
+<div class="row col"><span class="k">Format still matters</span><span class="v">A shortcut to CSV gives you files, not a table. Delta or Parquet is what makes it queryable.</span></div>
+</div>
+</section>
+
+<section class="slide">
+<span class="tag">The honest part</span>
+<h2>Shortcut or <em>copy</em>?</h2>
+<div class="split">
+<div class="box yes"><h3>Shortcut</h3><ul><li>Data is already in Delta or Parquet</li><li>Another team owns and maintains it</li><li>You want zero duplication</li></ul></div>
+<div class="box no"><h3>Copy the data</h3><ul><li>The source is slow or far away</li><li>You need to reshape it heavily anyway</li><li>The source may change without warning</li></ul></div>
+</div>
+<p class="quote"><b class="w">The catch:</b> a shortcut makes you depend on someone else's storage. If they rename a folder or rotate a key, your reports break and nothing in your workspace changed.</p>
+</section>
+
+<section class="slide">
+<span class="tag amber">Watch out</span>
+<h2>Four things to <span class="amberc">check first</span></h2>
+<div class="steps">
+<div class="row"><span class="ic">1</span><span class="v"><b class="w">Who owns the connection</b> an external shortcut relies on</span></div>
+<div class="row"><span class="ic">2</span><span class="v"><b class="w">Egress charges</b> when the source is in another cloud</span></div>
+<div class="row"><span class="ic">3</span><span class="v"><b class="w">Access rules</b>: who can now reach the data through you</span></div>
+<div class="row"><span class="ic">4</span><span class="v"><b class="w">A plan</b> for when the source moves or changes</span></div>
+</div>
+<p class="lead">A shortcut removes the copy, <b class="w">not the dependency</b>.</p>
+</section>
+
+<section class="slide">
+<span class="tag">Save this</span>
+<h2>Shortcuts in <em>five lines</em></h2>
+<div class="body">
+<div class="row"><span class="ic">1</span><span class="v"><b class="w">A pointer</b>, not a copy</span></div>
+<div class="row"><span class="ic">2</span><span class="v"><b class="w">Works across</b> OneLake, Azure, AWS and Google</span></div>
+<div class="row"><span class="ic">3</span><span class="v"><b class="w">Delta targets</b> behave like native tables</span></div>
+<div class="row"><span class="ic">4</span><span class="v"><b class="w">Performance</b> follows the source</span></div>
+<div class="row"><span class="ic">5</span><span class="v"><b class="w">Ownership</b> of the source still matters</span></div>
+</div>
+<p class="big">Tomorrow: <em>Medallion architecture</em>.<br>Bronze, Silver, Gold, and what each layer is for.</p>
+</section>
+
+<script src="../../assets/carousel.js"></script></body></html>

@@ -1,0 +1,42 @@
+topic: Data Factory pipelines
+cap_title: Data Factory pipelines
+title: Data|Factory|*pipelines*
+sub: The part that runs everything.|On time, in order, with retries.
+pills: Copy || Schedule || Orchestrate
+p_h: Good code is useless if it runs ^at the wrong time^.
+p_rows: A script on a laptop :: Runs when someone remembers || Cron on a server :: No retries, no visibility || Jobs out of order :: Reports built on old data
+p_end: Someone has to decide **what runs, when, in what order, and what happens on failure**.
+s_h: A *delivery schedule* for data.
+s_leads: A logistics planner does not drive the trucks. They decide which truck leaves when, what it waits for, and what to do if one breaks down. || A pipeline is **that planner** for your data jobs.
+s_rows: Activities :: The individual jobs || Dependencies :: What waits for what || Triggers :: When it all starts
+m_h: Building blocks of a *pipeline*
+m_rows: **Copy data** moves data from a source to a destination || **Notebook** runs your Spark code || **Dataflow** and **Stored procedure** run other logic || **ForEach** and **If** add loops and branches || **Triggers** start it on a schedule or on an event
+m_bar: Orchestrate, do not transform :: Pipelines are best at moving and sequencing. Heavy logic belongs in notebooks or SQL.
+e_h: Habits that ^save you later^
+e_rows: Parameterise from day one :: One pipeline driven by a list of tables beats fifty copies of the same pipeline. || Make every run repeatable :: A rerun after failure should not create duplicates. Design loads to be idempotent. || Use event triggers where they fit :: Starting when a file lands, or when another job finishes, beats polling on a schedule. || Plan the failure path :: Retries, alerts and a clear owner. A silent failure is worse than a loud one.
+h_h: Pipeline or *something else*?
+h_yes_t: Use a pipeline
+h_no_t: Look elsewhere
+h_yes: Moving data between systems || Running steps in a set order || Scheduling and retrying jobs
+h_no: Complex row-level transformations || Data that arrives every second || Logic that needs unit tests
+h_catch: The catch :: pipelines grow by copy and paste. Without parameters, a small platform becomes hundreds of near-identical pipelines nobody dares to change.
+r_kind: real
+r_h: Pipelines on a ^real project^
+r_lead: A people-analytics platform where HR data was shared as CSV files by hand.
+r_rows: **Manual CSV workflows** were replaced with pipelines || **Triggers** started the loads automatically || **Data refreshed daily** with no manual step || **PySpark notebooks** did the transformation work
+r_end: The pipeline did not make the data better. It made it **arrive, every day**.
+z_h: Pipelines in *five lines*
+z_rows: **Activities** do the work || **Dependencies** set the order || **Triggers** decide when || **Parameters** keep it maintainable || **Failure handling** is part of the design
+z_next: Tomorrow :: Dataflows Gen2 :: Cleaning data without writing code.
+q: Schedule or event trigger: which one runs most of your loads?
+tags: #DataFactory #ETL #Orchestration
+caption:
+Every data platform needs something that decides what runs, when, and in what order. In Fabric that is a pipeline in Data Factory.
+
+A pipeline is a set of activities with dependencies between them. Copy moves data. Notebook runs Spark code. Stored procedure and Dataflow run other logic. ForEach and If add loops and branches. A trigger starts it all, on a schedule or when something happens, such as a file landing.
+
+The mental model I use: a pipeline is the planner, not the driver. It is excellent at moving data and sequencing work. Heavy transformation logic is easier to test and maintain in a notebook or in SQL. And for plain copying, Copy job now handles bulk and incremental loads without building a pipeline at all.
+
+Three habits pay off quickly. Parameterise so one pipeline handles many tables. Make runs repeatable so a retry never duplicates data. And design the failure path, with retries, alerts and an owner.
+
+On a people-analytics platform I worked on, pipelines replaced CSV files that people passed around by hand. The data refreshed daily with no manual step.

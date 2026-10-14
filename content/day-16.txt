@@ -1,0 +1,43 @@
+topic: Real-Time Intelligence
+cap_title: Real-Time Intelligence
+title: Real-Time|*Intelligence*
+sub: What "real time" actually means.|And when you truly need it.
+pills: Streaming || Events || Sub-second
+p_h: A nightly report tells you what ^already went wrong^.
+p_rows: A machine overheats :: You find out tomorrow || Orders pile up :: You see it in the weekly review || A payment fails :: The customer tells you first
+p_end: Batch data answers "what happened". **Some questions need "what is happening".**
+s_h: A *live scoreboard*, not tomorrow's paper.
+s_leads: The newspaper gives you the final score the next morning. The scoreboard changes the moment a goal is scored. || Real-Time Intelligence is **the scoreboard for your business data**.
+s_rows: Batch :: Collect, then process later || Streaming :: Process as each event arrives || The gain :: Seconds instead of hours
+m_tag: The map
+m_h: The *five* building blocks
+m_rows: **Real-Time hub**: find every stream in the organisation || **Eventstream**: bring events in and shape them on the way || **Eventhouse**: store and query huge volumes of events || **Real-Time Dashboard**: see what is happening now || **Activator**: act automatically when a condition is met
+m_bar: One flow :: Capture, store, analyse, visualise, act. All inside Fabric, all on OneLake.
+e_h: How to ^think about it^
+e_rows: Events, not tables :: A stream is an endless series of small messages. You query windows of time, not a finished dataset. || Latency is a requirement, not a default :: Ask how fresh the answer really needs to be. Seconds, minutes and hours are very different builds. || It can meet batch in OneLake :: Event data can be exposed as Delta tables, so streaming and batch data can be joined. || Different capacity behaviour :: Streaming runs all day. Budget for steady usage, not occasional peaks.
+h_h: Do you *need* real time?
+h_yes_t: Yes when
+h_no_t: Probably not when
+h_yes: Someone acts on the data within minutes || Sensors, clicks or logs arrive nonstop || Delay costs money or safety
+h_no: Decisions are made daily or weekly || The source only updates overnight || Nobody is watching the screen
+h_catch: The catch :: real time is expensive to run and easy to over-buy. If nobody acts faster because of it, an hourly batch gives the same outcome for much less.
+r_kind: real
+r_h: Real time on a ^real project^
+r_lead: A consumer delivery platform that needed live operational numbers for its leadership.
+r_rows: **Event Hub and Eventstream** carried the streaming data in || **Volumes** reached terabytes per minute || **Eventhouse and KQL** delivered sub-second analytics || **The first production use case** shipped in under 14 days
+r_end: At that scale, the architecture **is** the product.
+z_h: Real-Time Intelligence in *five lines*
+z_rows: **Batch** tells you what happened || **Streaming** tells you what is happening || **Eventstream** in, **Eventhouse** to store || **Dashboards** to see, **Activator** to act || **Use it** where minutes truly matter
+z_next: Tomorrow :: Eventstream :: Catching data as it happens.
+q: Which of your reports would really change a decision if it were live?
+tags: #RealTimeIntelligence #Streaming #Eventhouse
+caption:
+"Real time" is one of the most over-used phrases in data. It is worth being precise about it.
+
+Batch processing collects data and handles it later, which answers "what happened". Streaming handles each event as it arrives, which answers "what is happening". Real-Time Intelligence is the part of Fabric built for the second kind of question.
+
+It has five building blocks. Real-Time hub is where you discover streams. Eventstream brings events in and shapes them. Eventhouse stores them and makes them queryable at very large scale. Real-Time Dashboards show the current state. Activator takes an action when a condition is met.
+
+The question I ask first is not technical: who will act on this, and how quickly? If the answer is "tomorrow morning", a batch pipeline is cheaper and simpler. Real time earns its cost when minutes matter.
+
+I worked on a real-time platform for a consumer delivery business, where streaming data arrived at terabytes per minute through Event Hub and Eventstream, and Eventhouse served sub-second analytics. The first production use case shipped in under 14 days.

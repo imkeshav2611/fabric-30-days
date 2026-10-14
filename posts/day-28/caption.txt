@@ -1,0 +1,19 @@
+Microsoft Fabric, Day 28 of 30: AI on Fabric.
+
+The promise of AI on data is simple: ask a question in normal language and get an answer from your own numbers.
+
+Fabric now has several pieces for this. Copilot helps people who build, by writing code, queries and reports. Fabric data agents, which are generally available, answer business questions over lakehouses, warehouses, semantic models and KQL databases. AI functions summarise, classify and extract inside a data pipeline. And the same governed data can sit under a custom agent built with Azure OpenAI.
+
+What decides whether any of it works is not the model. It is the data underneath. An agent writes a query against your tables, so cryptic column names, duplicate tables and undefined KPIs lead straight to wrong answers given with confidence. Security carries through as well: the agent respects the permissions of the person asking.
+
+I have built two of these. One was an assistant for HR leaders using Azure OpenAI and LangChain, answering questions on attrition and workforce metrics. The other was an insight agent for executives, using Agentic-RAG on real-time sales and logistics data.
+
+In both, the model was the easy part. The data foundation was the work.
+
+Slides 1 to 4 cover the big picture. Slides 5 to 7 are where it gets practical. Slide 8 is the summary.
+
+Tomorrow: Migration.
+
+What is the first question your leadership would ask a data agent?
+
+#MicrosoftFabric #DataEngineering #GenerativeAI #DataAgents #AzureOpenAI
