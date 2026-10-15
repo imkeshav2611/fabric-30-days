@@ -2,8 +2,11 @@ name: Post daily carousel
 
 on:
   schedule:
-    - cron: "0 3 * * 1-5"    # weekdays 08:30 India time
-    - cron: "30 4 * * 0,6"   # weekends 10:00 India time
+    # GitHub often starts scheduled runs late or skips them, so several attempts are made.
+    # The first one that runs posts; the rest see "already posted today" and stop.
+    - cron: "7,37 3,4,5 * * 1-5"    # weekdays from 08:37 India time, every 30 min until about 11:00
+    - cron: "37 4 * * 0,6"          # weekends from 10:07 India time
+    - cron: "7,37 5,6 * * 0,6"
   workflow_dispatch:
     inputs:
       day:

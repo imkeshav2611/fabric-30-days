@@ -61,8 +61,18 @@ def main():
         if not cfg.get("start_date"):
             print("Series not started: start_date is not set in series.json. Nothing posted.")
             return
-        now = datetime.datetime.now(datetime.timezone.utc) + datetime.timedelta(hours=cfg["timezone_offset_hours"])
-        day = (now.date() - datetime.date.fromisoformat(cfg["start_date"])).days + 1
+        off = datetime.timedelta(hours=cfg["timezone_offset_hours"])
+        today = (datetime.datetime.now(datetime.timezone.utc) + off).date()
+        due = (today - datetime.date.fromisoformat(cfg["start_date"])).days + 1
+        posted_today = [k for k, v in log.items() if (datetime.datetime.fromisoformat(v["at"]) + off).date() == today]
+        if posted_today:
+            print(f"Already posted today (day {posted_today[0]}). Nothing posted.")
+            return
+        # Post the next day in order. If GitHub skipped a run, the series shifts by a day instead of leaving a gap.
+        day = max([int(k) for k in log] or [0]) + 1
+        if day > due:
+            print(f"Day {day} is not due until later. Nothing posted.")
+            return
     if day < 1 or day > cfg["total_days"]:
         print(f"Day {day} is outside the series (1 to {cfg['total_days']}). Nothing posted.")
         return
