@@ -15,7 +15,7 @@ A 30-day LinkedIn carousel series, posted automatically to a personal profile.
 2. Run `python3 scripts/get_token.py`, sign in and click Allow. The token goes straight into this repository's secrets.
 3. Set `start_date` in `series.json` to the date of Day 1, for example `"2026-10-19"`, then commit and push.
 
-Posts go out from about 08:40 India time on weekdays and 10:10 on weekends. GitHub often starts scheduled jobs late, so the job retries every 30 minutes for a few hours and posts once per day. If a whole day is missed, the series shifts by one day rather than skipping a topic.
+GitHub has been starting scheduled jobs about 5 hours late, so attempts are queued every 30 minutes through the night. Nothing posts before 07:30 India time, and only one post goes out per day. If a whole day is missed, the series shifts by one day rather than skipping a topic.
 
 ## Upkeep
 

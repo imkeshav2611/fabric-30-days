@@ -2,11 +2,12 @@ name: Post daily carousel
 
 on:
   schedule:
-    # GitHub often starts scheduled runs late or skips them, so several attempts are made.
-    # The first one that runs posts; the rest see "already posted today" and stop.
-    - cron: "7,37 3,4,5 * * 1-5"    # weekdays from 08:37 India time, every 30 min until about 11:00
-    - cron: "37 4 * * 0,6"          # weekends from 10:07 India time
-    - cron: "7,37 5,6 * * 0,6"
+    # GitHub has been starting this repo's scheduled runs about 5 hours late, and drops many.
+    # So attempts are queued every 30 min through the night (UTC 20:07 to 05:37).
+    # The script refuses to post before 07:30 India time; the first run after that posts,
+    # and the rest see "already posted today" and stop. Later attempts are a fallback.
+    - cron: "7,37 20-23 * * *"
+    - cron: "7,37 0-5 * * *"
   workflow_dispatch:
     inputs:
       day:

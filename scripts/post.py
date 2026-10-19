@@ -62,8 +62,12 @@ def main():
             print("Series not started: start_date is not set in series.json. Nothing posted.")
             return
         off = datetime.timedelta(hours=cfg["timezone_offset_hours"])
-        today = (datetime.datetime.now(datetime.timezone.utc) + off).date()
-        due = (today - datetime.date.fromisoformat(cfg["start_date"])).days + 1
+        local_now = datetime.datetime.now(datetime.timezone.utc) + off
+        today = local_now.date()
+        if local_now.time() < datetime.time(7, 30):
+            print(f"Too early ({local_now:%H:%M} India time). Scheduled posts go out from 07:30. Nothing posted.")
+            return
+        due =(today - datetime.date.fromisoformat(cfg["start_date"])).days + 1
         posted_today = [k for k, v in log.items() if (datetime.datetime.fromisoformat(v["at"]) + off).date() == today]
         if posted_today:
             print(f"Already posted today (day {posted_today[0]}). Nothing posted.")
