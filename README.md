@@ -26,4 +26,4 @@ GitHub has been starting scheduled jobs about 5 hours late, so attempts are queu
 
 ## Content rules
 
-See `experience-bank.md`. No client or employer names, no certifications, and personal claims only from that file. Facts were checked against Microsoft Learn on 13 October 2026; see `sources.md`.
+`experience-bank.md` is kept only on the Mac, not in this repository. No client or employer names, no certifications, and personal claims only from that file. Facts were checked against Microsoft Learn on 13 October 2026; see `sources.md`.
